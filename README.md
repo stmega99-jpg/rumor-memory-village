@@ -233,6 +233,22 @@ db/schema.sql              the memory core
 scripts/                   world generation, embedding, loading, verification
 ```
 
+## How this was built
+
+Written with two AI coding assistants, which the hackathon rules permit
+explicitly. OpenAI Codex built the walking skeleton: the Amplify deployment, the
+first Managed MCP connection, and the Bedrock path. Claude Code built the memory
+core — schema, scoring, propagation, belief evaluation, the MCP recall path and
+the verification suite — and audited the earlier work.
+
+Only Claude Code's commits carry a `Co-Authored-By` trailer, because that is
+what its tooling does; the split above is the accurate one and the commit
+history on its own would understate Codex's share.
+
+Neither assistant decided anything that matters to the demonstration. Belief
+arbitration is deterministic code, and the one place a language model appears at
+runtime is writing the sentence a villager says.
+
 ## Licence
 
 [MIT](./LICENSE)
