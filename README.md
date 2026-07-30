@@ -82,7 +82,14 @@ Use separate roles for Amplify build/deployment and SSR runtime:
 - **Amplify service role:** only the permissions Amplify needs to build and
   publish the app.
 - **SSR Compute Role:** `secretsmanager:GetSecretValue` on the exact runtime
-  secret plus `bedrock:InvokeModel` on the exact Nova Lite model resource.
+  secret plus `bedrock:InvokeModel` on the US Nova Lite inference profile and
+  its three current destination model resources (`us-east-1`, `us-east-2`,
+  and `us-west-2`).
+
+Live inference uses the Geo profile ID `us.amazon.nova-lite-v1:0`. The seeded
+provenance continues to record the underlying foundation model ID
+`amazon.nova-lite-v1:0`; these identify the routing profile and the model,
+respectively.
 
 Attach the compute role only to the production branch. Titan Text Embeddings
 v2 permission will be added when the embedding path is implemented; the
