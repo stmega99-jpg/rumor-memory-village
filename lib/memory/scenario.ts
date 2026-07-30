@@ -156,8 +156,28 @@ export async function runScenario(
   worldId: string,
   steps: ScenarioStep[] = DEMO_SCENARIO,
 ): Promise<StepResult[]> {
-  const { byName, namesJa, namesEn } = await resolveActors(exec, worldId);
   const results: StepResult[] = [];
+  for (const step of steps) {
+    results.push(await runStep(exec, worldId, step));
+  }
+  return results;
+}
+
+/**
+ * Run a single step.
+ *
+ * The interface drives the scenario one step per request rather than in one
+ * call. Playing the whole thing server-side took thirty-odd seconds, which is
+ * past what Amplify's SSR runtime will hold a response open for, and it left
+ * the visitor watching a spinner through the part of the demo that is
+ * supposed to be the interesting bit.
+ */
+export async function runStep(
+  exec: Executor,
+  worldId: string,
+  step: ScenarioStep,
+): Promise<StepResult> {
+  const { byName, namesJa, namesEn } = await resolveActors(exec, worldId);
 
   const currentTime = async (): Promise<Date> => {
     const [row] = await exec<{ simulated_at: Date }>(
@@ -167,7 +187,7 @@ export async function runScenario(
     return new Date(row.simulated_at);
   };
 
-  for (const step of steps) {
+  {
     const simulatedAt = await currentTime();
 
     if (step.kind === "advance") {
@@ -175,8 +195,7 @@ export async function runScenario(
         `UPDATE world SET simulated_at = simulated_at + $2::INTERVAL WHERE id = $1`,
         [worldId, `${step.days} days`],
       );
-      results.push({ step, detail: `advanced ${step.days} days` });
-      continue;
+      return { step, detail: `advanced ${step.days} days` };
     }
 
     if (step.kind === "evaluate") {
@@ -192,19 +211,17 @@ export async function runScenario(
         );
         count += evaluated.length;
       }
-      results.push({
+      return {
         step,
         detail: `${count} verdicts`,
         snapshot: await snapshotVerdicts(exec, worldId),
-      });
-      continue;
+      };
     }
 
     const from = byName.get(step.from);
     const to = byName.get(step.to);
     if (!from || !to) {
-      results.push({ step, detail: "skipped: unknown villager" });
-      continue;
+      return { step, detail: "skipped: unknown villager" };
     }
 
     const [claim] = await exec<{ id: string }>(
@@ -212,8 +229,7 @@ export async function runScenario(
       [worldId, step.predicate],
     );
     if (!claim) {
-      results.push({ step, detail: "skipped: unknown claim" });
-      continue;
+      return { step, detail: "skipped: unknown claim" };
     }
 
     const told = await tellAbout(exec, {
@@ -225,19 +241,19 @@ export async function runScenario(
     });
 
     if (!told) {
-      results.push({ step, detail: `${step.from} has nothing to say about this` });
-    } else if (told.outcome.outcome === "adopted") {
-      results.push({
+      return { step, detail: `${step.from} has nothing to say about this` };
+    }
+
+    if (told.outcome.outcome === "adopted") {
+      return {
         step,
         detail: `${step.to} took it on at confidence ${told.outcome.confidence.toFixed(2)} (${told.outcome.distortionNote})`,
-      });
-    } else {
-      results.push({
-        step,
-        detail: `${step.to} refused it (${told.outcome.reason}; trust ${told.outcome.actualTrust.toFixed(2)} < ${told.outcome.requiredTrust.toFixed(2)})`,
-      });
+      };
     }
-  }
 
-  return results;
+    return {
+      step,
+      detail: `${step.to} refused it (${told.outcome.reason}; trust ${told.outcome.actualTrust.toFixed(2)} < ${told.outcome.requiredTrust.toFixed(2)})`,
+    };
+  }
 }

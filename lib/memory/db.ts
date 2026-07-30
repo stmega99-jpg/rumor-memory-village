@@ -14,6 +14,8 @@ import { getRuntimeSecrets } from "../walking-skeleton/config";
  * updates, belief re-evaluation, and forking a world for a visitor.
  */
 
+export const DATABASE = "rumor_memory_village";
+
 let pool: Pool | undefined;
 
 export class SqlUnavailableError extends Error {
@@ -23,17 +25,36 @@ export class SqlUnavailableError extends Error {
   }
 }
 
+/**
+ * Point a connection string at the village database.
+ *
+ * The Cloud console hands out a string ending in /defaultdb, and asking every
+ * operator to hand-edit it before use invites exactly the mistake that only
+ * shows up in production. Rewriting the path here is cheaper than qualifying
+ * every table name in every query, and cheaper than a post-connect SET, which
+ * races the first real query on the same client.
+ */
+function pointAtDatabase(url: string): string {
+  try {
+    const parsed = new URL(url);
+    parsed.pathname = `/${DATABASE}`;
+    return parsed.toString();
+  } catch {
+    throw new SqlUnavailableError();
+  }
+}
+
 async function connectionString(): Promise<string> {
   const fromEnv = process.env.RMV_COCKROACH_SQL_URL;
   if (fromEnv && process.env.RMV_ALLOW_ENV_SECRETS === "true") {
-    return fromEnv;
+    return pointAtDatabase(fromEnv);
   }
 
   const secrets = (await getRuntimeSecrets()) as { cockroachSqlUrl?: string };
   if (!secrets.cockroachSqlUrl) {
     throw new SqlUnavailableError();
   }
-  return secrets.cockroachSqlUrl;
+  return pointAtDatabase(secrets.cockroachSqlUrl);
 }
 
 export async function getPool(): Promise<Pool> {
