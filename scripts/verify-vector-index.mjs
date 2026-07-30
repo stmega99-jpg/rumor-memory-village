@@ -11,11 +11,8 @@
  * fails if the plan is not a vector search over the expected index.
  */
 
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
 import pg from "pg";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DB = "rumor_memory_village";
 const INDEX = "memory_embedding_idx";
 const LIMIT = 24;
