@@ -146,9 +146,10 @@ def main() -> None:
         subject = q(actor_id[claim["subject_ref"]]) if claim.get("subject_ref") else "NULL"
         truth = "NULL" if claim.get("truth_value") is None else str(claim["truth_value"]).lower()
         lines.append(
-            "INSERT INTO claim (world_id, id, subject_id, subject_label, predicate, "
-            "canonical_ja, canonical_en, embedding, embedding_model, truth_value) VALUES ("
+            "INSERT INTO claim (world_id, id, subject_id, subject_label, subject_valence, "
+            "predicate, canonical_ja, canonical_en, embedding, embedding_model, truth_value) VALUES ("
             f"{q(world_id)}, {q(claim['id'])}, {subject}, {q(claim['subject_label'])}, "
+            f"{claim.get('subject_valence', 0.0)}, "
             f"{q(claim['predicate'])}, {q(claim['canonical_ja'])}, {q(claim['canonical_en'])}, "
             f"{vec(vector)}, {q(MODEL_ID)}, {truth});"
         )

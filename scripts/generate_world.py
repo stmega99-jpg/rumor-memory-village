@@ -172,6 +172,9 @@ def build_background(rng: random.Random) -> list[dict]:
                 "canonical_ja": ja,
                 "canonical_en": en,
                 "truth_value": None,
+                # Village weather and broken hoes say nothing about anyone's
+                # character, so they carry no prior for or against their subject.
+                "subject_valence": 0.0,
             }
         )
 
@@ -226,31 +229,31 @@ def build_background(rng: random.Random) -> list[dict]:
 
 SCENARIO = [
     dict(key="sc-help-hana", predicate="helped_with_field", subject_ref="player",
-         subject_label="旅の人", truth_value=True,
+         subject_label="旅の人", truth_value=True, subject_valence=1.0,
          canonical_ja="旅の人がハナの畑仕事を手伝った。",
          canonical_en="The traveller helped Hana with her field work."),
     dict(key="sc-stole", predicate="stole_from_warehouse", subject_ref="player",
-         subject_label="旅の人", truth_value=False,
+         subject_label="旅の人", truth_value=False, subject_valence=-1.0,
          canonical_ja="旅の人が古い倉庫から物を盗んだ。",
          canonical_en="The traveller stole goods from the old warehouse."),
     dict(key="sc-repaired", predicate="repaired_warehouse", subject_ref="player",
-         subject_label="旅の人", truth_value=True,
+         subject_label="旅の人", truth_value=True, subject_valence=0.6,
          canonical_ja="旅の人が古い倉庫を修理していた。",
          canonical_en="The traveller was repairing the old warehouse."),
     dict(key="sc-well-glow", predicate="well_glows", subject_ref=None,
-         subject_label="北の井戸", truth_value=None,
+         subject_label="北の井戸", truth_value=None, subject_valence=0.0,
          canonical_ja="北の井戸の水は、夜だけ青く光るらしい。",
          canonical_en="They say the water in the north well glows blue only at night."),
     dict(key="sc-well-dry", predicate="well_running_dry", subject_ref=None,
-         subject_label="北の井戸", truth_value=True,
+         subject_label="北の井戸", truth_value=True, subject_valence=0.0,
          canonical_ja="北の井戸の水が減ってきている。",
          canonical_en="The north well is running low."),
     dict(key="sc-bridge-broke", predicate="broke_bridge", subject_ref="player",
-         subject_label="旅の人", truth_value=False,
+         subject_label="旅の人", truth_value=False, subject_valence=-1.0,
          canonical_ja="旅の人が橋を壊した。",
          canonical_en="The traveller broke the bridge."),
     dict(key="sc-bridge-fixed", predicate="fixed_bridge", subject_ref="player",
-         subject_label="旅の人", truth_value=True,
+         subject_label="旅の人", truth_value=True, subject_valence=0.6,
          canonical_ja="旅の人が橋を直していた。",
          canonical_en="The traveller was mending the bridge."),
 ]

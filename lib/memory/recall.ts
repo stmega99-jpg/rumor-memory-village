@@ -90,39 +90,57 @@ export function computeRoots(memories: MemoryRow[]): Map<string, string> {
  * Scoring needs the support counts and the support counts need the grouping, so
  * this runs in two passes rather than trying to do both at once.
  */
+/**
+ * How much independent backing each claim has, from provenance alone.
+ *
+ * Shared with belief evaluation, which asks the same question of a different
+ * set of memories: recall asks it of whatever the vector search returned,
+ * arbitration asks it of everything the villager holds about a disputed point.
+ */
+export function supportByClaim(
+  memories: MemoryRow[],
+  rootOf?: (memory: MemoryRow) => string,
+): { support: Map<string, SupportCounts>; roots: Map<string, string[]> } {
+  const fallback = computeRoots(memories);
+  const resolve = rootOf ?? ((memory: MemoryRow) => fallback.get(memory.memoryId)!);
+
+  const roots = new Map<string, string[]>();
+  for (const memory of memories) {
+    const list = roots.get(memory.claimId) ?? [];
+    list.push(resolve(memory));
+    roots.set(memory.claimId, list);
+  }
+
+  const support = new Map<string, SupportCounts>();
+  for (const [claimId, list] of roots) {
+    const distinct = new Set(list);
+    support.set(claimId, {
+      // The first account is the baseline, not corroboration of itself.
+      corroborationCount: Math.max(0, distinct.size - 1),
+      repeatCount: Math.max(0, list.length - distinct.size),
+    });
+  }
+
+  return { support, roots };
+}
+
 export function aggregate(
   candidates: Candidate[],
   options: AggregateOptions,
 ): ClaimGroup[] {
   const memories = candidates.map((c) => c.memory);
-  const fallbackRoots = computeRoots(memories);
-  const rootOf =
-    options.rootOf ?? ((memory: MemoryRow) => fallbackRoots.get(memory.memoryId)!);
-
-  // Pass one: how much independent backing does each claim have?
-  const rootsByClaim = new Map<string, string[]>();
-  for (const memory of memories) {
-    const list = rootsByClaim.get(memory.claimId) ?? [];
-    list.push(rootOf(memory));
-    rootsByClaim.set(memory.claimId, list);
-  }
-
-  const supportByClaim = new Map<string, SupportCounts>();
-  for (const [claimId, roots] of rootsByClaim) {
-    const distinct = new Set(roots);
-    supportByClaim.set(claimId, {
-      // The first account is the baseline, not corroboration of itself.
-      corroborationCount: Math.max(0, distinct.size - 1),
-      repeatCount: Math.max(0, roots.length - distinct.size),
-    });
-  }
+  const { support: supportByClaimId, roots: rootsByClaim } = supportByClaim(
+    memories,
+    options.rootOf,
+  );
+  const supportMap = supportByClaimId;
 
   // Pass two: score every candidate now that support is known.
   const context = {
     simulatedAt: options.simulatedAt,
     trustOf: options.trustOf,
     supportOf: (claimId: string) =>
-      supportByClaim.get(claimId) ?? { corroborationCount: 0, repeatCount: 0 },
+      supportMap.get(claimId) ?? { corroborationCount: 0, repeatCount: 0 },
   };
 
   const grouped = new Map<string, RecallBreakdown[]>();

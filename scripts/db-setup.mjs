@@ -29,18 +29,19 @@ if (!connectionString) {
   process.exit(1);
 }
 
-async function run(client, label, path) {
+async function run(client, label, path, batchSize = BATCH) {
   const list = statements(readFileSync(path, "utf8"));
   console.log(`${label}: ${list.length} statements`);
 
   const started = Date.now();
-  for (let i = 0; i < list.length; i += BATCH) {
-    const chunk = list.slice(i, i + BATCH);
+  for (let i = 0; i < list.length; i += batchSize) {
+    const chunk = list.slice(i, i + batchSize);
     try {
       await client.query(chunk.join(";\n") + ";");
     } catch (error) {
       console.error(`\n${label} failed near statement ${i + 1}:`);
       console.error(chunk[0].slice(0, 300));
+      console.error(`\n${error.message}`);
       throw error;
     }
     process.stdout.write(
@@ -66,7 +67,10 @@ try {
   console.log(`${rows[0].v.split(" (")[0]}\n`);
 
   if (only !== "--seed-only") {
-    await run(client, "schema", SCHEMA);
+    // One statement at a time. DDL is a couple of dozen statements, and a
+    // schema change that stalls should name itself rather than hide inside a
+    // batch reported as "near statement 1".
+    await run(client, "schema", SCHEMA, 1);
   }
   if (only !== "--schema-only") {
     await run(client, "seed", SEED);

@@ -250,6 +250,7 @@
    "canonical_ja": "タツが梯子を直した。",
    "canonical_en": "Tatsu repaired the ladder.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7d00085f-ff20-56aa-b634-4955fe423303"
   },
   {
@@ -260,6 +261,7 @@
    "canonical_ja": "杉の林のあたりで野良犬を見かけた。",
    "canonical_en": "A stray dog was seen near the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ead03028-f24e-53d1-b9ac-34b141e4c69c"
   },
   {
@@ -270,6 +272,7 @@
    "canonical_ja": "田植えのあとに雨が降って、川べりの小屋の道がぬかるんだ。",
    "canonical_en": "It rained after the planting and the road by the riverside hut turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0fc02547-29c0-5ff5-a85e-ccd698120009"
   },
   {
@@ -280,6 +283,7 @@
    "canonical_ja": "先の市の日の夜、水車小屋のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the mill the last market day.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "753f84ba-cd54-50d9-9cbe-f2d04ee4a404"
   },
   {
@@ -290,6 +294,7 @@
    "canonical_ja": "タツの鍬が壊れた。",
    "canonical_en": "Tatsu's hoe broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c0b21da0-4b03-5bbe-abbd-243c0a510865"
   },
   {
@@ -300,6 +305,7 @@
    "canonical_ja": "先の市の日に雨が降って、古い倉庫の道がぬかるんだ。",
    "canonical_en": "It rained the last market day and the road by the old warehouse turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "cb6d9a58-ba53-57d6-8662-70c6815fa3f2"
   },
   {
@@ -310,6 +316,7 @@
    "canonical_ja": "水車小屋のあたりで猪を見かけた。",
    "canonical_en": "A boar was seen near the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d95d2605-1a9b-58a9-bd3a-3449b9a916ac"
   },
   {
@@ -320,6 +327,7 @@
    "canonical_ja": "北の井戸の水がincreased。",
    "canonical_en": "The water at the north well turned high.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b91055a3-b5bb-5e76-9e56-693f958c32c1"
   },
   {
@@ -330,6 +338,7 @@
    "canonical_ja": "ミヨが井戸の縄を直した。",
    "canonical_en": "Miyo repaired the well rope.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "6fbc5283-65a3-5cc0-bb54-b82235461c0f"
   },
   {
@@ -340,6 +349,7 @@
    "canonical_ja": "谷の田んぼのあたりで白い鳥を見かけた。",
    "canonical_en": "A white bird was seen near the valley paddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "50d33b45-dcc8-5d66-b886-a749d96002dc"
   },
   {
@@ -350,6 +360,7 @@
    "canonical_ja": "先の市の日に雨が降って、川べりの小屋の道がぬかるんだ。",
    "canonical_en": "It rained the last market day and the road by the riverside hut turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "41649ca6-3c35-5031-839c-5150794378d6"
   },
   {
@@ -360,6 +371,7 @@
    "canonical_ja": "三日前に雨が降って、峠の道の道がぬかるんだ。",
    "canonical_en": "It rained three days ago and the road by the mountain pass turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8c33e4dc-dafb-544d-818e-4646e5dd5376"
   },
   {
@@ -370,6 +382,7 @@
    "canonical_ja": "町から人が来て、水車小屋に泊まった。",
    "canonical_en": "Someone came from town and stayed at the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4efb0598-8726-506a-8d90-a1ca812dec80"
   },
   {
@@ -380,6 +393,7 @@
    "canonical_ja": "雪解けのころに雨が降って、水車小屋の道がぬかるんだ。",
    "canonical_en": "It rained the thaw and the road by the mill turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "55072724-880d-59a4-942f-29cf21f83fe9"
   },
   {
@@ -390,6 +404,7 @@
    "canonical_ja": "スエが焼き栗を分けてくれた。",
    "canonical_en": "Sue shared some roasted chestnuts.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9fca0813-7256-526d-a217-b1c06e70c1c0"
   },
   {
@@ -400,6 +415,7 @@
    "canonical_ja": "ゲンの背負い籠が壊れた。",
    "canonical_en": "Gen's carrying basket broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "af2036d7-82d2-5b38-945c-dcc64533c833"
   },
   {
@@ -410,6 +426,7 @@
    "canonical_ja": "隣の郷から人が来て、水車小屋に泊まった。",
    "canonical_en": "Someone came from the next hamlet and stayed at the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3af4495d-a2e3-5d4f-820a-95e3ae082bef"
   },
   {
@@ -420,6 +437,7 @@
    "canonical_ja": "田植えのあとに雨が降って、谷の田んぼの道がぬかるんだ。",
    "canonical_en": "It rained after the planting and the road by the valley paddy turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2acc4137-c34a-513b-9dd2-fa3481dc0741"
   },
   {
@@ -430,6 +448,7 @@
    "canonical_ja": "水車小屋の水がincreased。",
    "canonical_en": "The water at the mill turned high.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2eaaa28e-36d3-5abc-a652-994bc1a8be00"
   },
   {
@@ -440,6 +459,7 @@
    "canonical_ja": "ハナが瓜の収穫を終えた。",
    "canonical_en": "Hana finished harvesting the melons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0a812de5-10de-5ef3-a06f-b3da7da99b95"
   },
   {
@@ -450,6 +470,7 @@
    "canonical_ja": "五日前に雨が降って、川べりの小屋の道がぬかるんだ。",
    "canonical_en": "It rained five days ago and the road by the riverside hut turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "106226d7-03ca-5932-8fc0-0d64d52ac063"
   },
   {
@@ -460,6 +481,7 @@
    "canonical_ja": "水車小屋のあたりで狐を見かけた。",
    "canonical_en": "A fox was seen near the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5db2681d-062f-5853-968a-d02da4100362"
   },
   {
@@ -470,6 +492,7 @@
    "canonical_ja": "先月のはじめに雨が降って、北の井戸の道がぬかるんだ。",
    "canonical_en": "It rained early last month and the road by the north well turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3ffcf08a-ae67-5196-8783-43f709ba11b2"
   },
   {
@@ -480,6 +503,7 @@
    "canonical_ja": "北の井戸のあたりで猪を見かけた。",
    "canonical_en": "A boar was seen near the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "6948c894-e480-5539-b905-96774e4921eb"
   },
   {
@@ -490,6 +514,7 @@
    "canonical_ja": "南の畑のあたりで鹿を見かけた。",
    "canonical_en": "A deer was seen near the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2d94c6cd-01a7-5acf-907a-86adedee061e"
   },
   {
@@ -500,6 +525,7 @@
    "canonical_ja": "スエが屋根を直した。",
    "canonical_en": "Sue repaired the roof.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c0618758-93e7-5f28-bcd0-6f10374dda0f"
   },
   {
@@ -510,6 +536,7 @@
    "canonical_ja": "杉の林のあたりで猪を見かけた。",
    "canonical_en": "A boar was seen near the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "03ccb3d6-0c33-57b8-bc57-272a6237d568"
   },
   {
@@ -520,6 +547,7 @@
    "canonical_ja": "雪解けのころに雨が降って、峠の道の道がぬかるんだ。",
    "canonical_en": "It rained the thaw and the road by the mountain pass turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "aec6d1e6-95e7-507d-bbe3-148a6e4151f3"
   },
   {
@@ -530,6 +558,7 @@
    "canonical_ja": "ミヨが梯子を直した。",
    "canonical_en": "Miyo repaired the ladder.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f1f2fd46-5df7-50a5-bbf7-d9b3b8a95373"
   },
   {
@@ -540,6 +569,7 @@
    "canonical_ja": "スエの斧が壊れた。",
    "canonical_en": "Sue's axe broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f2531016-3ad3-5c58-9019-73e2cd2edbe2"
   },
   {
@@ -550,6 +580,7 @@
    "canonical_ja": "ハナの斧が壊れた。",
    "canonical_en": "Hana's axe broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "43b112b9-f86c-5815-99fc-be77f056f707"
   },
   {
@@ -560,6 +591,7 @@
    "canonical_ja": "三日前に雨が降って、南の畑の道がぬかるんだ。",
    "canonical_en": "It rained three days ago and the road by the south field turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "910a202f-c545-512c-9725-2f2b70628372"
   },
   {
@@ -570,6 +602,7 @@
    "canonical_ja": "ミヨの鍬が壊れた。",
    "canonical_en": "Miyo's hoe broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2fa2cb4c-59f1-51f5-9a1f-18a8f12a5746"
   },
   {
@@ -580,6 +613,7 @@
    "canonical_ja": "ミヨの臼が壊れた。",
    "canonical_en": "Miyo's mortar broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d339d4b5-9cb6-5d93-92fc-42b61c7446fa"
   },
   {
@@ -590,6 +624,7 @@
    "canonical_ja": "先の市の日の夜、川べりの小屋のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the riverside hut the last market day.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0032823b-6bc3-5906-82dd-f0e64ea59b27"
   },
   {
@@ -600,6 +635,7 @@
    "canonical_ja": "先月のはじめの夜、水車小屋のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the mill early last month.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b4fdbb87-2327-5bda-b50d-d4fba6871b8f"
   },
   {
@@ -610,6 +646,7 @@
    "canonical_ja": "ゲンの縄が壊れた。",
    "canonical_en": "Gen's rope broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b5b47420-97a5-5a5b-b599-050a3752f573"
   },
   {
@@ -620,6 +657,7 @@
    "canonical_ja": "ハナが餅を分けてくれた。",
    "canonical_en": "Hana shared some rice cakes.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "cad85a3b-6680-52f8-ac80-449d825a4e54"
   },
   {
@@ -630,6 +668,7 @@
    "canonical_ja": "村はずれの祠の水がincreased。",
    "canonical_en": "The water at the roadside shrine turned high.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "15c0cdaf-67e2-5432-8ee9-3bf28f9fd08b"
   },
   {
@@ -640,6 +679,7 @@
    "canonical_ja": "ゲンが水路を直した。",
    "canonical_en": "Gen repaired the channel.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "293f915b-26c0-5cac-be12-46c4fb76887b"
   },
   {
@@ -650,6 +690,7 @@
    "canonical_ja": "祭りの前の日に雨が降って、古い倉庫の道がぬかるんだ。",
    "canonical_en": "It rained the day before the festival and the road by the old warehouse turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8a96daa3-345d-5111-92b8-c5d996c70f49"
   },
   {
@@ -660,6 +701,7 @@
    "canonical_ja": "海のほうへ行く道が塞がっている。",
    "canonical_en": "The road to the coast is blocked.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d9d52e02-4927-5c05-95c4-14b8b7492a48"
   },
   {
@@ -670,6 +712,7 @@
    "canonical_ja": "先の市の日に雨が降って、南の畑の道がぬかるんだ。",
    "canonical_en": "It rained the last market day and the road by the south field turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0a8ccae9-7f6d-5a98-be7f-dd34be500dfa"
   },
   {
@@ -680,6 +723,7 @@
    "canonical_ja": "水車小屋のあたりで山猫を見かけた。",
    "canonical_en": "A wildcat was seen near the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7ea5b5e7-a22d-500d-8655-b15d30dc7a7c"
   },
   {
@@ -690,6 +734,7 @@
    "canonical_ja": "ハナの縄が壊れた。",
    "canonical_en": "Hana's rope broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a29569a0-bf1a-54bc-8266-8613276ef4ef"
   },
   {
@@ -700,6 +745,7 @@
    "canonical_ja": "橋のたもとの水がincreased。",
    "canonical_en": "The water at the bridge turned high.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "794e2a81-2600-5fe2-ae11-15ed52841b04"
   },
   {
@@ -710,6 +756,7 @@
    "canonical_ja": "先月のはじめの夜、南の畑のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the south field early last month.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "cc0d50c3-36e1-5459-aa74-775171e9a169"
   },
   {
@@ -720,6 +767,7 @@
    "canonical_ja": "先の満月の晩に雨が降って、村はずれの祠の道がぬかるんだ。",
    "canonical_en": "It rained the last full moon and the road by the roadside shrine turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c37ba0b4-c439-5f3f-b776-2faf663fb8e0"
   },
   {
@@ -730,6 +778,7 @@
    "canonical_ja": "杉の林の水が濁った。",
    "canonical_en": "The water at the cedar grove turned muddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ef601e47-3462-594b-8c72-43b2caa13edc"
   },
   {
@@ -740,6 +789,7 @@
    "canonical_ja": "先の市の日の夜、橋のたもとのあたりで風が強かった。",
    "canonical_en": "The wind was strong near the bridge the last market day.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "82ced62f-ec87-5a5e-ba3f-9b822ee797d5"
   },
   {
@@ -750,6 +800,7 @@
    "canonical_ja": "北の井戸のあたりで蛇を見かけた。",
    "canonical_en": "A snake was seen near the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5bc50be8-a51c-59a7-9398-e8c899e22cc3"
   },
   {
@@ -760,6 +811,7 @@
    "canonical_ja": "先の市の日の夜、杉の林のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the cedar grove the last market day.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e8e6b6d6-aed3-5679-bd40-ea9c7af99644"
   },
   {
@@ -770,6 +822,7 @@
    "canonical_ja": "隣の郷へ行く道が直った。",
    "canonical_en": "The road to the next hamlet is passable again.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7a3499bc-2ee8-501a-82aa-261d113dad13"
   },
   {
@@ -780,6 +833,7 @@
    "canonical_ja": "スエが麦の収穫を終えた。",
    "canonical_en": "Sue finished harvesting the barley.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ab502fc8-05cd-57ae-9201-9ba289846145"
   },
   {
@@ -790,6 +844,7 @@
    "canonical_ja": "タツが麦の収穫を終えた。",
    "canonical_en": "Tatsu finished harvesting the barley.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c5ff41b6-16e3-58f1-be94-ff6726fabbf6"
   },
   {
@@ -800,6 +855,7 @@
    "canonical_ja": "ハナの臼が壊れた。",
    "canonical_en": "Hana's mortar broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "05c31505-130d-55f7-8793-109418f513e7"
   },
   {
@@ -810,6 +866,7 @@
    "canonical_ja": "峠の向こうへ行く道が塞がっている。",
    "canonical_en": "The road to beyond the pass is blocked.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "04211d63-3789-5914-bed1-54f7859f1c4c"
   },
   {
@@ -820,6 +877,7 @@
    "canonical_ja": "海のほうへ行く道がぬかるんでいる。",
    "canonical_en": "The road to the coast is muddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "80d12f6f-5b0e-5b13-b275-0714bd417cde"
   },
   {
@@ -830,6 +888,7 @@
    "canonical_ja": "五日前の夜、谷の田んぼのあたりで風が強かった。",
    "canonical_en": "The wind was strong near the valley paddy five days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "1bca7037-0e30-56e6-b6b0-e66672acc9f9"
   },
   {
@@ -840,6 +899,7 @@
    "canonical_ja": "ミヨの斧が壊れた。",
    "canonical_en": "Miyo's axe broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "02a308c3-76af-51b3-8c13-d148c6e17ff9"
   },
   {
@@ -850,6 +910,7 @@
    "canonical_ja": "隣の郷から人が来て、北の井戸に泊まった。",
    "canonical_en": "Someone came from the next hamlet and stayed at the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "072fb534-3a9e-5a71-b9cb-af6617ab924a"
   },
   {
@@ -860,6 +921,7 @@
    "canonical_ja": "祭りの前の日に雨が降って、峠の道の道がぬかるんだ。",
    "canonical_en": "It rained the day before the festival and the road by the mountain pass turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "01267354-0467-54d3-84db-5ff410fe73d1"
   },
   {
@@ -870,6 +932,7 @@
    "canonical_ja": "先月のはじめの夜、古い倉庫のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the old warehouse early last month.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8c30e00b-46ea-5c3e-a7b0-717288d91a66"
   },
   {
@@ -880,6 +943,7 @@
    "canonical_ja": "スエが漬物を分けてくれた。",
    "canonical_en": "Sue shared some pickles.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e8bfec8c-e192-568f-9bd7-48f6f9d6dc27"
   },
   {
@@ -890,6 +954,7 @@
    "canonical_ja": "古い倉庫のあたりで白い鳥を見かけた。",
    "canonical_en": "A white bird was seen near the old warehouse.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8387f813-81e9-5020-8605-83e6451437a0"
   },
   {
@@ -900,6 +965,7 @@
    "canonical_ja": "先月のはじめの夜、橋のたもとのあたりで風が強かった。",
    "canonical_en": "The wind was strong near the bridge early last month.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5f2d3976-63cc-576e-8bc8-842823d71644"
   },
   {
@@ -910,6 +976,7 @@
    "canonical_ja": "タツが井戸の縄を直した。",
    "canonical_en": "Tatsu repaired the well rope.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "76980229-6c32-5210-8ed8-fb4a556885b6"
   },
   {
@@ -920,6 +987,7 @@
    "canonical_ja": "タツが水路を直した。",
    "canonical_en": "Tatsu repaired the channel.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "63082c73-91a9-5243-aa54-bb72419109ec"
   },
   {
@@ -930,6 +998,7 @@
    "canonical_ja": "先の満月の晩に雨が降って、杉の林の道がぬかるんだ。",
    "canonical_en": "It rained the last full moon and the road by the cedar grove turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b1503a61-95c7-5519-880f-80a6afd6a8c5"
   },
   {
@@ -940,6 +1009,7 @@
    "canonical_ja": "タツが煮豆を分けてくれた。",
    "canonical_en": "Tatsu shared some stewed beans.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "88b830ae-382a-5e38-bfa1-046dc9e48da8"
   },
   {
@@ -950,6 +1020,7 @@
    "canonical_ja": "スエが小屋の床を直した。",
    "canonical_en": "Sue repaired the hut floor.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "63e8e7c4-a3c8-5e03-9a99-8248091d6781"
   },
   {
@@ -960,6 +1031,7 @@
    "canonical_ja": "川べりの小屋のあたりで鹿を見かけた。",
    "canonical_en": "A deer was seen near the riverside hut.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f5cf8f48-2452-5318-b82b-c227bcf52612"
   },
   {
@@ -970,6 +1042,7 @@
    "canonical_ja": "タツが栗の収穫を終えた。",
    "canonical_en": "Tatsu finished harvesting the chestnuts.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c20e4916-6884-5bd9-9d27-b333417de19d"
   },
   {
@@ -980,6 +1053,7 @@
    "canonical_ja": "南の畑のあたりで山猫を見かけた。",
    "canonical_en": "A wildcat was seen near the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "47f0376a-f150-5daa-b7d1-67ef2893e993"
   },
   {
@@ -990,6 +1064,7 @@
    "canonical_ja": "ハナの桶が壊れた。",
    "canonical_en": "Hana's bucket broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0721c698-afa8-5dd6-b0ca-e647cadcef4d"
   },
   {
@@ -1000,6 +1075,7 @@
    "canonical_ja": "峠の道のあたりで野良犬を見かけた。",
    "canonical_en": "A stray dog was seen near the mountain pass.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "355d3f6f-9e97-5e09-8d01-3a6b40d11b7b"
   },
   {
@@ -1010,6 +1086,7 @@
    "canonical_ja": "三日前の夜、水車小屋のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the mill three days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e8344e91-324e-5c1e-b3f0-4b0bcae7a0f4"
   },
   {
@@ -1020,6 +1097,7 @@
    "canonical_ja": "タツの鎌が壊れた。",
    "canonical_en": "Tatsu's sickle broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "bcf287ba-88b7-5945-a85b-573ec177a6e4"
   },
   {
@@ -1030,6 +1108,7 @@
    "canonical_ja": "スエが水路を直した。",
    "canonical_en": "Sue repaired the channel.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "cd2b6ef8-2eb0-5872-a1cc-cf60beed42bf"
   },
   {
@@ -1040,6 +1119,7 @@
    "canonical_ja": "タツが屋根を直した。",
    "canonical_en": "Tatsu repaired the roof.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "730fbecf-14ee-508f-8629-4c28de8b8747"
   },
   {
@@ -1050,6 +1130,7 @@
    "canonical_ja": "雪解けのころに雨が降って、古い倉庫の道がぬかるんだ。",
    "canonical_en": "It rained the thaw and the road by the old warehouse turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "414bc6fa-a4ff-5601-a7e6-306834ec4749"
   },
   {
@@ -1060,6 +1141,7 @@
    "canonical_ja": "ミヨが小屋の床を直した。",
    "canonical_en": "Miyo repaired the hut floor.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "71ef1c4e-ec98-5eb8-bc60-5cdc422d6ae8"
   },
   {
@@ -1070,6 +1152,7 @@
    "canonical_ja": "峠の道のあたりで白い鳥を見かけた。",
    "canonical_en": "A white bird was seen near the mountain pass.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b3bedb26-222f-5510-bf7e-1ed28b9bbdab"
   },
   {
@@ -1080,6 +1163,7 @@
    "canonical_ja": "五日前の夜、古い倉庫のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the old warehouse five days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "6f3864ee-5167-51cb-b751-d98a417c6365"
   },
   {
@@ -1090,6 +1174,7 @@
    "canonical_ja": "ゲンが漬物を分けてくれた。",
    "canonical_en": "Gen shared some pickles.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "fdd8f993-813e-5c04-b8e6-1b96adee9e5b"
   },
   {
@@ -1100,6 +1185,7 @@
    "canonical_ja": "五日前の夜、橋のたもとのあたりで風が強かった。",
    "canonical_en": "The wind was strong near the bridge five days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "76956326-34e7-5407-9d54-d916004ff874"
   },
   {
@@ -1110,6 +1196,7 @@
    "canonical_ja": "タツが餅を分けてくれた。",
    "canonical_en": "Tatsu shared some rice cakes.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a1ae30d7-d56a-59ae-bcb0-fef9dce81dd8"
   },
   {
@@ -1120,6 +1207,7 @@
    "canonical_ja": "五日前に雨が降って、橋のたもとの道がぬかるんだ。",
    "canonical_en": "It rained five days ago and the road by the bridge turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b707caa5-68ce-54a3-854d-609fedb70f71"
   },
   {
@@ -1130,6 +1218,7 @@
    "canonical_ja": "ゲンが柿の収穫を終えた。",
    "canonical_en": "Gen finished harvesting the persimmons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "fd81a602-02e0-5365-a949-8d098ce070d5"
   },
   {
@@ -1140,6 +1229,7 @@
    "canonical_ja": "隣の郷から人が来て、南の畑に泊まった。",
    "canonical_en": "Someone came from the next hamlet and stayed at the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f8c94a35-db94-536a-ab0a-5ce52e2d1656"
   },
   {
@@ -1150,6 +1240,7 @@
    "canonical_ja": "五日前の夜、北の井戸のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the north well five days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4c3d8451-3085-52fe-9fc0-8ed202273ae2"
   },
   {
@@ -1160,6 +1251,7 @@
    "canonical_ja": "先の満月の晩に雨が降って、川べりの小屋の道がぬかるんだ。",
    "canonical_en": "It rained the last full moon and the road by the riverside hut turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "85b65d58-9a8d-5b5e-a10c-42af5fcb75d6"
   },
   {
@@ -1170,6 +1262,7 @@
    "canonical_ja": "ハナが米の収穫を終えた。",
    "canonical_en": "Hana finished harvesting the rice.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d4432894-f5d7-5992-b873-e45d6c784cae"
   },
   {
@@ -1180,6 +1273,7 @@
    "canonical_ja": "先の市の日の夜、村はずれの祠のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the roadside shrine the last market day.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "98f17a2c-40e2-5be3-add6-4417f159c7e2"
   },
   {
@@ -1190,6 +1284,7 @@
    "canonical_ja": "雪解けのころに雨が降って、川べりの小屋の道がぬかるんだ。",
    "canonical_en": "It rained the thaw and the road by the riverside hut turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ac18d3fb-f77e-5e53-b270-3185421f249a"
   },
   {
@@ -1200,6 +1295,7 @@
    "canonical_ja": "水車小屋のあたりで蛇を見かけた。",
    "canonical_en": "A snake was seen near the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a2e43ccf-c129-5cd4-a373-52192f1c4365"
   },
   {
@@ -1210,6 +1306,7 @@
    "canonical_ja": "先の市の日に雨が降って、水車小屋の道がぬかるんだ。",
    "canonical_en": "It rained the last market day and the road by the mill turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "21c0dc3a-1545-587e-a762-3cfc1884f4b8"
   },
   {
@@ -1220,6 +1317,7 @@
    "canonical_ja": "北の井戸のあたりで山猫を見かけた。",
    "canonical_en": "A wildcat was seen near the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "fca92e94-6ff1-5cb3-9b96-e1570f40ecf8"
   },
   {
@@ -1230,6 +1328,7 @@
    "canonical_ja": "ミヨが垣根を直した。",
    "canonical_en": "Miyo repaired the fence.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "688d0844-777b-523e-8f10-9a664ca477c6"
   },
   {
@@ -1240,6 +1339,7 @@
    "canonical_ja": "ハナの鍬が壊れた。",
    "canonical_en": "Hana's hoe broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0a619c1f-6851-587d-bdb4-0d84101cad24"
   },
   {
@@ -1250,6 +1350,7 @@
    "canonical_ja": "南の畑のあたりで白い鳥を見かけた。",
    "canonical_en": "A white bird was seen near the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a9a2c195-9a34-55b5-b4df-e7242ff520ac"
   },
   {
@@ -1260,6 +1361,7 @@
    "canonical_ja": "村はずれの祠のあたりで鳶を見かけた。",
    "canonical_en": "A kite was seen near the roadside shrine.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d4673b6f-eb0e-5449-a10a-f2bf4ffadcee"
   },
   {
@@ -1270,6 +1372,7 @@
    "canonical_ja": "タツが柿の収穫を終えた。",
    "canonical_en": "Tatsu finished harvesting the persimmons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9760b111-e7f0-5a09-8dda-ee897627087d"
   },
   {
@@ -1280,6 +1383,7 @@
    "canonical_ja": "ミヨが甘酒を分けてくれた。",
    "canonical_en": "Miyo shared some sweet sake.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3a9e98bc-4385-55ff-bf76-b20a22e567c0"
   },
   {
@@ -1290,6 +1394,7 @@
    "canonical_ja": "スエの笠が壊れた。",
    "canonical_en": "Sue's hat broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c200abd5-2b39-586c-ab2a-e2b66a30a8cd"
   },
   {
@@ -1300,6 +1405,7 @@
    "canonical_ja": "祭りの前の日に雨が降って、南の畑の道がぬかるんだ。",
    "canonical_en": "It rained the day before the festival and the road by the south field turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c2da4222-fabb-5bd1-83cc-42fa462c3b26"
   },
   {
@@ -1310,6 +1416,7 @@
    "canonical_ja": "杉の林のあたりで白い鳥を見かけた。",
    "canonical_en": "A white bird was seen near the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4a66a9c2-06ef-5692-8c0b-2f754b2639ad"
   },
   {
@@ -1320,6 +1427,7 @@
    "canonical_ja": "スエの縄が壊れた。",
    "canonical_en": "Sue's rope broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "da1dd847-2be0-598f-bb0e-af39c494ff9a"
   },
   {
@@ -1330,6 +1438,7 @@
    "canonical_ja": "ゲンの臼が壊れた。",
    "canonical_en": "Gen's mortar broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a97fe660-e0fe-5d7f-abb2-26b3650842e2"
   },
   {
@@ -1340,6 +1449,7 @@
    "canonical_ja": "谷の田んぼのあたりで猪を見かけた。",
    "canonical_en": "A boar was seen near the valley paddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ce394e0b-19f8-5250-8f3f-b2f5ba582c9c"
   },
   {
@@ -1350,6 +1460,7 @@
    "canonical_ja": "先の満月の晩に雨が降って、北の井戸の道がぬかるんだ。",
    "canonical_en": "It rained the last full moon and the road by the north well turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e4829199-e8b3-5f76-9962-2adb83000840"
   },
   {
@@ -1360,6 +1471,7 @@
    "canonical_ja": "五日前の夜、村はずれの祠のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the roadside shrine five days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "48b79761-403d-58ab-b861-a63dc4f9e3c0"
   },
   {
@@ -1370,6 +1482,7 @@
    "canonical_ja": "ハナが井戸の縄を直した。",
    "canonical_en": "Hana repaired the well rope.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0b75f66e-e1bf-5d54-a19d-1ad8576b4abd"
   },
   {
@@ -1380,6 +1493,7 @@
    "canonical_ja": "ゲンが橋の板を直した。",
    "canonical_en": "Gen repaired the bridge plank.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "dfbbf0bf-1a8c-5593-b5c4-baaa28f2dc7e"
   },
   {
@@ -1390,6 +1504,7 @@
    "canonical_ja": "ゲンが芋の収穫を終えた。",
    "canonical_en": "Gen finished harvesting the taro.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "12d0cc70-d8b1-5439-84fa-4b6a45a73576"
   },
   {
@@ -1400,6 +1515,7 @@
    "canonical_ja": "ハナが麦の収穫を終えた。",
    "canonical_en": "Hana finished harvesting the barley.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "67ff7501-831b-5cfb-a671-8ee0e4de4a7c"
   },
   {
@@ -1410,6 +1526,7 @@
    "canonical_ja": "ミヨが餅を分けてくれた。",
    "canonical_en": "Miyo shared some rice cakes.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d216304d-3e2b-5394-91f7-c295c2c96fc5"
   },
   {
@@ -1420,6 +1537,7 @@
    "canonical_ja": "峠の向こうから人が来て、水車小屋に泊まった。",
    "canonical_en": "Someone came from beyond the pass and stayed at the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3f611da9-fabc-59d6-a4d4-b64d38f137df"
   },
   {
@@ -1430,6 +1548,7 @@
    "canonical_ja": "北の井戸のあたりで鳶を見かけた。",
    "canonical_en": "A kite was seen near the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "63ddc608-de54-5936-b2e5-746b28719c73"
   },
   {
@@ -1440,6 +1559,7 @@
    "canonical_ja": "先月のはじめの夜、村はずれの祠のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the roadside shrine early last month.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "70c6c364-14e7-5f7a-bcb6-15e31601f429"
   },
   {
@@ -1450,6 +1570,7 @@
    "canonical_ja": "五日前の夜、杉の林のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the cedar grove five days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7a89e5b8-5f7c-54ab-aae8-fae832abbc42"
   },
   {
@@ -1460,6 +1581,7 @@
    "canonical_ja": "先の満月の晩に雨が降って、古い倉庫の道がぬかるんだ。",
    "canonical_en": "It rained the last full moon and the road by the old warehouse turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ee04fc4d-2ccf-5486-a8ab-2dcb9cef016e"
   },
   {
@@ -1470,6 +1592,7 @@
    "canonical_ja": "ミヨが豆の収穫を終えた。",
    "canonical_en": "Miyo finished harvesting the beans.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a3fb6a2f-a0a5-5ca1-9d91-5f4d823bd18e"
   },
   {
@@ -1480,6 +1603,7 @@
    "canonical_ja": "古い倉庫のあたりで野良犬を見かけた。",
    "canonical_en": "A stray dog was seen near the old warehouse.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c6bea99a-9fd7-5667-a4f8-ae8598556045"
   },
   {
@@ -1490,6 +1614,7 @@
    "canonical_ja": "スエが橋の板を直した。",
    "canonical_en": "Sue repaired the bridge plank.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "bd72c8e4-0c71-5035-ae61-baa8c41ffd70"
   },
   {
@@ -1500,6 +1625,7 @@
    "canonical_ja": "ミヨの縄が壊れた。",
    "canonical_en": "Miyo's rope broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c7d94a96-9192-5c09-8584-085d25bff13e"
   },
   {
@@ -1510,6 +1636,7 @@
    "canonical_ja": "杉の林のあたりで狐を見かけた。",
    "canonical_en": "A fox was seen near the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d0cd9586-832e-5991-88cb-fb23802de375"
   },
   {
@@ -1520,6 +1647,7 @@
    "canonical_ja": "ハナが干し柿を分けてくれた。",
    "canonical_en": "Hana shared some dried persimmons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "571d87df-2ee9-543e-a373-1ebda73343a8"
   },
   {
@@ -1530,6 +1658,7 @@
    "canonical_ja": "ミヨの鎌が壊れた。",
    "canonical_en": "Miyo's sickle broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "765eab6e-9d24-55c7-bbac-52840569b694"
   },
   {
@@ -1540,6 +1669,7 @@
    "canonical_ja": "谷の田んぼのあたりで山猫を見かけた。",
    "canonical_en": "A wildcat was seen near the valley paddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4123bd47-f025-5488-b7c3-5c31b10c61a6"
   },
   {
@@ -1550,6 +1680,7 @@
    "canonical_ja": "川べりの小屋のあたりで白い鳥を見かけた。",
    "canonical_en": "A white bird was seen near the riverside hut.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "49687727-18be-5e05-a8b6-2ca82a89cd45"
   },
   {
@@ -1560,6 +1691,7 @@
    "canonical_ja": "橋のたもとの水が澄んだ。",
    "canonical_en": "The water at the bridge turned clear.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f2f349c9-b026-532b-96cd-4a53ac051ed1"
   },
   {
@@ -1570,6 +1702,7 @@
    "canonical_ja": "スエが甘酒を分けてくれた。",
    "canonical_en": "Sue shared some sweet sake.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "fc559067-72e5-5c56-aaf2-027b39f980a1"
   },
   {
@@ -1580,6 +1713,7 @@
    "canonical_ja": "海のほうから人が来て、杉の林に泊まった。",
    "canonical_en": "Someone came from the coast and stayed at the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "765069c8-b5fe-5399-8d4e-03b8e8c83615"
   },
   {
@@ -1590,6 +1724,7 @@
    "canonical_ja": "雪解けのころに雨が降って、杉の林の道がぬかるんだ。",
    "canonical_en": "It rained the thaw and the road by the cedar grove turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a3c2145c-3184-5459-b197-48e061217195"
   },
   {
@@ -1600,6 +1735,7 @@
    "canonical_ja": "峠の向こうへ行く道が崩れている。",
    "canonical_en": "The road to beyond the pass is washed out.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "680a7e94-f0bc-5bd2-aa32-9b30e6b64d1b"
   },
   {
@@ -1610,6 +1746,7 @@
    "canonical_ja": "村はずれの祠のあたりで白い鳥を見かけた。",
    "canonical_en": "A white bird was seen near the roadside shrine.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "22ec0d0b-92f1-5c06-b1e0-46415560b3f6"
   },
   {
@@ -1620,6 +1757,7 @@
    "canonical_ja": "先月のはじめの夜、川べりの小屋のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the riverside hut early last month.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "10245f64-3a84-5b02-987c-a756efd216e5"
   },
   {
@@ -1630,6 +1768,7 @@
    "canonical_ja": "三日前に雨が降って、古い倉庫の道がぬかるんだ。",
    "canonical_en": "It rained three days ago and the road by the old warehouse turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "be180b1a-b96f-5aa1-8873-c908be3a35c9"
   },
   {
@@ -1640,6 +1779,7 @@
    "canonical_ja": "先の市の日に雨が降って、杉の林の道がぬかるんだ。",
    "canonical_en": "It rained the last market day and the road by the cedar grove turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "6051f054-2412-5745-b3c0-02f212c7eb1d"
   },
   {
@@ -1650,6 +1790,7 @@
    "canonical_ja": "ゲンが梯子を直した。",
    "canonical_en": "Gen repaired the ladder.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "beb237b1-2147-5a3c-ae27-5c72a898f347"
   },
   {
@@ -1660,6 +1801,7 @@
    "canonical_ja": "隣の郷へ行く道が崩れている。",
    "canonical_en": "The road to the next hamlet is washed out.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8b0d8158-39fc-51ef-bf9b-93d18abdc132"
   },
   {
@@ -1670,6 +1812,7 @@
    "canonical_ja": "水車小屋の水が濁った。",
    "canonical_en": "The water at the mill turned muddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "aa1384a9-5a94-5246-9fc1-ebbcacde3753"
   },
   {
@@ -1680,6 +1823,7 @@
    "canonical_ja": "タツが干し柿を分けてくれた。",
    "canonical_en": "Tatsu shared some dried persimmons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f42a1913-514b-57be-abdb-1167e727b3ee"
   },
   {
@@ -1690,6 +1834,7 @@
    "canonical_ja": "海のほうから人が来て、水車小屋に泊まった。",
    "canonical_en": "Someone came from the coast and stayed at the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4063568f-b968-5df1-8f63-17a364103dd8"
   },
   {
@@ -1700,6 +1845,7 @@
    "canonical_ja": "スエが戸を直した。",
    "canonical_en": "Sue repaired the door.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "35532cbc-c954-58cd-b6b5-33e545243fbd"
   },
   {
@@ -1710,6 +1856,7 @@
    "canonical_ja": "ハナが水路を直した。",
    "canonical_en": "Hana repaired the channel.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "852047dd-df3a-594c-8bcd-b775083f33a3"
   },
   {
@@ -1720,6 +1867,7 @@
    "canonical_ja": "ハナが煮豆を分けてくれた。",
    "canonical_en": "Hana shared some stewed beans.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "1ba7c50a-7447-572c-89d1-bc6456c0bac8"
   },
   {
@@ -1730,6 +1878,7 @@
    "canonical_ja": "スエが菜の収穫を終えた。",
    "canonical_en": "Sue finished harvesting the greens.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "69a61203-19cf-5a7f-b689-0a99464fca35"
   },
   {
@@ -1740,6 +1889,7 @@
    "canonical_ja": "隣の郷から人が来て、杉の林に泊まった。",
    "canonical_en": "Someone came from the next hamlet and stayed at the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "92cf658b-3696-5369-9336-be561480a94a"
   },
   {
@@ -1750,6 +1900,7 @@
    "canonical_ja": "田植えのあとに雨が降って、杉の林の道がぬかるんだ。",
    "canonical_en": "It rained after the planting and the road by the cedar grove turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a26d115c-5386-5317-a1c6-76aa60df1248"
   },
   {
@@ -1760,6 +1911,7 @@
    "canonical_ja": "スエの背負い籠が壊れた。",
    "canonical_en": "Sue's carrying basket broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "924cf77b-70b9-5d9b-b4f9-0b220c32f673"
   },
   {
@@ -1770,6 +1922,7 @@
    "canonical_ja": "タツが戸を直した。",
    "canonical_en": "Tatsu repaired the door.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "dab2fc57-3b6c-5b0f-a2a4-17b1b765df09"
   },
   {
@@ -1780,6 +1933,7 @@
    "canonical_ja": "峠の道のあたりで蛇を見かけた。",
    "canonical_en": "A snake was seen near the mountain pass.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8f1b96a8-fab0-5e4b-894f-de2cdf0669d8"
   },
   {
@@ -1790,6 +1944,7 @@
    "canonical_ja": "タツが寝込んでいるらしい。",
    "canonical_en": "They say Tatsu has taken ill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c4ad4309-f7f8-5858-8b1e-632365e23eb7"
   },
   {
@@ -1800,6 +1955,7 @@
    "canonical_ja": "南の畑の水が澄んだ。",
    "canonical_en": "The water at the south field turned clear.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0dab1dba-16c5-5633-a56d-a7e3f3fc827b"
   },
   {
@@ -1810,6 +1966,7 @@
    "canonical_ja": "先の市の日に雨が降って、村はずれの祠の道がぬかるんだ。",
    "canonical_en": "It rained the last market day and the road by the roadside shrine turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4bbfbabc-1206-522c-ac51-2e73d4647bc4"
   },
   {
@@ -1820,6 +1977,7 @@
    "canonical_ja": "スエが豆の収穫を終えた。",
    "canonical_en": "Sue finished harvesting the beans.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "dcbaa95d-6c0a-5b76-8264-7f8ed12b6cfa"
   },
   {
@@ -1830,6 +1988,7 @@
    "canonical_ja": "三日前の夜、杉の林のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the cedar grove three days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e8e0cf9e-66fc-5832-86fe-e136e41189ae"
   },
   {
@@ -1840,6 +1999,7 @@
    "canonical_ja": "ミヨが干し柿を分けてくれた。",
    "canonical_en": "Miyo shared some dried persimmons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f4652cd3-6e4d-5f5f-b221-1e56009abfa3"
   },
   {
@@ -1850,6 +2010,7 @@
    "canonical_ja": "峠の道のあたりで鳶を見かけた。",
    "canonical_en": "A kite was seen near the mountain pass.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d44d2d62-2237-5aeb-881d-4f8467c9f18c"
   },
   {
@@ -1860,6 +2021,7 @@
    "canonical_ja": "三日前の夜、橋のたもとのあたりで風が強かった。",
    "canonical_en": "The wind was strong near the bridge three days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7dc72d82-b246-5b00-b13d-3a6a38091daa"
   },
   {
@@ -1870,6 +2032,7 @@
    "canonical_ja": "村はずれの祠の水が減った。",
    "canonical_en": "The water at the roadside shrine turned low.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "569afed3-933d-5860-adf7-961ba791c1fe"
   },
   {
@@ -1880,6 +2043,7 @@
    "canonical_ja": "五日前に雨が降って、峠の道の道がぬかるんだ。",
    "canonical_en": "It rained five days ago and the road by the mountain pass turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "11cd00c0-3e9b-5511-a0a6-65b386d1effc"
   },
   {
@@ -1890,6 +2054,7 @@
    "canonical_ja": "南の畑のあたりで猪を見かけた。",
    "canonical_en": "A boar was seen near the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3fd4da31-43f8-5cf6-8f93-88407958feb5"
   },
   {
@@ -1900,6 +2065,7 @@
    "canonical_ja": "北の井戸のあたりで狐を見かけた。",
    "canonical_en": "A fox was seen near the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "812120fd-cb8e-5977-83de-d5f59cc1576e"
   },
   {
@@ -1910,6 +2076,7 @@
    "canonical_ja": "五日前に雨が降って、杉の林の道がぬかるんだ。",
    "canonical_en": "It rained five days ago and the road by the cedar grove turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0c8feead-7a46-52e5-a03f-0d3da595644c"
   },
   {
@@ -1920,6 +2087,7 @@
    "canonical_ja": "海のほうへ行く道が直った。",
    "canonical_en": "The road to the coast is passable again.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "db4a7434-8066-5063-bafe-fe00015db7fc"
   },
   {
@@ -1930,6 +2098,7 @@
    "canonical_ja": "先月のはじめに雨が降って、村はずれの祠の道がぬかるんだ。",
    "canonical_en": "It rained early last month and the road by the roadside shrine turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "366245d7-7298-506e-a324-d5a369ff64e9"
   },
   {
@@ -1940,6 +2109,7 @@
    "canonical_ja": "峠の向こうから人が来て、杉の林に泊まった。",
    "canonical_en": "Someone came from beyond the pass and stayed at the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "18c55900-09bc-5550-b621-bd53689d5b4b"
   },
   {
@@ -1950,6 +2120,7 @@
    "canonical_ja": "村はずれの祠のあたりで蛇を見かけた。",
    "canonical_en": "A snake was seen near the roadside shrine.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7635fbdd-46d8-5e3b-b950-bc6e16d394e8"
   },
   {
@@ -1960,6 +2131,7 @@
    "canonical_ja": "町へ行く道が直った。",
    "canonical_en": "The road to town is passable again.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "923c5e32-b806-55cb-ae5c-b3bfe2a918cd"
   },
   {
@@ -1970,6 +2142,7 @@
    "canonical_ja": "田植えのあとに雨が降って、水車小屋の道がぬかるんだ。",
    "canonical_en": "It rained after the planting and the road by the mill turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "98ec826d-91ff-579e-aa18-35fc09272fb0"
   },
   {
@@ -1980,6 +2153,7 @@
    "canonical_ja": "南の畑のあたりで蛇を見かけた。",
    "canonical_en": "A snake was seen near the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "edaaf559-2c6a-565e-a256-76e41aa48f58"
   },
   {
@@ -1990,6 +2164,7 @@
    "canonical_ja": "スエが栗の収穫を終えた。",
    "canonical_en": "Sue finished harvesting the chestnuts.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f1862d14-6fa0-565c-a38e-fad4dd609f8d"
   },
   {
@@ -2000,6 +2175,7 @@
    "canonical_ja": "先月のはじめに雨が降って、南の畑の道がぬかるんだ。",
    "canonical_en": "It rained early last month and the road by the south field turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "1270c671-f9b8-5e12-9869-30cf12928a28"
   },
   {
@@ -2010,6 +2186,7 @@
    "canonical_ja": "古い倉庫のあたりで狐を見かけた。",
    "canonical_en": "A fox was seen near the old warehouse.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b965d572-b50f-5dae-b796-b4ecfe1b2405"
   },
   {
@@ -2020,6 +2197,7 @@
    "canonical_ja": "ゲンが甘酒を分けてくれた。",
    "canonical_en": "Gen shared some sweet sake.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e3d7412f-3e10-55a0-ba85-7b88b0d39fa6"
   },
   {
@@ -2030,6 +2208,7 @@
    "canonical_ja": "町へ行く道が塞がっている。",
    "canonical_en": "The road to town is blocked.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f96476dc-51d1-535e-85dd-725a6bdf7891"
   },
   {
@@ -2040,6 +2219,7 @@
    "canonical_ja": "雪解けのころに雨が降って、南の畑の道がぬかるんだ。",
    "canonical_en": "It rained the thaw and the road by the south field turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "fdf7d930-7220-5719-8d75-8bc062f91def"
   },
   {
@@ -2050,6 +2230,7 @@
    "canonical_ja": "ミヨの笠が壊れた。",
    "canonical_en": "Miyo's hat broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c064dcf0-219d-5d7d-9cdd-24e6ca6ff7c4"
   },
   {
@@ -2060,6 +2241,7 @@
    "canonical_ja": "先月のはじめの夜、谷の田んぼのあたりで風が強かった。",
    "canonical_en": "The wind was strong near the valley paddy early last month.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2c50d287-54fd-5dfb-9fc9-800dee4ec182"
   },
   {
@@ -2070,6 +2252,7 @@
    "canonical_ja": "ハナが垣根を直した。",
    "canonical_en": "Hana repaired the fence.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4612ba27-8f40-5509-b211-21e2c3b945bf"
   },
   {
@@ -2080,6 +2263,7 @@
    "canonical_ja": "ハナが焼き栗を分けてくれた。",
    "canonical_en": "Hana shared some roasted chestnuts.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9d32331e-15c5-5a5e-acdc-dc1228c5f86d"
   },
   {
@@ -2090,6 +2274,7 @@
    "canonical_ja": "スエが柿の収穫を終えた。",
    "canonical_en": "Sue finished harvesting the persimmons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ed6f2e7d-d3d3-507b-be72-eafbb80024e4"
   },
   {
@@ -2100,6 +2285,7 @@
    "canonical_ja": "峠の道のあたりで狐を見かけた。",
    "canonical_en": "A fox was seen near the mountain pass.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "06e4b80c-55ba-504e-ba45-ceaace6d0d33"
   },
   {
@@ -2110,6 +2296,7 @@
    "canonical_ja": "ミヨが戸を直した。",
    "canonical_en": "Miyo repaired the door.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d777320e-5568-5b7a-8048-6049c8139820"
   },
   {
@@ -2120,6 +2307,7 @@
    "canonical_ja": "ハナが菜の収穫を終えた。",
    "canonical_en": "Hana finished harvesting the greens.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e01a6eaf-3fe9-5a0f-b221-8590ff5e69e4"
   },
   {
@@ -2130,6 +2318,7 @@
    "canonical_ja": "ミヨが栗の収穫を終えた。",
    "canonical_en": "Miyo finished harvesting the chestnuts.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "32a063f8-d4a9-59e4-b970-e0382ca2e6f9"
   },
   {
@@ -2140,6 +2329,7 @@
    "canonical_ja": "タツの斧が壊れた。",
    "canonical_en": "Tatsu's axe broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "efcf6ac5-d2a3-53d4-b973-54bcf9ec9c61"
   },
   {
@@ -2150,6 +2340,7 @@
    "canonical_ja": "北の井戸の水が濁った。",
    "canonical_en": "The water at the north well turned muddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f548d8d3-61d7-5962-ae36-a181e9dfb45a"
   },
   {
@@ -2160,6 +2351,7 @@
    "canonical_ja": "先の満月の晩に雨が降って、峠の道の道がぬかるんだ。",
    "canonical_en": "It rained the last full moon and the road by the mountain pass turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2e0976e7-3715-50cd-842f-e1199a8dfe5c"
   },
   {
@@ -2170,6 +2362,7 @@
    "canonical_ja": "谷の田んぼのあたりで野良犬を見かけた。",
    "canonical_en": "A stray dog was seen near the valley paddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "56e4ea5c-fc40-51bd-8fe7-5908c3a34964"
   },
   {
@@ -2180,6 +2373,7 @@
    "canonical_ja": "杉の林の水が澄んだ。",
    "canonical_en": "The water at the cedar grove turned clear.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "22a12542-c7e9-5a1c-93ce-cb6a629d96ce"
   },
   {
@@ -2190,6 +2384,7 @@
    "canonical_ja": "スエの鍬が壊れた。",
    "canonical_en": "Sue's hoe broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c38ca7c5-0571-5de6-83c6-447cb648a76b"
   },
   {
@@ -2200,6 +2395,7 @@
    "canonical_ja": "川べりの小屋のあたりで野良犬を見かけた。",
    "canonical_en": "A stray dog was seen near the riverside hut.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ea84e2c6-f939-53eb-a270-bdac2ff99b42"
   },
   {
@@ -2210,6 +2406,7 @@
    "canonical_ja": "ハナが柿の収穫を終えた。",
    "canonical_en": "Hana finished harvesting the persimmons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8802bd61-3d2b-5ef9-a0ef-f7ac12311555"
   },
   {
@@ -2220,6 +2417,7 @@
    "canonical_ja": "祭りの前の日に雨が降って、北の井戸の道がぬかるんだ。",
    "canonical_en": "It rained the day before the festival and the road by the north well turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "fb8a2c37-bbc0-5b6a-b7ad-d2d07dac1e53"
   },
   {
@@ -2230,6 +2428,7 @@
    "canonical_ja": "田植えのあとに雨が降って、峠の道の道がぬかるんだ。",
    "canonical_en": "It rained after the planting and the road by the mountain pass turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "41016cce-617e-5590-99d8-07f79f0f187a"
   },
   {
@@ -2240,6 +2439,7 @@
    "canonical_ja": "海のほうへ行く道が崩れている。",
    "canonical_en": "The road to the coast is washed out.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8deb652c-29d5-5e98-90d7-e6ceaf484fd3"
   },
   {
@@ -2250,6 +2450,7 @@
    "canonical_ja": "古い倉庫のあたりで猪を見かけた。",
    "canonical_en": "A boar was seen near the old warehouse.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "75478ca8-f6a1-5141-a234-02a8302916ab"
   },
   {
@@ -2260,6 +2461,7 @@
    "canonical_ja": "三日前の夜、南の畑のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the south field three days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f6a0f746-fe4e-56c4-92fc-931765837fde"
   },
   {
@@ -2270,6 +2472,7 @@
    "canonical_ja": "ハナが芋の収穫を終えた。",
    "canonical_en": "Hana finished harvesting the taro.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a8b52fdf-424c-5040-aa7c-2b62af32e2ce"
   },
   {
@@ -2280,6 +2483,7 @@
    "canonical_ja": "スエの臼が壊れた。",
    "canonical_en": "Sue's mortar broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a79ab6a6-6baf-5079-8af3-d9384a33b4b5"
   },
   {
@@ -2290,6 +2494,7 @@
    "canonical_ja": "峠の向こうから人が来て、北の井戸に泊まった。",
    "canonical_en": "Someone came from beyond the pass and stayed at the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e33604b1-8ec0-5fb6-add8-4326d1bdaaa9"
   },
   {
@@ -2300,6 +2505,7 @@
    "canonical_ja": "古い倉庫のあたりで蛇を見かけた。",
    "canonical_en": "A snake was seen near the old warehouse.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "cc9ee6d8-001c-545e-aac3-b6dddfe38c91"
   },
   {
@@ -2310,6 +2516,7 @@
    "canonical_ja": "先の市の日の夜、谷の田んぼのあたりで風が強かった。",
    "canonical_en": "The wind was strong near the valley paddy the last market day.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "149337e9-60e8-5e8e-b091-b951296edc88"
   },
   {
@@ -2320,6 +2527,7 @@
    "canonical_ja": "水車小屋のあたりで鳶を見かけた。",
    "canonical_en": "A kite was seen near the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "cdcf90ed-d37a-5b3b-9b49-76e42ff65d9d"
   },
   {
@@ -2330,6 +2538,7 @@
    "canonical_ja": "祭りの前の日に雨が降って、川べりの小屋の道がぬかるんだ。",
    "canonical_en": "It rained the day before the festival and the road by the riverside hut turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e99ae5dc-731e-5028-8cb5-a153bb4e4174"
   },
   {
@@ -2340,6 +2549,7 @@
    "canonical_ja": "先の市の日の夜、北の井戸のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the north well the last market day.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "197fdd5a-99f8-5d1c-8b54-325014f5e643"
   },
   {
@@ -2350,6 +2560,7 @@
    "canonical_ja": "南の畑のあたりで鳶を見かけた。",
    "canonical_en": "A kite was seen near the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "28003ec6-4909-5043-b810-aaf16fa21fa1"
   },
   {
@@ -2360,6 +2571,7 @@
    "canonical_ja": "ミヨが水路を直した。",
    "canonical_en": "Miyo repaired the channel.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f603d88b-cfc5-5ae7-9c53-2b286e693129"
   },
   {
@@ -2370,6 +2582,7 @@
    "canonical_ja": "先の市の日の夜、南の畑のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the south field the last market day.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "227bc027-a69d-529a-a907-65ca0ed6726a"
   },
   {
@@ -2380,6 +2593,7 @@
    "canonical_ja": "ミヨの背負い籠が壊れた。",
    "canonical_en": "Miyo's carrying basket broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3d2c9640-4040-5354-9335-f5e654f345a5"
   },
   {
@@ -2390,6 +2604,7 @@
    "canonical_ja": "杉の林のあたりで蛇を見かけた。",
    "canonical_en": "A snake was seen near the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5ee11816-fc27-537c-88e1-2dedcc41bc87"
   },
   {
@@ -2400,6 +2615,7 @@
    "canonical_ja": "先の満月の晩に雨が降って、谷の田んぼの道がぬかるんだ。",
    "canonical_en": "It rained the last full moon and the road by the valley paddy turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7903d212-22f7-57ce-a6c5-b8aae47fd061"
   },
   {
@@ -2410,6 +2626,7 @@
    "canonical_ja": "田植えのあとに雨が降って、橋のたもとの道がぬかるんだ。",
    "canonical_en": "It rained after the planting and the road by the bridge turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "cfd647ed-11ca-56c1-81ef-a12fd41c4db1"
   },
   {
@@ -2420,6 +2637,7 @@
    "canonical_ja": "隣の郷へ行く道がぬかるんでいる。",
    "canonical_en": "The road to the next hamlet is muddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d29e5a16-c218-54e9-ae0d-d9e9ed959070"
   },
   {
@@ -2430,6 +2648,7 @@
    "canonical_ja": "ハナが豆の収穫を終えた。",
    "canonical_en": "Hana finished harvesting the beans.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0a7fc7cc-c951-5c46-8e78-6ba8554cc90f"
   },
   {
@@ -2440,6 +2659,7 @@
    "canonical_ja": "五日前の夜、川べりの小屋のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the riverside hut five days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "bcb92ca1-832e-5fa8-92f7-0236671820b2"
   },
   {
@@ -2450,6 +2670,7 @@
    "canonical_ja": "先月のはじめに雨が降って、杉の林の道がぬかるんだ。",
    "canonical_en": "It rained early last month and the road by the cedar grove turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2b99dc11-abd6-5946-b68c-24bfa948b314"
   },
   {
@@ -2460,6 +2681,7 @@
    "canonical_ja": "スエが餅を分けてくれた。",
    "canonical_en": "Sue shared some rice cakes.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d921f464-3d2f-5d1b-a363-b920ea1d8e69"
   },
   {
@@ -2470,6 +2692,7 @@
    "canonical_ja": "川べりの小屋のあたりで猪を見かけた。",
    "canonical_en": "A boar was seen near the riverside hut.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "949a6bd3-2bb0-5249-a7ca-42a8c4223a1d"
   },
   {
@@ -2480,6 +2703,7 @@
    "canonical_ja": "ゲンの笠が壊れた。",
    "canonical_en": "Gen's hat broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2b186e54-63f7-5331-b491-7223451d6841"
   },
   {
@@ -2490,6 +2714,7 @@
    "canonical_ja": "川べりの小屋のあたりで山猫を見かけた。",
    "canonical_en": "A wildcat was seen near the riverside hut.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f8426aec-effc-5bc0-9cc1-711d72caebd4"
   },
   {
@@ -2500,6 +2725,7 @@
    "canonical_ja": "ゲンの鍬が壊れた。",
    "canonical_en": "Gen's hoe broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "478e6221-4cd2-54c7-b372-1f5b5e178d12"
   },
   {
@@ -2510,6 +2736,7 @@
    "canonical_ja": "スエの桶が壊れた。",
    "canonical_en": "Sue's bucket broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "32ad6bb3-ebda-5dd0-98b4-1ccfadff7592"
   },
   {
@@ -2520,6 +2747,7 @@
    "canonical_ja": "橋のたもとの水が減った。",
    "canonical_en": "The water at the bridge turned low.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "85a69284-041a-590c-9c4b-77c9c9a56eec"
   },
   {
@@ -2530,6 +2758,7 @@
    "canonical_ja": "五日前の夜、南の畑のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the south field five days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ef1450fc-84ca-556e-8c7f-61f26f5719fa"
   },
   {
@@ -2540,6 +2769,7 @@
    "canonical_ja": "タツが焼き栗を分けてくれた。",
    "canonical_en": "Tatsu shared some roasted chestnuts.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "bdcf10be-1ee5-52ed-95f7-321c743be19d"
   },
   {
@@ -2550,6 +2780,7 @@
    "canonical_ja": "橋のたもとのあたりで野良犬を見かけた。",
    "canonical_en": "A stray dog was seen near the bridge.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3af235b9-0a1c-5895-b376-52ef02e1aaa0"
   },
   {
@@ -2560,6 +2791,7 @@
    "canonical_ja": "南の畑のあたりで野良犬を見かけた。",
    "canonical_en": "A stray dog was seen near the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "35d5a21a-c0f6-57f9-b406-e877fd8741d5"
   },
   {
@@ -2570,6 +2802,7 @@
    "canonical_ja": "三日前に雨が降って、橋のたもとの道がぬかるんだ。",
    "canonical_en": "It rained three days ago and the road by the bridge turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a3a6b84b-38c8-586c-8f0d-543968669e79"
   },
   {
@@ -2580,6 +2813,7 @@
    "canonical_ja": "先の市の日に雨が降って、橋のたもとの道がぬかるんだ。",
    "canonical_en": "It rained the last market day and the road by the bridge turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "74cefc9f-a82f-59f2-907c-6ff577be094f"
   },
   {
@@ -2590,6 +2824,7 @@
    "canonical_ja": "五日前に雨が降って、谷の田んぼの道がぬかるんだ。",
    "canonical_en": "It rained five days ago and the road by the valley paddy turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f85d8d57-3b56-5233-a9e4-fd1734449e90"
   },
   {
@@ -2600,6 +2835,7 @@
    "canonical_ja": "北の井戸のあたりで白い鳥を見かけた。",
    "canonical_en": "A white bird was seen near the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2b458947-c267-5695-b41d-b1bba67993ac"
   },
   {
@@ -2610,6 +2846,7 @@
    "canonical_ja": "タツの背負い籠が壊れた。",
    "canonical_en": "Tatsu's carrying basket broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5ce1f1dc-153b-5a7d-9507-8b32e2a1d720"
   },
   {
@@ -2620,6 +2857,7 @@
    "canonical_ja": "タツの縄が壊れた。",
    "canonical_en": "Tatsu's rope broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "38297aa1-de0b-52ef-91c2-56627d9c2f11"
   },
   {
@@ -2630,6 +2868,7 @@
    "canonical_ja": "谷の田んぼのあたりで鹿を見かけた。",
    "canonical_en": "A deer was seen near the valley paddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0058077e-bd9d-5ccd-97c6-bc7ea959029d"
   },
   {
@@ -2640,6 +2879,7 @@
    "canonical_ja": "祭りの前の日に雨が降って、水車小屋の道がぬかるんだ。",
    "canonical_en": "It rained the day before the festival and the road by the mill turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "bef0a85f-5c3d-5240-ac42-af5da3efadbb"
   },
   {
@@ -2650,6 +2890,7 @@
    "canonical_ja": "ミヨが漬物を分けてくれた。",
    "canonical_en": "Miyo shared some pickles.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ea5ff2ce-8fea-5771-8ada-dd3f1b6a5cba"
   },
   {
@@ -2660,6 +2901,7 @@
    "canonical_ja": "三日前の夜、北の井戸のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the north well three days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2f351ee0-86d4-579e-9545-3baced2eea1e"
   },
   {
@@ -2670,6 +2912,7 @@
    "canonical_ja": "橋のたもとの水が濁った。",
    "canonical_en": "The water at the bridge turned muddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d5633cf7-edea-5f0d-9b4c-a96eb8ed4e19"
   },
   {
@@ -2680,6 +2923,7 @@
    "canonical_ja": "谷の田んぼのあたりで蛇を見かけた。",
    "canonical_en": "A snake was seen near the valley paddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0faa03b4-445b-5f5f-a8cf-ba00e960064c"
   },
   {
@@ -2690,6 +2934,7 @@
    "canonical_ja": "スエが芋の収穫を終えた。",
    "canonical_en": "Sue finished harvesting the taro.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5f9f61d4-b1f6-5c9a-8e6c-3f7be6c2c15c"
   },
   {
@@ -2700,6 +2945,7 @@
    "canonical_ja": "先の市の日に雨が降って、峠の道の道がぬかるんだ。",
    "canonical_en": "It rained the last market day and the road by the mountain pass turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "668c2f48-46f1-56dc-b7e9-9cefaf632b7a"
   },
   {
@@ -2710,6 +2956,7 @@
    "canonical_ja": "ミヨが屋根を直した。",
    "canonical_en": "Miyo repaired the roof.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3621d585-64d5-5b2c-ba83-1d2470321586"
   },
   {
@@ -2720,6 +2967,7 @@
    "canonical_ja": "谷の田んぼのあたりで鳶を見かけた。",
    "canonical_en": "A kite was seen near the valley paddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "cca57f09-d868-5519-8a04-1235c2561008"
   },
   {
@@ -2730,6 +2978,7 @@
    "canonical_ja": "ハナが甘酒を分けてくれた。",
    "canonical_en": "Hana shared some sweet sake.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "1b089d57-cf9c-5ac8-a0d5-80bdac89b998"
   },
   {
@@ -2740,6 +2989,7 @@
    "canonical_ja": "三日前に雨が降って、川べりの小屋の道がぬかるんだ。",
    "canonical_en": "It rained three days ago and the road by the riverside hut turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9e7e2558-ac34-5fef-8c05-f9accccfb392"
   },
   {
@@ -2750,6 +3000,7 @@
    "canonical_ja": "タツが米の収穫を終えた。",
    "canonical_en": "Tatsu finished harvesting the rice.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "498cf211-8655-5a98-bc4e-7f555555de73"
   },
   {
@@ -2760,6 +3011,7 @@
    "canonical_ja": "橋のたもとのあたりで蛇を見かけた。",
    "canonical_en": "A snake was seen near the bridge.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "946bfaa3-11f8-5d9f-b78e-dd7c86acefd0"
   },
   {
@@ -2770,6 +3022,7 @@
    "canonical_ja": "南の畑の水が減った。",
    "canonical_en": "The water at the south field turned low.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e00d672d-71d2-5940-b460-d9ebbbfc06c2"
   },
   {
@@ -2780,6 +3033,7 @@
    "canonical_ja": "村はずれの祠の水が濁った。",
    "canonical_en": "The water at the roadside shrine turned muddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e2fdb04c-3eb8-5aed-ba53-d0e52335c7de"
   },
   {
@@ -2790,6 +3044,7 @@
    "canonical_ja": "ミヨが瓜の収穫を終えた。",
    "canonical_en": "Miyo finished harvesting the melons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7ba957d9-b6dd-578c-920f-fb3f650e9f94"
   },
   {
@@ -2800,6 +3055,7 @@
    "canonical_ja": "ハナが屋根を直した。",
    "canonical_en": "Hana repaired the roof.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d6886988-f392-5957-81dc-00f7533795b7"
   },
   {
@@ -2810,6 +3066,7 @@
    "canonical_ja": "タツが瓜の収穫を終えた。",
    "canonical_en": "Tatsu finished harvesting the melons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c0646a5a-110f-569b-aee9-29ff1c99952d"
   },
   {
@@ -2820,6 +3077,7 @@
    "canonical_ja": "橋のたもとのあたりで鹿を見かけた。",
    "canonical_en": "A deer was seen near the bridge.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "06fde5af-fbcc-551c-b167-0b82830396cc"
   },
   {
@@ -2830,6 +3088,7 @@
    "canonical_ja": "先の市の日の夜、古い倉庫のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the old warehouse the last market day.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "61970b47-fc42-5195-b9a2-81784866e69b"
   },
   {
@@ -2840,6 +3099,7 @@
    "canonical_ja": "橋のたもとのあたりで白い鳥を見かけた。",
    "canonical_en": "A white bird was seen near the bridge.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "73af212d-8a1a-5c28-9af3-447ddd3c61e4"
   },
   {
@@ -2850,6 +3110,7 @@
    "canonical_ja": "村はずれの祠のあたりで山猫を見かけた。",
    "canonical_en": "A wildcat was seen near the roadside shrine.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "806568e4-fc45-5dd2-9733-ecefdd6a135f"
   },
   {
@@ -2860,6 +3121,7 @@
    "canonical_ja": "ハナの背負い籠が壊れた。",
    "canonical_en": "Hana's carrying basket broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ea1d39b9-71cf-5a23-98d1-d2f59ec5595f"
   },
   {
@@ -2870,6 +3132,7 @@
    "canonical_ja": "橋のたもとのあたりで狐を見かけた。",
    "canonical_en": "A fox was seen near the bridge.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d4dfaaaf-e54e-524b-b990-955ce597b7d2"
   },
   {
@@ -2880,6 +3143,7 @@
    "canonical_ja": "ミヨが寝込んでいるらしい。",
    "canonical_en": "They say Miyo has taken ill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "61130b4c-ef4f-56d3-9cce-d2377fbea69e"
   },
   {
@@ -2890,6 +3154,7 @@
    "canonical_ja": "村はずれの祠のあたりで猪を見かけた。",
    "canonical_en": "A boar was seen near the roadside shrine.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2711401d-5887-5384-bfc3-e1bf2cc8d320"
   },
   {
@@ -2900,6 +3165,7 @@
    "canonical_ja": "町から人が来て、北の井戸に泊まった。",
    "canonical_en": "Someone came from town and stayed at the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3f8e2737-9405-5a28-a5e1-420cf97bb3f2"
   },
   {
@@ -2910,6 +3176,7 @@
    "canonical_ja": "ゲンの鎌が壊れた。",
    "canonical_en": "Gen's sickle broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "943acb48-6ae2-57dc-bf43-4ed103fc38c0"
   },
   {
@@ -2920,6 +3187,7 @@
    "canonical_ja": "杉の林の水が減った。",
    "canonical_en": "The water at the cedar grove turned low.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "1f26df05-60a8-5357-b1f3-a2e8cdcb86a7"
   },
   {
@@ -2930,6 +3198,7 @@
    "canonical_ja": "峠の向こうへ行く道が直った。",
    "canonical_en": "The road to beyond the pass is passable again.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e7f5e6c3-8d67-5e4c-a4e5-b785b26fd26b"
   },
   {
@@ -2940,6 +3209,7 @@
    "canonical_ja": "雪解けのころに雨が降って、北の井戸の道がぬかるんだ。",
    "canonical_en": "It rained the thaw and the road by the north well turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "46a07dbd-ff4e-5622-b292-1b65375d7992"
   },
   {
@@ -2950,6 +3220,7 @@
    "canonical_ja": "スエが梯子を直した。",
    "canonical_en": "Sue repaired the ladder.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "6f04f911-e845-554b-9df8-871ffb3035fa"
   },
   {
@@ -2960,6 +3231,7 @@
    "canonical_ja": "ゲンが屋根を直した。",
    "canonical_en": "Gen repaired the roof.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "154784ed-6327-5005-ab67-7cb21d00ab32"
   },
   {
@@ -2970,6 +3242,7 @@
    "canonical_ja": "先月のはじめに雨が降って、峠の道の道がぬかるんだ。",
    "canonical_en": "It rained early last month and the road by the mountain pass turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2aa2e5f4-75af-5ade-8364-f31a6844f89a"
   },
   {
@@ -2980,6 +3253,7 @@
    "canonical_ja": "杉の林のあたりで鳶を見かけた。",
    "canonical_en": "A kite was seen near the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5c5a4479-4ce1-534c-8544-6a682f356b40"
   },
   {
@@ -2990,6 +3264,7 @@
    "canonical_ja": "ゲンが豆の収穫を終えた。",
    "canonical_en": "Gen finished harvesting the beans.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7245a00c-9405-534b-bf35-8a80dd5b7065"
   },
   {
@@ -3000,6 +3275,7 @@
    "canonical_ja": "三日前の夜、峠の道のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the mountain pass three days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d757e3b1-4e77-5df2-8a11-2396375b0f15"
   },
   {
@@ -3010,6 +3286,7 @@
    "canonical_ja": "スエの鎌が壊れた。",
    "canonical_en": "Sue's sickle broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7636acf6-b426-5e5d-bd5d-d6c50d65511a"
   },
   {
@@ -3020,6 +3297,7 @@
    "canonical_ja": "村はずれの祠の水が澄んだ。",
    "canonical_en": "The water at the roadside shrine turned clear.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "dab1de85-696c-58d2-8713-fcaa4fade293"
   },
   {
@@ -3030,6 +3308,7 @@
    "canonical_ja": "ゲンが焼き栗を分けてくれた。",
    "canonical_en": "Gen shared some roasted chestnuts.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8f8ab615-e506-50ba-9c9e-71d13d9448d5"
   },
   {
@@ -3040,6 +3319,7 @@
    "canonical_ja": "三日前の夜、谷の田んぼのあたりで風が強かった。",
    "canonical_en": "The wind was strong near the valley paddy three days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8e2ff9e3-6577-53b5-ac2f-7aa18c8857e8"
   },
   {
@@ -3050,6 +3330,7 @@
    "canonical_ja": "ミヨが麦の収穫を終えた。",
    "canonical_en": "Miyo finished harvesting the barley.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2a612ff4-2bf2-5407-ac4c-f3c4522627b4"
   },
   {
@@ -3060,6 +3341,7 @@
    "canonical_ja": "タツが漬物を分けてくれた。",
    "canonical_en": "Tatsu shared some pickles.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5efc6b07-ba75-5e58-a3cc-398cb3549203"
   },
   {
@@ -3070,6 +3352,7 @@
    "canonical_ja": "三日前に雨が降って、水車小屋の道がぬかるんだ。",
    "canonical_en": "It rained three days ago and the road by the mill turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "1fc086e2-ab44-5ee5-8532-386c78b3561a"
   },
   {
@@ -3080,6 +3363,7 @@
    "canonical_ja": "タツが菜の収穫を終えた。",
    "canonical_en": "Tatsu finished harvesting the greens.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "66287888-aecc-5183-ad59-8b777cc735e3"
   },
   {
@@ -3090,6 +3374,7 @@
    "canonical_ja": "祭りの前の日に雨が降って、杉の林の道がぬかるんだ。",
    "canonical_en": "It rained the day before the festival and the road by the cedar grove turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3f75548b-0cb1-5f7d-a840-1fb4fe71678c"
   },
   {
@@ -3100,6 +3385,7 @@
    "canonical_ja": "水車小屋の水が澄んだ。",
    "canonical_en": "The water at the mill turned clear.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "df23cc8c-f51f-571d-809d-75c8d9ec7259"
   },
   {
@@ -3110,6 +3396,7 @@
    "canonical_ja": "スエが煮豆を分けてくれた。",
    "canonical_en": "Sue shared some stewed beans.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9c6a15b0-8201-511b-83b1-45a912b72370"
   },
   {
@@ -3120,6 +3407,7 @@
    "canonical_ja": "村はずれの祠のあたりで狐を見かけた。",
    "canonical_en": "A fox was seen near the roadside shrine.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7533aac7-ba03-531c-90f0-6fc93b1feb64"
   },
   {
@@ -3130,6 +3418,7 @@
    "canonical_ja": "五日前に雨が降って、南の畑の道がぬかるんだ。",
    "canonical_en": "It rained five days ago and the road by the south field turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "98acd56b-9338-534e-8f57-be9fc6452035"
   },
   {
@@ -3140,6 +3429,7 @@
    "canonical_ja": "町へ行く道がぬかるんでいる。",
    "canonical_en": "The road to town is muddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f5d719ae-1e1d-5ccc-9757-1f6ed32cdb6d"
   },
   {
@@ -3150,6 +3440,7 @@
    "canonical_ja": "ハナが戸を直した。",
    "canonical_en": "Hana repaired the door.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c73239a4-9e18-574a-8aa5-fd2e71206519"
   },
   {
@@ -3160,6 +3451,7 @@
    "canonical_ja": "タツの臼が壊れた。",
    "canonical_en": "Tatsu's mortar broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "31624678-80a3-5e75-9609-60976b622f85"
   },
   {
@@ -3170,6 +3462,7 @@
    "canonical_ja": "ゲンが小屋の床を直した。",
    "canonical_en": "Gen repaired the hut floor.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4304bbe1-cb63-5d6b-9a89-08457ed2bfdd"
   },
   {
@@ -3180,6 +3473,7 @@
    "canonical_ja": "ゲンが垣根を直した。",
    "canonical_en": "Gen repaired the fence.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "439d90ef-fd42-577f-b4c7-5655a5455da4"
   },
   {
@@ -3190,6 +3484,7 @@
    "canonical_ja": "川べりの小屋のあたりで狐を見かけた。",
    "canonical_en": "A fox was seen near the riverside hut.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "64905f97-9b13-58bc-a7c1-f7d075607811"
   },
   {
@@ -3200,6 +3495,7 @@
    "canonical_ja": "五日前の夜、峠の道のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the mountain pass five days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "90a1c626-a847-5b78-826d-2950b3ffc765"
   },
   {
@@ -3210,6 +3506,7 @@
    "canonical_ja": "水車小屋のあたりで白い鳥を見かけた。",
    "canonical_en": "A white bird was seen near the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "10920c49-6225-5d6a-80e4-fc3c05e0d568"
   },
   {
@@ -3220,6 +3517,7 @@
    "canonical_ja": "先月のはじめの夜、杉の林のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the cedar grove early last month.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "08ca48f6-fcb4-5380-aae2-e420d621fa47"
   },
   {
@@ -3230,6 +3528,7 @@
    "canonical_ja": "ゲンが煮豆を分けてくれた。",
    "canonical_en": "Gen shared some stewed beans.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2e76eba0-5243-5c0d-a2c3-506440e00a93"
   },
   {
@@ -3240,6 +3539,7 @@
    "canonical_ja": "ゲンが瓜の収穫を終えた。",
    "canonical_en": "Gen finished harvesting the melons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "24f52a99-0039-55c1-b4e0-ea7b03511a30"
   },
   {
@@ -3250,6 +3550,7 @@
    "canonical_ja": "先の市の日の夜、峠の道のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the mountain pass the last market day.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c8813818-7292-5ba5-9b52-d9d15e2596d7"
   },
   {
@@ -3260,6 +3561,7 @@
    "canonical_ja": "海のほうから人が来て、北の井戸に泊まった。",
    "canonical_en": "Someone came from the coast and stayed at the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "29dc4145-35f4-5780-a49d-f90e57895732"
   },
   {
@@ -3270,6 +3572,7 @@
    "canonical_ja": "橋のたもとのあたりで鳶を見かけた。",
    "canonical_en": "A kite was seen near the bridge.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "1cb9d079-10c7-5567-9ea3-abced42bb71b"
   },
   {
@@ -3280,6 +3583,7 @@
    "canonical_ja": "杉の林のあたりで山猫を見かけた。",
    "canonical_en": "A wildcat was seen near the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8b754f1e-2280-5321-b615-8ec12c953758"
   },
   {
@@ -3290,6 +3594,7 @@
    "canonical_ja": "ハナが小屋の床を直した。",
    "canonical_en": "Hana repaired the hut floor.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a961f1ea-0835-534a-bec3-d930bb8596e6"
   },
   {
@@ -3300,6 +3605,7 @@
    "canonical_ja": "ハナの鎌が壊れた。",
    "canonical_en": "Hana's sickle broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "6c835847-6dcb-5046-8f6e-1ed00a4b39b9"
   },
   {
@@ -3310,6 +3616,7 @@
    "canonical_ja": "雪解けのころに雨が降って、谷の田んぼの道がぬかるんだ。",
    "canonical_en": "It rained the thaw and the road by the valley paddy turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "223628d6-3cdc-54d9-b373-f90b5db7ab2c"
   },
   {
@@ -3320,6 +3627,7 @@
    "canonical_ja": "古い倉庫のあたりで鹿を見かけた。",
    "canonical_en": "A deer was seen near the old warehouse.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a9a82c4e-1fcc-52f2-bf90-839315da35dd"
   },
   {
@@ -3330,6 +3638,7 @@
    "canonical_ja": "五日前に雨が降って、古い倉庫の道がぬかるんだ。",
    "canonical_en": "It rained five days ago and the road by the old warehouse turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "38dfcaea-e6fb-5efd-8ff1-12c74454d764"
   },
   {
@@ -3340,6 +3649,7 @@
    "canonical_ja": "田植えのあとに雨が降って、南の畑の道がぬかるんだ。",
    "canonical_en": "It rained after the planting and the road by the south field turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "bc04a72c-08ce-524e-b2f7-48c905a1a5c0"
   },
   {
@@ -3350,6 +3660,7 @@
    "canonical_ja": "先月のはじめに雨が降って、水車小屋の道がぬかるんだ。",
    "canonical_en": "It rained early last month and the road by the mill turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "6d832b4a-0fb7-5d58-87cf-54f6ea32b5c2"
   },
   {
@@ -3360,6 +3671,7 @@
    "canonical_ja": "古い倉庫のあたりで山猫を見かけた。",
    "canonical_en": "A wildcat was seen near the old warehouse.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f98c8063-8cce-5bb5-bb9b-033efa89ba94"
   },
   {
@@ -3370,6 +3682,7 @@
    "canonical_ja": "ミヨが菜の収穫を終えた。",
    "canonical_en": "Miyo finished harvesting the greens.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b6c029d3-eb09-5c37-8d18-7a1492bd4489"
   },
   {
@@ -3380,6 +3693,7 @@
    "canonical_ja": "先月のはじめに雨が降って、橋のたもとの道がぬかるんだ。",
    "canonical_en": "It rained early last month and the road by the bridge turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "290b0fb0-438b-50fb-a43d-ae99e24f5bc4"
   },
   {
@@ -3390,6 +3704,7 @@
    "canonical_ja": "祭りの前の日に雨が降って、谷の田んぼの道がぬかるんだ。",
    "canonical_en": "It rained the day before the festival and the road by the valley paddy turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "23c8d656-fb3e-52d4-ab7f-af2acc258860"
   },
   {
@@ -3400,6 +3715,7 @@
    "canonical_ja": "五日前に雨が降って、水車小屋の道がぬかるんだ。",
    "canonical_en": "It rained five days ago and the road by the mill turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d9701e3e-a9f7-5050-8bd7-9e50f27c1243"
   },
   {
@@ -3410,6 +3726,7 @@
    "canonical_ja": "隣の郷へ行く道が塞がっている。",
    "canonical_en": "The road to the next hamlet is blocked.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ae6eafdc-c33a-55ab-9963-a3c398ed47ee"
   },
   {
@@ -3420,6 +3737,7 @@
    "canonical_ja": "先月のはじめに雨が降って、古い倉庫の道がぬかるんだ。",
    "canonical_en": "It rained early last month and the road by the old warehouse turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3e1e1400-14b3-53ee-b22c-b53b3128bc3b"
   },
   {
@@ -3430,6 +3748,7 @@
    "canonical_ja": "古い倉庫のあたりで鳶を見かけた。",
    "canonical_en": "A kite was seen near the old warehouse.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7a4b83ba-e157-5e10-a100-2353db3ef50e"
   },
   {
@@ -3440,6 +3759,7 @@
    "canonical_ja": "三日前に雨が降って、村はずれの祠の道がぬかるんだ。",
    "canonical_en": "It rained three days ago and the road by the roadside shrine turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ca83f9e8-5d2a-5f74-9f6a-c89cb85f0f50"
   },
   {
@@ -3450,6 +3770,7 @@
    "canonical_ja": "タツが甘酒を分けてくれた。",
    "canonical_en": "Tatsu shared some sweet sake.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "95178dd8-3752-5ecd-9f1b-76ed3969a65e"
   },
   {
@@ -3460,6 +3781,7 @@
    "canonical_ja": "田植えのあとに雨が降って、村はずれの祠の道がぬかるんだ。",
    "canonical_en": "It rained after the planting and the road by the roadside shrine turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3b0cdf70-e8ca-5f1c-8f00-dd2bdbcf63d1"
   },
   {
@@ -3470,6 +3792,7 @@
    "canonical_ja": "田植えのあとに雨が降って、北の井戸の道がぬかるんだ。",
    "canonical_en": "It rained after the planting and the road by the north well turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "6c273b75-40fe-5656-870a-0c8dd280b4c3"
   },
   {
@@ -3480,6 +3803,7 @@
    "canonical_ja": "峠の道のあたりで山猫を見かけた。",
    "canonical_en": "A wildcat was seen near the mountain pass.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a4bf1a80-ef94-5b74-a658-156a374ea35f"
   },
   {
@@ -3490,6 +3814,7 @@
    "canonical_ja": "南の畑の水がincreased。",
    "canonical_en": "The water at the south field turned high.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9c352ac0-3358-5b0e-a332-65c9ae54d50c"
   },
   {
@@ -3500,6 +3825,7 @@
    "canonical_ja": "タツが小屋の床を直した。",
    "canonical_en": "Tatsu repaired the hut floor.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "1e338838-5954-5d96-b1f8-2688e6d3e4ba"
   },
   {
@@ -3510,6 +3836,7 @@
    "canonical_ja": "先月のはじめの夜、峠の道のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the mountain pass early last month.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b6a5f0ec-331e-57ce-8f1b-6c37653412fc"
   },
   {
@@ -3520,6 +3847,7 @@
    "canonical_ja": "ハナが寝込んでいるらしい。",
    "canonical_en": "They say Hana has taken ill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4d9c066c-9c13-5927-878a-84618b384228"
   },
   {
@@ -3530,6 +3858,7 @@
    "canonical_ja": "水車小屋のあたりで鹿を見かけた。",
    "canonical_en": "A deer was seen near the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "79c16093-1c8e-558e-8276-4ba5d7a5cbd1"
   },
   {
@@ -3540,6 +3869,7 @@
    "canonical_ja": "スエが干し柿を分けてくれた。",
    "canonical_en": "Sue shared some dried persimmons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "042c0668-7584-5c3b-9fad-c02cd933b120"
   },
   {
@@ -3550,6 +3880,7 @@
    "canonical_ja": "祭りの前の日に雨が降って、橋のたもとの道がぬかるんだ。",
    "canonical_en": "It rained the day before the festival and the road by the bridge turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "52ed7c1a-61e1-5779-b65f-aa676b9b3e2b"
   },
   {
@@ -3560,6 +3891,7 @@
    "canonical_ja": "タツの笠が壊れた。",
    "canonical_en": "Tatsu's hat broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "1b12656e-a5bf-5772-9b26-bbd67381f98d"
   },
   {
@@ -3570,6 +3902,7 @@
    "canonical_ja": "先の市の日に雨が降って、谷の田んぼの道がぬかるんだ。",
    "canonical_en": "It rained the last market day and the road by the valley paddy turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8f172aae-b92c-564e-a492-52547cda108c"
   },
   {
@@ -3580,6 +3913,7 @@
    "canonical_ja": "雪解けのころに雨が降って、橋のたもとの道がぬかるんだ。",
    "canonical_en": "It rained the thaw and the road by the bridge turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "154312b7-ab82-51bd-a49a-5dba2c9c637d"
   },
   {
@@ -3590,6 +3924,7 @@
    "canonical_ja": "村はずれの祠のあたりで野良犬を見かけた。",
    "canonical_en": "A stray dog was seen near the roadside shrine.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "736a7782-c778-5fd5-a527-3194b80eea3e"
   },
   {
@@ -3600,6 +3935,7 @@
    "canonical_ja": "ゲンが寝込んでいるらしい。",
    "canonical_en": "They say Gen has taken ill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "628ff4a3-e12e-5fc7-a4d9-51af5ff15b92"
   },
   {
@@ -3610,6 +3946,7 @@
    "canonical_ja": "先の満月の晩に雨が降って、南の畑の道がぬかるんだ。",
    "canonical_en": "It rained the last full moon and the road by the south field turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c6b64907-98bc-559e-a2b6-bcf7d80ab553"
   },
   {
@@ -3620,6 +3957,7 @@
    "canonical_ja": "ゲンの斧が壊れた。",
    "canonical_en": "Gen's axe broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "54c762ab-7555-5224-9d32-f73eb304a53f"
   },
   {
@@ -3630,6 +3968,7 @@
    "canonical_ja": "スエが瓜の収穫を終えた。",
    "canonical_en": "Sue finished harvesting the melons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b4f6932d-6229-57f0-895e-98200cff26c0"
   },
   {
@@ -3640,6 +3979,7 @@
    "canonical_ja": "橋のたもとのあたりで猪を見かけた。",
    "canonical_en": "A boar was seen near the bridge.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "64fc5fc9-07dc-5038-a4dd-268d95142dca"
   },
   {
@@ -3650,6 +3990,7 @@
    "canonical_ja": "ミヨが焼き栗を分けてくれた。",
    "canonical_en": "Miyo shared some roasted chestnuts.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d23a255a-62f0-5a16-8b9c-5a15c94e6291"
   },
   {
@@ -3660,6 +4001,7 @@
    "canonical_ja": "峠の向こうへ行く道がぬかるんでいる。",
    "canonical_en": "The road to beyond the pass is muddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d42c1d97-c1a6-5787-89ad-334b994d5ccd"
   },
   {
@@ -3670,6 +4012,7 @@
    "canonical_ja": "北の井戸の水が澄んだ。",
    "canonical_en": "The water at the north well turned clear.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "12397349-ff46-5354-aa0f-095bde5859d9"
   },
   {
@@ -3680,6 +4023,7 @@
    "canonical_ja": "峠の向こうから人が来て、南の畑に泊まった。",
    "canonical_en": "Someone came from beyond the pass and stayed at the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "d9e7bfe0-790b-53cb-b5d8-523eee6c3445"
   },
   {
@@ -3690,6 +4034,7 @@
    "canonical_ja": "ハナが漬物を分けてくれた。",
    "canonical_en": "Hana shared some pickles.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b8fa5a17-47fe-5ced-9a7d-1e000d771695"
   },
   {
@@ -3700,6 +4045,7 @@
    "canonical_ja": "ゲンが井戸の縄を直した。",
    "canonical_en": "Gen repaired the well rope.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e30c9492-9d32-58c1-9acd-57ab6b2f3511"
   },
   {
@@ -3710,6 +4056,7 @@
    "canonical_ja": "南の畑の水が濁った。",
    "canonical_en": "The water at the south field turned muddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "239a37bb-69bf-521e-aa4d-fa3d0771fe4e"
   },
   {
@@ -3720,6 +4067,7 @@
    "canonical_ja": "ゲンが干し柿を分けてくれた。",
    "canonical_en": "Gen shared some dried persimmons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c2b93507-0904-5a96-bbe3-115e679b7cdb"
   },
   {
@@ -3730,6 +4078,7 @@
    "canonical_ja": "町から人が来て、杉の林に泊まった。",
    "canonical_en": "Someone came from town and stayed at the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f3f0c1fd-7b3b-56c8-8be6-88830ddc86fb"
   },
   {
@@ -3740,6 +4089,7 @@
    "canonical_ja": "ミヨが柿の収穫を終えた。",
    "canonical_en": "Miyo finished harvesting the persimmons.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c20c4de6-ab42-533d-863d-4551c7ce9581"
   },
   {
@@ -3750,6 +4100,7 @@
    "canonical_ja": "三日前に雨が降って、谷の田んぼの道がぬかるんだ。",
    "canonical_en": "It rained three days ago and the road by the valley paddy turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "95494d4a-7de1-5c4b-b20e-0d0db32e6c53"
   },
   {
@@ -3760,6 +4111,7 @@
    "canonical_ja": "海のほうから人が来て、南の畑に泊まった。",
    "canonical_en": "Someone came from the coast and stayed at the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9db3cbdd-35c2-5fda-9464-d0412ca0967e"
   },
   {
@@ -3770,6 +4122,7 @@
    "canonical_ja": "三日前の夜、川べりの小屋のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the riverside hut three days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "05dc1770-2f68-513a-86ab-09893f9dda8d"
   },
   {
@@ -3780,6 +4133,7 @@
    "canonical_ja": "ミヨが芋の収穫を終えた。",
    "canonical_en": "Miyo finished harvesting the taro.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "17b37351-44d2-57fb-bd63-da69989db37f"
   },
   {
@@ -3790,6 +4144,7 @@
    "canonical_ja": "水車小屋の水が減った。",
    "canonical_en": "The water at the mill turned low.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9b34f2a8-70a1-53e4-ad95-5f31e3ff249f"
   },
   {
@@ -3800,6 +4155,7 @@
    "canonical_ja": "三日前に雨が降って、北の井戸の道がぬかるんだ。",
    "canonical_en": "It rained three days ago and the road by the north well turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ff9d5da2-e7ba-5942-87b7-f412507ca5ec"
   },
   {
@@ -3810,6 +4166,7 @@
    "canonical_ja": "杉の林のあたりで鹿を見かけた。",
    "canonical_en": "A deer was seen near the cedar grove.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c7cd5da6-d496-52a3-b09c-f45c97049d86"
   },
   {
@@ -3820,6 +4177,7 @@
    "canonical_ja": "北の井戸のあたりで鹿を見かけた。",
    "canonical_en": "A deer was seen near the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "fabce9bf-bba6-5aa1-b8c8-8d339af2ec92"
   },
   {
@@ -3830,6 +4188,7 @@
    "canonical_ja": "三日前の夜、古い倉庫のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the old warehouse three days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "714d4f3a-77ab-5e1d-b47b-0095b15caf2c"
   },
   {
@@ -3840,6 +4199,7 @@
    "canonical_ja": "タツが垣根を直した。",
    "canonical_en": "Tatsu repaired the fence.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2415aff9-371c-5f52-8af0-a31e9433500b"
   },
   {
@@ -3850,6 +4210,7 @@
    "canonical_ja": "ゲンが餅を分けてくれた。",
    "canonical_en": "Gen shared some rice cakes.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "335b2a4c-6bc1-5b3a-845f-c11613f3fcaa"
   },
   {
@@ -3860,6 +4221,7 @@
    "canonical_ja": "スエが垣根を直した。",
    "canonical_en": "Sue repaired the fence.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "41748dfe-bf4f-531a-abb7-05aaecaa8b58"
   },
   {
@@ -3870,6 +4232,7 @@
    "canonical_ja": "ミヨが米の収穫を終えた。",
    "canonical_en": "Miyo finished harvesting the rice.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "158b81ef-45d4-501b-8084-64969731a594"
   },
   {
@@ -3880,6 +4243,7 @@
    "canonical_ja": "ハナが栗の収穫を終えた。",
    "canonical_en": "Hana finished harvesting the chestnuts.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "0929f58c-3c56-5149-ae8d-8854c0bb28db"
   },
   {
@@ -3890,6 +4254,7 @@
    "canonical_ja": "タツが橋の板を直した。",
    "canonical_en": "Tatsu repaired the bridge plank.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "63c38427-0a94-542b-a343-d2e487da82cd"
   },
   {
@@ -3900,6 +4265,7 @@
    "canonical_ja": "雪解けのころに雨が降って、村はずれの祠の道がぬかるんだ。",
    "canonical_en": "It rained the thaw and the road by the roadside shrine turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c372e3f4-7d63-5834-8357-4f2122a9199e"
   },
   {
@@ -3910,6 +4276,7 @@
    "canonical_ja": "川べりの小屋のあたりで鳶を見かけた。",
    "canonical_en": "A kite was seen near the riverside hut.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5501e8d9-f56c-557d-ad30-71b62434c575"
   },
   {
@@ -3920,6 +4287,7 @@
    "canonical_ja": "ミヨが橋の板を直した。",
    "canonical_en": "Miyo repaired the bridge plank.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "51937530-2c34-5f2a-b647-109e940e3d16"
   },
   {
@@ -3930,6 +4298,7 @@
    "canonical_ja": "町から人が来て、南の畑に泊まった。",
    "canonical_en": "Someone came from town and stayed at the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9e48f00d-46b3-5028-b18b-94964f47677f"
   },
   {
@@ -3940,6 +4309,7 @@
    "canonical_ja": "先の満月の晩に雨が降って、橋のたもとの道がぬかるんだ。",
    "canonical_en": "It rained the last full moon and the road by the bridge turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "fae3b42c-a2c9-58cf-95d9-ee1c7ff36ce8"
   },
   {
@@ -3950,6 +4320,7 @@
    "canonical_ja": "ハナの笠が壊れた。",
    "canonical_en": "Hana's hat broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3ddda1c1-d967-5786-b162-00161ec987b9"
   },
   {
@@ -3960,6 +4331,7 @@
    "canonical_ja": "北の井戸のあたりで野良犬を見かけた。",
    "canonical_en": "A stray dog was seen near the north well.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "992d1ed2-f294-5fbe-8f35-ae1ae9bb6cae"
   },
   {
@@ -3970,6 +4342,7 @@
    "canonical_ja": "橋のたもとのあたりで山猫を見かけた。",
    "canonical_en": "A wildcat was seen near the bridge.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9b12dd58-9162-591c-8a23-d0d283d656f7"
   },
   {
@@ -3980,6 +4353,7 @@
    "canonical_ja": "タツが芋の収穫を終えた。",
    "canonical_en": "Tatsu finished harvesting the taro.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "82a913d0-09d6-5511-9c87-9cfeba9241d1"
   },
   {
@@ -3990,6 +4364,7 @@
    "canonical_ja": "ゲンが麦の収穫を終えた。",
    "canonical_en": "Gen finished harvesting the barley.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2d817fdf-d13e-5f3a-aa27-df9496369e9e"
   },
   {
@@ -4000,6 +4375,7 @@
    "canonical_ja": "村はずれの祠のあたりで鹿を見かけた。",
    "canonical_en": "A deer was seen near the roadside shrine.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4d887272-0415-5187-80e7-b567e0211119"
   },
   {
@@ -4010,6 +4386,7 @@
    "canonical_ja": "南の畑のあたりで狐を見かけた。",
    "canonical_en": "A fox was seen near the south field.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "78ccd79c-38fa-554d-b9a3-1eb37f9c2124"
   },
   {
@@ -4020,6 +4397,7 @@
    "canonical_ja": "ゲンが米の収穫を終えた。",
    "canonical_en": "Gen finished harvesting the rice.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f6ee13ec-7924-5066-a5d9-6457b8098e04"
   },
   {
@@ -4030,6 +4408,7 @@
    "canonical_ja": "ゲンが栗の収穫を終えた。",
    "canonical_en": "Gen finished harvesting the chestnuts.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b414918b-77e8-5f1c-ae3a-2522e77fa1d2"
   },
   {
@@ -4040,6 +4419,7 @@
    "canonical_ja": "先の満月の晩に雨が降って、水車小屋の道がぬかるんだ。",
    "canonical_en": "It rained the last full moon and the road by the mill turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "6e18cbf2-2a9f-56c9-9b0f-e74bb81eb654"
   },
   {
@@ -4050,6 +4430,7 @@
    "canonical_ja": "三日前に雨が降って、杉の林の道がぬかるんだ。",
    "canonical_en": "It rained three days ago and the road by the cedar grove turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "aada29ca-b1aa-54b3-b456-618c591216ba"
   },
   {
@@ -4060,6 +4441,7 @@
    "canonical_ja": "ゲンが戸を直した。",
    "canonical_en": "Gen repaired the door.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "a402bd56-1fd9-52d5-bb3b-4fc2774da203"
   },
   {
@@ -4070,6 +4452,7 @@
    "canonical_ja": "町へ行く道が崩れている。",
    "canonical_en": "The road to town is washed out.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "4f97300c-ea14-58ff-8b99-28e91cf29729"
   },
   {
@@ -4080,6 +4463,7 @@
    "canonical_ja": "スエが井戸の縄を直した。",
    "canonical_en": "Sue repaired the well rope.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "df85aec1-3ff5-5d4f-a8cd-e4fe245f88ce"
   },
   {
@@ -4090,6 +4474,7 @@
    "canonical_ja": "タツが豆の収穫を終えた。",
    "canonical_en": "Tatsu finished harvesting the beans.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "111c660b-4575-5a29-ba93-388437938997"
   },
   {
@@ -4100,6 +4485,7 @@
    "canonical_ja": "先月のはじめに雨が降って、谷の田んぼの道がぬかるんだ。",
    "canonical_en": "It rained early last month and the road by the valley paddy turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5298abbf-2850-5226-a942-6c8475905359"
   },
   {
@@ -4110,6 +4496,7 @@
    "canonical_ja": "ハナが橋の板を直した。",
    "canonical_en": "Hana repaired the bridge plank.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "2475414c-d829-537f-b86d-a1bb663b92ec"
   },
   {
@@ -4120,6 +4507,7 @@
    "canonical_ja": "峠の道のあたりで鹿を見かけた。",
    "canonical_en": "A deer was seen near the mountain pass.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "3cb5d9bf-6c17-5c1e-bc3d-dac83caca069"
   },
   {
@@ -4130,6 +4518,7 @@
    "canonical_ja": "三日前の夜、村はずれの祠のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the roadside shrine three days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "5567e12b-0a7e-524c-909d-13681033e30f"
   },
   {
@@ -4140,6 +4529,7 @@
    "canonical_ja": "峠の道のあたりで猪を見かけた。",
    "canonical_en": "A boar was seen near the mountain pass.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9dcdcba9-6822-5a88-829a-c8d5951137b3"
   },
   {
@@ -4150,6 +4540,7 @@
    "canonical_ja": "五日前に雨が降って、北の井戸の道がぬかるんだ。",
    "canonical_en": "It rained five days ago and the road by the north well turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "611c7b33-382a-5452-a4dd-31f3a566f5ed"
   },
   {
@@ -4160,6 +4551,7 @@
    "canonical_ja": "先の市の日に雨が降って、北の井戸の道がぬかるんだ。",
    "canonical_en": "It rained the last market day and the road by the north well turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "fe8c1992-b86f-557f-853f-2c02a5db1277"
   },
   {
@@ -4170,6 +4562,7 @@
    "canonical_ja": "ハナが梯子を直した。",
    "canonical_en": "Hana repaired the ladder.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8c1ea1ef-b244-515d-ae1f-a3702ea91990"
   },
   {
@@ -4180,6 +4573,7 @@
    "canonical_ja": "ゲンが菜の収穫を終えた。",
    "canonical_en": "Gen finished harvesting the greens.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8557a698-2991-5cb3-b160-da57536afa67"
   },
   {
@@ -4190,6 +4584,7 @@
    "canonical_ja": "谷の田んぼのあたりで狐を見かけた。",
    "canonical_en": "A fox was seen near the valley paddy.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "bc3bc27b-a113-5c7a-a2e3-1f471e47efa3"
   },
   {
@@ -4200,6 +4595,7 @@
    "canonical_ja": "先月のはじめの夜、北の井戸のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the north well early last month.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "f7caa571-f2a5-5183-bf5d-961dd32ededc"
   },
   {
@@ -4210,6 +4606,7 @@
    "canonical_ja": "杉の林の水がincreased。",
    "canonical_en": "The water at the cedar grove turned high.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e6bbd8ba-6612-5805-a50c-0447cf4762bc"
   },
   {
@@ -4220,6 +4617,7 @@
    "canonical_ja": "田植えのあとに雨が降って、古い倉庫の道がぬかるんだ。",
    "canonical_en": "It rained after the planting and the road by the old warehouse turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8201040c-0dd3-5b80-9fb9-429d41cb2b6b"
   },
   {
@@ -4230,6 +4628,7 @@
    "canonical_ja": "五日前に雨が降って、村はずれの祠の道がぬかるんだ。",
    "canonical_en": "It rained five days ago and the road by the roadside shrine turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ec7fd6b3-c344-54f1-8497-f9f642ee61d6"
   },
   {
@@ -4240,6 +4639,7 @@
    "canonical_ja": "先月のはじめに雨が降って、川べりの小屋の道がぬかるんだ。",
    "canonical_en": "It rained early last month and the road by the riverside hut turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "9db106eb-fa61-50a9-b1c7-fa5fb4b315dd"
   },
   {
@@ -4250,6 +4650,7 @@
    "canonical_ja": "ミヨの桶が壊れた。",
    "canonical_en": "Miyo's bucket broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "8634eae5-1f78-50ea-9c1d-3cab16c7eae6"
   },
   {
@@ -4260,6 +4661,7 @@
    "canonical_ja": "五日前の夜、水車小屋のあたりで風が強かった。",
    "canonical_en": "The wind was strong near the mill five days ago.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c13f7837-316a-550d-ae39-e2589b5dec3c"
   },
   {
@@ -4270,6 +4672,7 @@
    "canonical_ja": "北の井戸の水が減った。",
    "canonical_en": "The water at the north well turned low.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "b24ed974-9171-5456-ba2d-88b5bf1bca62"
   },
   {
@@ -4280,6 +4683,7 @@
    "canonical_ja": "ミヨが煮豆を分けてくれた。",
    "canonical_en": "Miyo shared some stewed beans.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "c2eb23be-6395-54b8-abd2-66b1ae0eed2b"
   },
   {
@@ -4290,6 +4694,7 @@
    "canonical_ja": "川べりの小屋のあたりで蛇を見かけた。",
    "canonical_en": "A snake was seen near the riverside hut.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "54370417-07ad-5345-bb6d-08b156a451c8"
   },
   {
@@ -4300,6 +4705,7 @@
    "canonical_ja": "ゲンの桶が壊れた。",
    "canonical_en": "Gen's bucket broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "6b91fe37-6412-5e2c-ad11-c3d45b240543"
   },
   {
@@ -4310,6 +4716,7 @@
    "canonical_ja": "祭りの前の日に雨が降って、村はずれの祠の道がぬかるんだ。",
    "canonical_en": "It rained the day before the festival and the road by the roadside shrine turned to mud.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "e77c1cd7-20e3-5255-935a-4dfa0dfcdac5"
   },
   {
@@ -4320,6 +4727,7 @@
    "canonical_ja": "水車小屋のあたりで野良犬を見かけた。",
    "canonical_en": "A stray dog was seen near the mill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "ca6b6d47-d5f3-5cf2-ab0c-7bda4201a2e1"
   },
   {
@@ -4330,6 +4738,7 @@
    "canonical_ja": "スエが寝込んでいるらしい。",
    "canonical_en": "They say Sue has taken ill.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "92615d32-786e-59e2-b849-01323e0521d2"
   },
   {
@@ -4340,6 +4749,7 @@
    "canonical_ja": "タツの桶が壊れた。",
    "canonical_en": "Tatsu's bucket broke.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "1b59e7ec-dc55-5ba4-b64a-085abe3efc63"
   },
   {
@@ -4350,6 +4760,7 @@
    "canonical_ja": "スエが米の収穫を終えた。",
    "canonical_en": "Sue finished harvesting the rice.",
    "truth_value": null,
+   "subject_valence": 0.0,
    "id": "7fa27541-d6ee-5fc5-9d07-5d43546a36b6"
   },
   {
@@ -4358,6 +4769,7 @@
    "subject_ref": "player",
    "subject_label": "旅の人",
    "truth_value": true,
+   "subject_valence": 1.0,
    "canonical_ja": "旅の人がハナの畑仕事を手伝った。",
    "canonical_en": "The traveller helped Hana with her field work.",
    "id": "15703737-c4f0-56d3-8317-8ce378279c75"
@@ -4368,6 +4780,7 @@
    "subject_ref": "player",
    "subject_label": "旅の人",
    "truth_value": false,
+   "subject_valence": -1.0,
    "canonical_ja": "旅の人が古い倉庫から物を盗んだ。",
    "canonical_en": "The traveller stole goods from the old warehouse.",
    "id": "87c9b744-2e95-5314-a45b-f1573ba705ee"
@@ -4378,6 +4791,7 @@
    "subject_ref": "player",
    "subject_label": "旅の人",
    "truth_value": true,
+   "subject_valence": 0.6,
    "canonical_ja": "旅の人が古い倉庫を修理していた。",
    "canonical_en": "The traveller was repairing the old warehouse.",
    "id": "2158bb35-641f-5ff8-8457-daa21e5532c1"
@@ -4388,6 +4802,7 @@
    "subject_ref": null,
    "subject_label": "北の井戸",
    "truth_value": null,
+   "subject_valence": 0.0,
    "canonical_ja": "北の井戸の水は、夜だけ青く光るらしい。",
    "canonical_en": "They say the water in the north well glows blue only at night.",
    "id": "61b86940-f920-5f04-892b-91f0f72c32e3"
@@ -4398,6 +4813,7 @@
    "subject_ref": null,
    "subject_label": "北の井戸",
    "truth_value": true,
+   "subject_valence": 0.0,
    "canonical_ja": "北の井戸の水が減ってきている。",
    "canonical_en": "The north well is running low.",
    "id": "69716987-4059-51f2-893a-efeec9793c76"
@@ -4408,6 +4824,7 @@
    "subject_ref": "player",
    "subject_label": "旅の人",
    "truth_value": false,
+   "subject_valence": -1.0,
    "canonical_ja": "旅の人が橋を壊した。",
    "canonical_en": "The traveller broke the bridge.",
    "id": "2b2f1147-ca71-504d-b354-4e4facff1f07"
@@ -4418,6 +4835,7 @@
    "subject_ref": "player",
    "subject_label": "旅の人",
    "truth_value": true,
+   "subject_valence": 0.6,
    "canonical_ja": "旅の人が橋を直していた。",
    "canonical_en": "The traveller was mending the bridge.",
    "id": "c62569c7-b1e7-5583-884a-6b7cfd13193c"

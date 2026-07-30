@@ -81,6 +81,11 @@ CREATE TABLE IF NOT EXISTS claim (
   -- well glows"), so an actor subject is optional and a label always present.
   subject_id      UUID NULL,
   subject_label   STRING NOT NULL,
+  -- How the proposition reflects on its subject: -1 accusatory, +1 favourable.
+  -- Prior bias is this multiplied by how the villager feels about the subject,
+  -- which is what makes someone who owes a debt doubt a theft story about
+  -- their creditor while accepting a kind one on the same evidence.
+  subject_valence FLOAT NOT NULL DEFAULT 0.0,
   predicate       STRING NOT NULL,
   object_ref      STRING NULL,
   canonical_ja    STRING NOT NULL,
@@ -99,6 +104,13 @@ CREATE TABLE IF NOT EXISTS claim (
   CONSTRAINT claim_event_fk
     FOREIGN KEY (world_id, event_id) REFERENCES event (world_id, id)
 );
+
+-- Column additions, kept idempotent so this file can be re-applied over an
+-- existing cluster. CREATE TABLE IF NOT EXISTS silently skips a table that
+-- already exists, new column and all, so evolution has to be stated separately.
+-- The database is not dropped and rebuilt because the deployed walking
+-- skeleton lives alongside these tables.
+ALTER TABLE claim ADD COLUMN IF NOT EXISTS subject_valence FLOAT NOT NULL DEFAULT 0.0;
 
 -- Mutually exclusive / supporting relations between propositions.
 CREATE TABLE IF NOT EXISTS claim_relation (
