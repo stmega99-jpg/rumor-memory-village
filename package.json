@@ -1,0 +1,45 @@
+{
+  "name": "rumor-memory-village",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.25",
+      "sharp": "0.35.3"
+    },
+    "brace-expansion": "5.0.8"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "verify:deployment": "node scripts/verify-deployment.mjs"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "3.1098.0",
+    "@aws-sdk/client-secrets-manager": "3.1098.0",
+    "@modelcontextprotocol/client": "2.0.0",
+    "next": "15.5.22",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "server-only": "0.0.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "3.3.6",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "15.5.22",
+    "typescript": "5.9.3",
+    "vitest": "4.1.10"
+  }
+}
