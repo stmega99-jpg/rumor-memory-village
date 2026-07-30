@@ -8,7 +8,7 @@ frontend:
     build:
       commands:
         - echo "RMV_LIVE_BEDROCK_PROBE=${RMV_LIVE_BEDROCK_PROBE:-false}" >> .env.production
-        - echo "RMV_BEDROCK_REGION=${RMV_BEDROCK_REGION:-us-east-2}" >> .env.production
+        - echo "RMV_BEDROCK_REGION=${RMV_BEDROCK_REGION:-ap-northeast-1}" >> .env.production
         - npm run typecheck
         - npm test
         - npm run lint
