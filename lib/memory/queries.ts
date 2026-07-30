@@ -102,6 +102,14 @@ export interface RecallQueryInput {
  * it made a 24-row response 12.8 KB against a 10 KiB ceiling. Text is fetched
  * afterwards, for the handful of memories a villager actually speaks from,
  * which is a fraction of what recall considers.
+ *
+ * The index is named explicitly rather than left to the planner. Each visitor
+ * gets a freshly forked world, and a world id minted a second ago appears in no
+ * histogram, so the optimizer estimates one matching row where there are
+ * hundreds and picks a primary-key scan with a sort. Recall would still return
+ * the right memories, at the cost of never touching the vector index -- exactly
+ * the kind of failure that looks like success. Re-analyzing on every fork is
+ * not an option: the fork itself already costs seconds.
  */
 export function buildRecallQuery(input: RecallQueryInput): string {
   const world = uuid(input.worldId, "world id");
@@ -109,7 +117,7 @@ export function buildRecallQuery(input: RecallQueryInput): string {
   const limit = positiveInt(input.limit, "limit", 200);
   const vector = vectorLiteral(input.embedding);
 
-  const sql = `SELECT memory_id, claim_id, source_actor_id, source_memory_id, source_forgotten_at, witnessed_directly, confidence_at_acq, importance, emotional_weight, emotion_type, acquired_at, last_recalled_at, embedding <=> ${vector} AS distance FROM mcp_memory_recall WHERE world_id = ${world} AND owner_npc_id = ${owner} ORDER BY distance LIMIT ${limit}`;
+  const sql = `SELECT id AS memory_id, claim_id, source_actor_id, source_memory_id, source_forgotten_at, witnessed_directly, confidence_at_acq, importance, emotional_weight, emotion_type, acquired_at, last_recalled_at, embedding <=> ${vector} AS distance FROM memory@memory_embedding_idx WHERE world_id = ${world} AND owner_npc_id = ${owner} ORDER BY distance LIMIT ${limit}`;
 
   if (sql.length > MCP_STATEMENT_LIMIT) {
     throw new UnsafeQueryValueError(`statement length (${sql.length} chars)`);
@@ -134,7 +142,7 @@ export function buildMemoryTextQuery(
     throw new UnsafeQueryValueError("memory batch size");
   }
   const ids = memoryIds.map((id) => uuid(id, "memory id")).join(", ");
-  return `SELECT memory_id, claim_id, source_type, recall_count, surface_ja FROM mcp_memory_recall WHERE world_id = ${world} AND memory_id IN (${ids})`;
+  return `SELECT id AS memory_id, claim_id, source_type, recall_count, surface_ja FROM memory WHERE world_id = ${world} AND id IN (${ids})`;
 }
 
 /** Claim text for a set of claim ids. Vectors deliberately excluded. */

@@ -129,15 +129,25 @@ try {
     `${payloadBytes} of ${10 * 1024} bytes`,
   );
 
-  // The MCP-facing views must not expose ground truth.
-  const { rows: leak } = await client.query(
+  // Ground truth exists in exactly one column. The recall role must not be
+  // able to reach it, directly or through a projection.
+  console.log("");
+  const { rows: projected } = await client.query(
     `SELECT column_name FROM information_schema.columns
-     WHERE table_schema = 'public'
-       AND table_name IN ('mcp_memory_recall', 'mcp_claim')
+     WHERE table_schema = 'public' AND table_name = 'mcp_claim'
        AND column_name = 'truth_value'`,
   );
-  console.log("");
-  check("truth_value is absent from the MCP views", leak.length === 0);
+  check("truth_value is absent from the MCP claim projection", projected.length === 0);
+
+  const { rows: granted } = await client.query(
+    `SELECT table_name FROM information_schema.table_privileges
+     WHERE grantee = 'rmv_mcp_read' AND table_name = 'claim'`,
+  );
+  check(
+    "the recall role has no grant on the table holding ground truth",
+    granted.length === 0,
+    granted.map((g) => g.table_name).join(", "),
+  );
 
   console.log(failures === 0 ? "\nall checks passed" : `\n${failures} check(s) failed`);
   process.exitCode = failures === 0 ? 0 : 1;

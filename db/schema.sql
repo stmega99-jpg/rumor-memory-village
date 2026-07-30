@@ -329,41 +329,18 @@ CREATE TABLE IF NOT EXISTS action_log (
 -- ---------------------------------------------------------------------------
 -- MCP read surface.
 --
--- The Managed MCP service account may only see these views. truth_value is
--- never projected, so no agent can read ground truth through the recall path.
+-- Ground truth lives in exactly one column, `claim.truth_value`, so exactly one
+-- table needs hiding behind a projection. `memory` holds nothing an agent
+-- should not see -- provenance, confidence and wording are all things the
+-- villager themselves knows -- and is granted directly.
 --
--- Two deliberate constraints shape these definitions:
---
---   a. `mcp_memory_recall` is a PURE PROJECTION of `memory` with no join. A
---      view is inlined by the optimizer, so a join here would risk the top-k
---      `ORDER BY embedding <=> $q LIMIT k` no longer driving off the vector
---      index. Claim text is fetched separately via `mcp_claim`.
---   b. `embedding` IS projected, because the recall query must order by it.
---      It must never appear in a SELECT list: one 384-dim vector is ~3.6 KB of
---      text and the MCP response ceiling is 10 KiB.
+-- That directness is load-bearing rather than a simplification. Recall must
+-- name its index explicitly, because a freshly forked world appears in no
+-- statistics and the planner would otherwise estimate a single matching row
+-- and choose a primary-key scan over the vector index. Index hints cannot be
+-- written through a view, so a view over `memory` would have quietly cost the
+-- vector index in every visitor's world.
 -- ---------------------------------------------------------------------------
-
-CREATE VIEW IF NOT EXISTS mcp_memory_recall AS
-  SELECT
-    world_id,
-    id AS memory_id,
-    owner_npc_id,
-    claim_id,
-    source_type,
-    source_actor_id,
-    source_memory_id,
-    source_forgotten_at,
-    witnessed_directly,
-    confidence_at_acq,
-    importance,
-    emotional_weight,
-    emotion_type,
-    acquired_at,
-    last_recalled_at,
-    recall_count,
-    surface_ja,
-    embedding
-  FROM memory;
 
 CREATE VIEW IF NOT EXISTS mcp_claim AS
   SELECT
@@ -377,13 +354,15 @@ CREATE VIEW IF NOT EXISTS mcp_claim AS
     canonical_en
   FROM claim;
 
+DROP VIEW IF EXISTS mcp_memory_recall;
+
 CREATE ROLE IF NOT EXISTS rmv_mcp_read;
 GRANT CONNECT ON DATABASE rumor_memory_village TO rmv_mcp_read;
 GRANT USAGE ON SCHEMA public TO rmv_mcp_read;
-GRANT SELECT ON TABLE mcp_memory_recall TO rmv_mcp_read;
+GRANT SELECT ON TABLE memory TO rmv_mcp_read;
 GRANT SELECT ON TABLE mcp_claim TO rmv_mcp_read;
 GRANT SELECT ON TABLE actor TO rmv_mcp_read;
 GRANT SELECT ON TABLE relationship TO rmv_mcp_read;
--- Deliberately NOT granted: claim and memory base tables (claim holds
--- truth_value), belief, event, world, rumor_transfer, recall_event,
--- action_log.
+-- Deliberately NOT granted: the `claim` base table, which is the only place
+-- ground truth exists. Also withheld: belief, event, world, rumor_transfer,
+-- recall_event, action_log -- none of which a villager recalls from.

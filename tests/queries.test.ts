@@ -77,9 +77,16 @@ describe("recall query", () => {
     limit: 24,
   });
 
-  it("reads the MCP projection, never the base table", () => {
-    expect(sql).toContain("FROM mcp_memory_recall");
-    expect(sql).not.toMatch(/FROM memory\b/);
+  it("names the vector index explicitly", () => {
+    // A freshly forked world is in no histogram, so the planner would estimate
+    // one matching row and choose a primary-key scan. Recall would still look
+    // right and never touch the vector index.
+    expect(sql).toContain("FROM memory@memory_embedding_idx");
+  });
+
+  it("never reads the table that holds ground truth", () => {
+    expect(sql).not.toContain("claim ");
+    expect(sql).not.toContain("truth_value");
   });
 
   it("pins both index prefix columns", () => {
@@ -141,6 +148,7 @@ describe("memory text lookup", () => {
     const sql = buildMemoryTextQuery(WORLD, [MEM]);
     expect(sql).toContain("surface_ja");
     expect(sql).toContain(`world_id = '${WORLD}'`);
+    expect(sql).not.toContain("truth_value");
   });
 
   it("refuses a batch large enough to overrun the response ceiling", () => {
