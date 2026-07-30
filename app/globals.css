@@ -672,3 +672,435 @@ footer {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* The village                                                         */
+/* ------------------------------------------------------------------ */
+
+.village {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 64px) clamp(20px, 5vw, 48px) 96px;
+}
+
+.village-head h1 {
+  font-size: clamp(30px, 5vw, 52px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 8px 0 18px;
+}
+
+.village .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--forest-light);
+  margin: 0;
+}
+
+.village .lede {
+  max-width: 62ch;
+  font-size: 17px;
+  line-height: 1.62;
+  color: rgba(24, 37, 30, 0.82);
+}
+
+.village .lede.small {
+  font-size: 15px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 26px 0 8px;
+}
+
+.controls button {
+  border: 1px solid var(--forest);
+  background: transparent;
+  color: var(--forest);
+  padding: 11px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.controls button:hover:not(:disabled) {
+  background: rgba(23, 63, 44, 0.08);
+}
+
+.controls button.primary {
+  background: var(--forest);
+  color: var(--paper);
+}
+
+.controls button.primary:hover:not(:disabled) {
+  background: var(--forest-light);
+}
+
+.controls button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.meta {
+  font-size: 13px;
+  color: rgba(24, 37, 30, 0.6);
+}
+
+.error {
+  color: var(--rust);
+  font-size: 14px;
+}
+
+.panel {
+  margin-top: 52px;
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+}
+
+.panel h2 {
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--forest-light);
+  margin: 0 0 20px;
+}
+
+/* Timeline ---------------------------------------------------------- */
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.timeline li {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) 1fr;
+  gap: 4px 18px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.5);
+  border-left: 3px solid var(--line);
+}
+
+.timeline li.adopted {
+  border-left-color: var(--moss);
+}
+
+.timeline li.refused {
+  border-left-color: var(--rust);
+}
+
+.step-label {
+  font-weight: 600;
+}
+
+.step-detail {
+  font-variant-numeric: tabular-nums;
+}
+
+.step-note {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  color: rgba(24, 37, 30, 0.55);
+}
+
+/* Disputes ---------------------------------------------------------- */
+
+.dispute {
+  margin-bottom: 40px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 22px;
+}
+
+.claim-ja {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 22px;
+  margin: 0;
+}
+
+.claim-en {
+  margin: 4px 0 0;
+  font-size: 16px;
+  color: rgba(24, 37, 30, 0.72);
+}
+
+.truth {
+  margin: 10px 0 20px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rust);
+}
+
+.truth .hint {
+  text-transform: none;
+  letter-spacing: 0;
+  color: rgba(24, 37, 30, 0.5);
+}
+
+.verdicts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.verdicts li {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.verdict-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.verdict-head .ja {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  color: rgba(24, 37, 30, 0.6);
+}
+
+.status {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+
+.status.believed {
+  background: rgba(169, 196, 140, 0.4);
+  border-color: transparent;
+}
+
+.status.rejected {
+  background: rgba(192, 100, 63, 0.16);
+  border-color: transparent;
+}
+
+.status.unknown {
+  background: rgba(24, 37, 30, 0.07);
+  border-color: transparent;
+}
+
+.score {
+  margin-left: auto;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(24, 37, 30, 0.55);
+}
+
+.why-en {
+  margin: 8px 0 2px;
+  line-height: 1.55;
+}
+
+.why-ja {
+  margin: 0 0 8px;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  color: rgba(24, 37, 30, 0.66);
+}
+
+.evidence {
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.evidence th {
+  text-align: left;
+  font-weight: 500;
+  color: rgba(24, 37, 30, 0.5);
+  padding: 2px 18px 2px 0;
+}
+
+.evidence td {
+  padding: 2px 18px 2px 0;
+}
+
+/* Hops -------------------------------------------------------------- */
+
+.hops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.hops li {
+  display: grid;
+  grid-template-columns: minmax(140px, 190px) 92px 130px 1fr;
+  gap: 4px 14px;
+  padding: 11px 14px;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  border-left: 3px solid var(--moss);
+}
+
+.hops li.rejected {
+  border-left-color: var(--rust);
+}
+
+.hop-outcome {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.hop-outcome.rejected {
+  color: var(--rust);
+}
+
+.hop-conf {
+  font-variant-numeric: tabular-nums;
+}
+
+.hop-claim {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  color: rgba(24, 37, 30, 0.55);
+}
+
+/* Contradictions ---------------------------------------------------- */
+
+.contradiction {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.contradiction p {
+  margin: 0;
+}
+
+.contradiction .versus {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin: 6px 0;
+}
+
+.contradiction .holders {
+  margin-top: 12px;
+  font-size: 13px;
+  color: rgba(24, 37, 30, 0.6);
+}
+
+/* Ask a villager ---------------------------------------------------- */
+
+.asks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.asks button {
+  display: grid;
+  gap: 1px;
+  text-align: left;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.asks button.selected {
+  border-color: var(--forest);
+  background: rgba(169, 196, 140, 0.25);
+}
+
+.asks button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.asks .ja {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  color: rgba(24, 37, 30, 0.62);
+}
+
+.asks .role,
+.asks .count {
+  font-size: 12px;
+  color: rgba(24, 37, 30, 0.5);
+}
+
+.recalled {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.recalled li {
+  border-left: 3px solid var(--moss);
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.recalled-text {
+  margin: 0;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 16px;
+}
+
+.recalled-terms {
+  margin: 5px 0 0;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(24, 37, 30, 0.66);
+}
+
+.recalled-src {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: rgba(24, 37, 30, 0.5);
+}
+
+.village-foot {
+  margin-top: 64px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  font-size: 13px;
+  color: rgba(24, 37, 30, 0.6);
+}
+
+@media (max-width: 720px) {
+  .timeline li,
+  .hops li {
+    grid-template-columns: 1fr;
+  }
+
+  .score {
+    margin-left: 0;
+  }
+}
+
+.timeline li.pending {
+  border-left-color: var(--forest-light);
+  opacity: 0.72;
+}
+
+.timeline li.pending .step-detail {
+  font-style: italic;
+}
