@@ -77,19 +77,17 @@ the database URL.
 
 ## Architecture
 
-```text
-Browser
-  │
-  ▼
-AWS Amplify Hosting  (Next.js 15, SSR compute role)
-  │
-  ├── recall ──────────►  CockroachDB Cloud Managed MCP Server
-  │                          │  select_query
-  │                          ▼
-  │                       CockroachDB  ── vector index (world, villager, embedding)
-  │
-  └── state changes ────►  CockroachDB  (direct SQL, transactional)
-                             beliefs, rumour hops, world forks
+```mermaid
+flowchart LR
+  B["Browser"] --> A["AWS Amplify Hosting<br/>Next.js 15 · SSR compute role"]
+
+  A -- "recall<br/>(an agent searching its own memory)" --> M["CockroachDB Cloud<br/>Managed MCP Server"]
+  M -- "select_query" --> C[("CockroachDB<br/>vector index:<br/>world · agent · embedding")]
+
+  A -- "state changes<br/>beliefs · rumour hops · world forks" --> C
+
+  A -- "dialogue" --> BR["Amazon Bedrock<br/>Nova Lite"]
+  A -- "credentials" --> S["AWS Secrets Manager"]
 ```
 
 Two paths, deliberately. Reads that represent an agent recalling something go
@@ -214,6 +212,11 @@ picks a primary-key scan. Recall still returns the right memories. The vector
 index is simply never touched. That is why the recall query names its index.
 
 ---
+
+## Submission materials
+
+[`docs/SUBMISSION.md`](docs/SUBMISSION.md) holds the video storyboard, the
+Devpost copy, and the pre-submission checklist.
 
 ## Repository layout
 
