@@ -24,7 +24,8 @@
     "verify:deployment": "node scripts/verify-deployment.mjs",
     "db:setup": "node --env-file=.env.local scripts/db-setup.mjs",
     "db:schema": "node --env-file=.env.local scripts/db-setup.mjs --schema-only",
-    "db:seed": "node --env-file=.env.local scripts/db-setup.mjs --seed-only"
+    "db:seed": "node --env-file=.env.local scripts/db-setup.mjs --seed-only",
+    "db:verify": "node --env-file=.env.local scripts/verify-vector-index.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "3.1098.0",

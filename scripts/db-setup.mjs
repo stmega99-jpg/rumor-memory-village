@@ -72,6 +72,18 @@ try {
     await run(client, "seed", SEED);
   }
 
+  // Without statistics the optimizer will not choose the vector index. It
+  // picks a cheap prefix scan plus a sort instead, the demo looks identical,
+  // and the vector index is quietly never used. Measured: the same query goes
+  // from `scan memory@memory_owner_claim_idx` to `vector search
+  // memory@memory_embedding_idx` on nothing but an ANALYZE.
+  if (only !== "--schema-only") {
+    console.log("\ncollecting statistics (required for vector index planning)");
+    for (const table of ["memory", "claim", "actor", "relationship"]) {
+      await client.query(`ANALYZE rumor_memory_village.public.${table}`);
+    }
+  }
+
   const summary = await client.query(`
     SELECT
       (SELECT count(*) FROM rumor_memory_village.public.claim)  AS claims,
