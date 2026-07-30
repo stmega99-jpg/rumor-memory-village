@@ -129,8 +129,12 @@ try {
     `${payloadBytes} of ${10 * 1024} bytes`,
   );
 
-  // Ground truth exists in exactly one column. The recall role must not be
-  // able to reach it, directly or through a projection.
+  // Ground truth exists in exactly one column, and the control that keeps it
+  // away from villagers is server-side query construction, not a grant:
+  // CockroachDB Cloud requires the Managed MCP service account to hold a Cloud
+  // role, which cannot be bound to a SQL role, so rmv_mcp_read does not
+  // constrain the MCP path. What can be checked here is that no statement the
+  // application issues mentions the column, and that the projection omits it.
   console.log("");
   const { rows: projected } = await client.query(
     `SELECT column_name FROM information_schema.columns
@@ -138,16 +142,7 @@ try {
        AND column_name = 'truth_value'`,
   );
   check("truth_value is absent from the MCP claim projection", projected.length === 0);
-
-  const { rows: granted } = await client.query(
-    `SELECT table_name FROM information_schema.table_privileges
-     WHERE grantee = 'rmv_mcp_read' AND table_name = 'claim'`,
-  );
-  check(
-    "the recall role has no grant on the table holding ground truth",
-    granted.length === 0,
-    granted.map((g) => g.table_name).join(", "),
-  );
+  check("the recall statement never mentions ground truth", !recall.includes("truth_value"));
 
   console.log(failures === 0 ? "\nall checks passed" : `\n${failures} check(s) failed`);
   process.exitCode = failures === 0 ? 0 : 1;

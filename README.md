@@ -1,173 +1,235 @@
 # Rumor Memory Village
 
-Rumor Memory Village is a durable memory layer for multi-agent worlds. The
-v0.1 Walking Skeleton deliberately implements one narrow, observable path:
+**A durable memory layer for multi-agent systems, where agents exchange
+information of varying reliability.**
+
+Each agent keeps its own memories, tagged with where they came from, how
+confident the agent was, and when. Information passes between agents, loses
+fidelity in transit, and is sometimes refused. When two accounts cannot both be
+true, both are kept — only the verdict moves — and every verdict can be traced
+back to the evidence that produced it.
+
+The village is the demonstration, not the point. The same substrate applies
+wherever agents pass each other claims of uneven reliability: contamination
+tracking in multi-agent RAG, provenance in incident response, handover quality
+in customer support.
+
+**Live demo:** https://main.d3ssa9wceol63i.amplifyapp.com
+
+Every visitor gets their own forked copy of the village, so nothing one visitor
+does changes what the next one sees.
+
+---
+
+## What the demo shows
+
+Five villagers. One afternoon at a warehouse. Gen thinks he saw a theft; Tatsu
+watched the whole thing and saw a repair. The rumour spreads, and the village
+ends up holding three incompatible views of the same event:
+
+| Villager | Verdict on the theft | Why |
+|---|---|---|
+| Gen | believes it | saw it himself |
+| Miyo | no longer knows | believed it on Gen's word; six weeks of hearsay faded |
+| Hana | rejects it | owes the traveller a debt she witnessed herself |
+
+Along the way one telling is refused outright. Tatsu already believes the
+repair, which raises his threshold for accepting the opposite from 0.35 to
+0.55; his trust in Miyo is 0.40, so the rumour stops there.
+
+The distortion is visible in the text. The copy of the rumour Hana holds still
+carries the wariness Gen put into it and the hedge he ended on.
+
+---
+
+## Required technologies, and what each one does
+
+### CockroachDB (2 of 4 required tools)
+
+**Cloud Managed MCP Server** — the only path by which an agent reads its own
+memory. Every recall in the running application is a `select_query` through
+Managed MCP. There is a direct SQL connection in this codebase and it is never
+used to answer a recall: a fallback would turn a broken dependency into an
+invisible one. `tests/mcp-recall.integration.test.ts` hands recall a bad
+credential and requires it to fail rather than answer from somewhere else.
+
+**Distributed Vector Indexing** — memories carry a 384-dimension embedding and
+are searched with a cosine vector index prefixed by `(world_id, owner_npc_id)`,
+so a search is scoped to one villager in one world before distance is
+considered. `npm run db:verify` runs the exact statement the application sends
+and fails unless the query plan is a vector search over `memory_embedding_idx`
+with both prefix columns pinned.
+
+### AWS
+
+**Amplify Hosting** — runs the Next.js application and its API routes. All
+credentials are read server-side from AWS Secrets Manager through the SSR
+compute role; nothing is baked into the build.
+
+**Amazon Bedrock** — Nova Lite generates villager dialogue. The public demo
+serves pre-generated lines by default, so a judge clicking through it costs
+nothing, never waits on a model, and cannot hit a quota mid-demonstration.
+
+**AWS Secrets Manager** — holds the MCP service-account key, the cluster id and
+the database URL.
+
+---
+
+## Architecture
 
 ```text
-Browser → AWS Amplify (Next.js API) → CockroachDB Cloud Managed MCP
-        → CockroachDB seed row → Amazon Bedrock Nova Lite → Browser
+Browser
+  │
+  ▼
+AWS Amplify Hosting  (Next.js 15, SSR compute role)
+  │
+  ├── recall ──────────►  CockroachDB Cloud Managed MCP Server
+  │                          │  select_query
+  │                          ▼
+  │                       CockroachDB  ── vector index (world, villager, embedding)
+  │
+  └── state changes ────►  CockroachDB  (direct SQL, transactional)
+                             beliefs, rumour hops, world forks
 ```
 
-The public API never reads CockroachDB through direct SQL. A Managed MCP
-failure fails closed. A Bedrock failure may return a clearly labelled,
-deterministic template fallback.
+Two paths, deliberately. Reads that represent an agent recalling something go
+through Managed MCP. Transactional updates — belief re-evaluation, rumour
+propagation, forking a world for a visitor — use a direct SQL connection,
+because Managed MCP offers `select_query` and `insert_rows` but not the updates
+these need. This is stated rather than glossed as "all traffic is MCP".
 
-## Current scope
+---
 
-- One fixed `world_id` and one fixed probe key
-- One read-only `select_query` call through CockroachDB Cloud Managed MCP
-- One non-streaming Nova Lite smoke call grounded in the returned row
-- A Nova Lite line pre-generated into CockroachDB for the public demo path
-- A visible per-boundary trace
-- No claim/memory/belief simulation yet
+## The memory model
 
-## Requirements
-
-- Node.js 24
-- npm
-- CockroachDB Cloud Basic cluster
-- AWS account with Amazon Bedrock access in the configured runtime Region
-- AWS Amplify Hosting with an SSR Compute Role
-
-## Local checks
-
-```bash
-npm ci
-npm run typecheck
-npm test
-npm run lint
-npm run build
-```
-
-The page can be developed locally with `npm run dev`. The API needs either AWS
-Secrets Manager access through the local AWS credential chain, or the explicit
-local-only environment opt-in documented in `.env.example`.
-
-Never commit `.env` files or credentials.
-
-## Database bootstrap
-
-Run [`db/walking-skeleton.sql`](./db/walking-skeleton.sql) through an
-authenticated CockroachDB SQL session. It creates the
-`rumor_memory_village` database, the world-scoped source table, a safe-column
-MCP projection table, and idempotent seed rows.
-
-Direct SQL is permitted here because this is a controlled migration/write
-operation. It is not a runtime read fallback.
-
-## Runtime secret
-
-Create an AWS Secrets Manager JSON secret named
-`rumor-memory-village/prod`:
-
-```json
-{
-  "cockroachMcpApiKey": "<CockroachDB service-account secret key>",
-  "cockroachClusterId": "dcd3153f-e8af-4509-a796-b4f160170270"
-}
-```
-
-The CockroachDB credential should belong to an application-specific service
-account scoped to the target cluster. The key is shown only once; place it
-directly into Secrets Manager and do not save it in the repository, Amplify
-build variables, screenshots, or logs.
-
-## AWS roles
-
-Use separate roles for Amplify build/deployment and SSR runtime:
-
-- **Amplify service role:** only the permissions Amplify needs to build and
-  publish the app.
-- **SSR Compute Role:** `secretsmanager:GetSecretValue` on the exact runtime
-  secret plus `bedrock:InvokeModel` on the exact Nova Lite model resource in
-  `ap-northeast-1`.
-
-Attach the compute role only to the production branch. Titan Text Embeddings
-v2 permission will be added when the embedding path is implemented; the
-Walking Skeleton does not request unused permissions.
-
-The application does not accept explicit AWS access keys. The AWS SDK uses the
-SSR Compute Role credential chain at runtime.
-
-No NAT Gateway is created. For this time-bounded demo, the CockroachDB public
-endpoint remains network-accessible and security is enforced with TLS,
-application-specific authentication, least privilege, and AWS Secrets Manager.
-A production deployment should additionally narrow network access where its
-hosting topology permits.
-
-## Amplify
-
-`amplify.yml` pins the build to Node.js 24 and produces the standard `.next`
-artifact. Configure this non-secret build variable on the Amplify app:
+Three layers, and the separation is what makes the rest work.
 
 ```text
-RMV_LIVE_BEDROCK_PROBE=false
-RMV_BEDROCK_REGION=ap-northeast-1
+claim    a proposition, in normalised form, with one canonical embedding
+memory   one agent's instance of a claim: source, confidence, when, how it was worded
+belief   per (agent, claim): which side they currently take, and why
 ```
 
-`amplify.yml` copies these settings into `.env.production` so they reach the
-SSR runtime. The Secrets Manager Region and secret name remain frozen to
-`us-east-1` and `rumor-memory-village/prod` in server-only defaults;
-`RMV_BEDROCK_REGION` selects the Nova Lite runtime Region. The live account
-measurement found no usable US allocation and a usable in-Region allocation
-in `ap-northeast-1`, so Tokyo is frozen for the smoke proof.
+A retelling changes `memory.surface_ja`. It never changes `claim_id`. If
+distortion created new claims, "two people told me the same thing" would become
+impossible to detect and corroboration counting would silently break.
 
-For the first deployment only, set `RMV_LIVE_BEDROCK_PROBE=true`, deploy, and
-run the verifier. After it reports `mode=bedrock`, set the value back to
-`false` and redeploy. The stable public path then returns the database's
-pre-generated Nova Lite line, avoiding a model charge for every anonymous
-click. The API response itself stays `no-store`: each visible trace therefore
-still proves a fresh Amplify → Managed MCP → CockroachDB read.
+**Belief lives on (agent, claim), not on a memory.** An agent can hold three
+memories of one proposition; there is still only one thing they believe about
+it.
 
-Attach the SSR Compute Role in Amplify Hosting before validating the API.
-Next.js streaming is intentionally not used because Amplify Hosting does not
-support it.
+**Provenance is immutable.** An agent can forget *who* told them something —
+that is a separate, reversible flag — but the audit trail is never rewritten.
 
-Verify a deployment with:
+**Corroboration and repetition are counted apart.** Two informants agreeing is
+evidence. One informant saying it twice is the same evidence heard twice. Every
+memory is traced back along its source chain; distinct roots corroborate,
+shared roots merely repeat.
+
+**Decay is computed at read time**, from the world's simulated clock, never
+from wall time and never written back by a scheduled job. Importance and
+emotional charge divide the decay rate, which is why a debt or a fright still
+reads clearly after six weeks and an ordinary afternoon does not. Nothing is
+ever deleted.
+
+**Arbitration is deterministic code.** A language model writes the sentence a
+villager says; it never decides what they believe. Every number in an
+explanation can be recomputed from the database.
+
+---
+
+## Security boundary, stated honestly
+
+Ground truth (`claim.truth_value`) exists so the demo can show the audience
+that the village is confidently wrong. No villager should be able to read it.
+
+The control that actually enforces this is **server-side query construction**,
+not a database grant. The browser cannot submit SQL, cannot choose a world id —
+that comes from a signed HttpOnly cookie — and cannot influence the projection:
+recall is compiled from fixed server constants in `lib/memory/queries.ts`, which
+validates every interpolated identifier against its expected shape and throws
+rather than escaping. `truth_value` appears in no query the application issues,
+and `mcp_claim` is a projection that omits it.
+
+**What is *not* true:** the `rmv_mcp_read` SQL role in `db/schema.sql` does not
+constrain the MCP path. CockroachDB Cloud requires a Managed MCP service account
+to hold `Cluster Operator` or `Cluster Admin`, and Cloud roles and SQL roles are
+separate, so that SQL role cannot be bound to the MCP identity. It records the
+least-privilege contract we would use if Managed MCP supported SQL-role binding.
+Until then, a compromised MCP service-account key would carry the broader Cloud
+role, which is why the key lives in Secrets Manager and rotation matters.
+
+---
+
+## Running it locally
+
+Requires Node.js 24 and a CockroachDB Cloud cluster (Basic is enough).
 
 ```bash
-npm run verify:deployment -- https://your-amplify-domain.example
+git clone https://github.com/stmega99-jpg/rumor-memory-village
+cd rumor-memory-village
+npm install
+cp .env.example .env.local     # then fill in the values below
+npm run db:setup               # schema, seed, and statistics
+npm run dev
 ```
 
-After the one-time live proof, verify the stable public deployment with:
+`.env.local` needs:
+
+| Variable | Where it comes from |
+|---|---|
+| `RMV_ALLOW_ENV_SECRETS=true` | local only; production uses Secrets Manager |
+| `RMV_COCKROACH_SQL_URL` | CockroachDB Cloud → cluster → Connect |
+| `RMV_COCKROACH_MCP_API_KEY` | CockroachDB Cloud → Service Accounts → Create API key |
+| `RMV_COCKROACH_CLUSTER_ID` | CockroachDB Cloud → cluster overview |
+
+In production the same three values are read from the Secrets Manager secret
+named by `RMV_SECRET_ID`, as `cockroachSqlUrl`, `cockroachMcpApiKey` and
+`cockroachClusterId`.
+
+`db/seed_generated.sql` is committed with its vectors already computed, so a
+first run needs no embedding model. To regenerate the world from scratch:
 
 ```bash
-npm run verify:deployment -- https://your-amplify-domain.example --allow-pregenerated
+python scripts/generate_world.py   # 418 propositions, 655 memories, deterministic
+python scripts/embed_seed.py       # local multilingual encoder, 384 dimensions
 ```
 
-## Security invariants
+Embeddings are produced locally rather than through Bedrock. Amazon Titan Text
+Embeddings V2 is allocated 0 RPM on this account in every region tried, and the
+requirement is vectors stored and searched in CockroachDB — not vectors produced
+by AWS. The provider sits behind one function and can be swapped back.
 
-- All credentials are server-only; nothing secret uses `NEXT_PUBLIC_`.
-- The browser supplies neither SQL nor `world_id`.
-- The MCP query is compiled from fixed server constants and includes
-  `LIMIT 1`.
-- MCP responses are rejected unless they contain exactly the expected
-  world-scoped row.
-- Runtime MCP reads select only from a safe-column projection table.
-- MCP errors are not serialized or logged.
-- `truth_value` is not selected or exposed.
-- There is no direct-SQL runtime read fallback.
+### Verification
 
-### Managed MCP authorization boundary
+```bash
+npm test           # 111 tests; the live ones skip without a cluster
+npm run db:verify  # proves the vector index is actually used
+```
 
-CockroachDB Cloud currently requires a Managed MCP service account to have
-`Cluster Operator` or `Cluster Admin` on the target cluster. Cloud roles and
-SQL roles are separate, so the `rmv_mcp_read` SQL role created by the migration
-cannot be attached to that Managed MCP service identity.
+`npm run db:verify` exists because the failure it guards against is silent.
+With statistics missing, or in a freshly forked world that appears in no
+histogram, the planner estimates one matching row where there are hundreds and
+picks a primary-key scan. Recall still returns the right memories. The vector
+index is simply never touched. That is why the recall query names its index.
 
-The application therefore enforces the product boundary that is actually
-available: the service account is scoped to one cluster, the
-`mcp-cluster-id` header pins that cluster, the browser cannot submit SQL or a
-world id, the server uses one fixed query, and that query selects a
-safe-column projection table whose `CHECK` constraint accepts only the fixed
-demo `world_id`. The unused SQL role records the intended
-least-privilege contract for a future Managed MCP version that supports
-SQL-role binding.
+---
 
-A compromised Managed MCP service-account key would still have the broader
-Cloud-role permissions, so key rotation and Secrets Manager protection remain
-mandatory.
+## Repository layout
 
-## License
+```text
+lib/memory/scoring.ts      decay, recall ranking, belief arbitration (pure)
+lib/memory/recall.ts       grouping candidates by claim; corroboration vs repetition
+lib/memory/propagation.ts  what happens when one agent tells another something
+lib/memory/queries.ts      SQL construction, sized to the MCP statement/response limits
+lib/memory/mcp-client.ts   the Managed MCP read path
+lib/memory/belief.ts       evaluation and persistence, with a recomputable rationale
+lib/memory/world.ts        per-visitor world forking
+lib/memory/scenario.ts     the demo script, as data
+db/schema.sql              the memory core
+scripts/                   world generation, embedding, loading, verification
+```
+
+## Licence
 
 [MIT](./LICENSE)
