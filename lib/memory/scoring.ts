@@ -55,11 +55,15 @@ export interface MemoryRow {
   claimId: string;
   sourceType: "witnessed" | "heard" | "told_by_player" | "inferred";
   sourceActorId: string | null;
+  /** The informant's own memory this one was copied from. Immutable. */
+  sourceMemoryId: string | null;
   sourceForgottenAt: Date | null;
   witnessedDirectly: boolean;
   confidenceAtAcq: number;
   importance: number;
   emotionalWeight: number;
+  /** Colours how the memory is retold. Never an input to arbitration. */
+  emotionType: string;
   acquiredAt: Date;
   lastRecalledAt: Date | null;
   surfaceJa: string;

@@ -48,10 +48,10 @@ describe("sql splitting", () => {
     const sql = readFileSync(join(ROOT, "db", "schema.sql"), "utf8");
     const list = statements(sql);
 
-    expect(list.some((s) => s.includes("CREATE VECTOR INDEX"))).toBe(true);
-    expect(list.some((s) => s.includes("CREATE VIEW"))).toBe(true);
+    expect(list.some((s: string) => s.includes("CREATE VECTOR INDEX"))).toBe(true);
+    expect(list.some((s: string) => s.includes("CREATE VIEW"))).toBe(true);
     // truth_value must never reach the MCP-facing projections.
-    const views = list.filter((s) => s.includes("CREATE VIEW"));
+    const views = list.filter((s: string) => s.includes("CREATE VIEW"));
     expect(views.length).toBeGreaterThan(0);
     for (const view of views) {
       expect(view).not.toContain("truth_value");
