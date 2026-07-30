@@ -12,11 +12,6 @@ export const COCKROACH_MCP_URL = "https://cockroachlabs.cloud/mcp";
 
 export const NOVA_LITE_MODEL_ID = "amazon.nova-lite-v1:0";
 
-// Live calls use the account-scoped US cross-Region inference profile. The
-// seeded provenance above still records the underlying foundation model ID.
-export const NOVA_LITE_INFERENCE_PROFILE_ID =
-  "us.amazon.nova-lite-v1:0";
-
 export const PREGENERATED_PROMPT_VERSION =
   "initial-bedrock-connectivity-smoke-v1";
 

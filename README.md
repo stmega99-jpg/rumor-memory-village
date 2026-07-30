@@ -29,7 +29,7 @@ specification.
 - Node.js 24
 - npm
 - CockroachDB Cloud Basic cluster
-- AWS account with Amazon Bedrock access in `us-east-1`
+- AWS account with Amazon Bedrock access in the configured runtime Region
 - AWS Amplify Hosting with an SSR Compute Role
 
 ## Local checks
@@ -82,14 +82,8 @@ Use separate roles for Amplify build/deployment and SSR runtime:
 - **Amplify service role:** only the permissions Amplify needs to build and
   publish the app.
 - **SSR Compute Role:** `secretsmanager:GetSecretValue` on the exact runtime
-  secret plus `bedrock:InvokeModel` on the US Nova Lite inference profile and
-  its three current destination model resources (`us-east-1`, `us-east-2`,
-  and `us-west-2`).
-
-Live inference uses the Geo profile ID `us.amazon.nova-lite-v1:0`. The seeded
-provenance continues to record the underlying foundation model ID
-`amazon.nova-lite-v1:0`; these identify the routing profile and the model,
-respectively.
+  secret plus `bedrock:InvokeModel` on the exact Nova Lite model resource in
+  `RMV_BEDROCK_REGION`.
 
 Attach the compute role only to the production branch. Titan Text Embeddings
 v2 permission will be added when the embedding path is implemented; the
@@ -111,12 +105,14 @@ artifact. Configure this non-secret build variable on the Amplify app:
 
 ```text
 RMV_LIVE_BEDROCK_PROBE=false
+RMV_BEDROCK_REGION=us-east-1
 ```
 
-`amplify.yml` copies this setting into `.env.production` so it reaches the SSR
-runtime. Region and secret name are frozen to `us-east-1` and
-`rumor-memory-village/prod` in server-only defaults; Amplify does not need an
-`AWS_REGION` console variable.
+`amplify.yml` copies these settings into `.env.production` so they reach the
+SSR runtime. The Secrets Manager Region and secret name remain frozen to
+`us-east-1` and `rumor-memory-village/prod` in server-only defaults;
+`RMV_BEDROCK_REGION` can independently select a Region with available Nova
+Lite quota.
 
 For the first deployment only, set `RMV_LIVE_BEDROCK_PROBE=true`, deploy, and
 run the verifier. After it reports `mode=bedrock`, set the value back to
