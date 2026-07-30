@@ -8,11 +8,12 @@ import { NOVA_LITE_MODEL_ID } from "./constants";
 import type { ProbeRow } from "./types";
 
 export async function generateNpcLine(row: ProbeRow): Promise<string> {
+  const region =
+    process.env.RMV_BEDROCK_REGION ??
+    process.env.AWS_REGION ??
+    "us-east-1";
   const client = new BedrockRuntimeClient({
-    region:
-      process.env.RMV_BEDROCK_REGION ??
-      process.env.AWS_REGION ??
-      "us-east-1",
+    region,
   });
 
   const prompt = [
@@ -52,6 +53,17 @@ export async function generateNpcLine(row: ProbeRow): Promise<string> {
     }
 
     return text.trim();
+  } catch (error) {
+    const metadata =
+      typeof error === "object" && error !== null && "$metadata" in error
+        ? (error as { $metadata?: { httpStatusCode?: number } }).$metadata
+        : undefined;
+    console.error(
+      `[walking-skeleton] bedrock error=${
+        error instanceof Error ? error.name : "UnknownError"
+      } status=${metadata?.httpStatusCode ?? "unknown"} region=${region}`,
+    );
+    throw error;
   } finally {
     client.destroy();
   }
