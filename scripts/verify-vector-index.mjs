@@ -13,9 +13,17 @@
 
 import pg from "pg";
 
+// The application's own builder, so this checks the statement that actually
+// ships rather than a hand-written approximation of it.
+import {
+  MCP_SAFE_RECALL_LIMIT,
+  buildMemoryTextQuery,
+  buildRecallQuery,
+} from "../lib/memory/queries.ts";
+
 const DB = "rumor_memory_village";
 const INDEX = "memory_embedding_idx";
-const LIMIT = 24;
+const LIMIT = MCP_SAFE_RECALL_LIMIT;
 
 const connectionString = process.env.RMV_COCKROACH_SQL_URL;
 if (!connectionString) {
@@ -54,25 +62,25 @@ try {
   );
   console.log("memories per NPC:", rowCounts.map((r) => r.n).join(", "));
 
-  // Use a stored claim vector as the probe so the literal matches production
-  // shape exactly: the application inlines a vector because the Managed MCP
-  // select_query tool takes a SQL string and no bind parameters.
+  // Probe with a stored claim vector so the literal is exactly the shape the
+  // application produces: it inlines vectors because the Managed MCP
+  // select_query tool takes a SQL string and offers no bind parameters.
   const { rows: probe } = await client.query(
     `SELECT canonical_ja, embedding::STRING AS v FROM claim
      WHERE world_id = $1 AND predicate = 'well_glows' LIMIT 1`,
     [worldId],
   );
   const topic = probe[0];
-  const vector = `'${topic.v}'::VECTOR(384)`;
+  const embedding = JSON.parse(topic.v);
 
   const npc = npcs.find((n) => n.name_ja === "ゲン") ?? npcs[0];
-  const recall = `
-    SELECT memory_id, claim_id, surface_ja, embedding <=> ${vector} AS distance
-    FROM mcp_memory_recall
-    WHERE world_id = '${worldId}' AND owner_npc_id = '${npc.id}'
-    ORDER BY embedding <=> ${vector}
-    LIMIT ${LIMIT}
-  `;
+  const recall = buildRecallQuery({
+    worldId,
+    ownerNpcId: npc.id,
+    embedding,
+    limit: LIMIT,
+  });
+  console.log(`\nrecall statement: ${recall.length} chars (MCP ceiling 16384)`);
 
   console.log(`\nplan for ${npc.name_ja}'s recall (limit ${LIMIT}):`);
   const { rows: planRows } = await client.query(`EXPLAIN ${recall}`);
@@ -97,11 +105,29 @@ try {
   const { rows: results } = await client.query(recall);
   check("recall returns rows", results.length > 0, `${results.length} rows`);
 
+  // Prose comes from the second, narrow lookup -- the same two-step the
+  // application performs, so this exercises both builders.
+  const top = results.slice(0, 5);
+  const { rows: texts } = await client.query(
+    buildMemoryTextQuery(worldId, top.map((r) => r.memory_id)),
+  );
+  const textById = new Map(texts.map((t) => [t.memory_id, t.surface_ja]));
+
   console.log(`\ntopic: ${topic.canonical_ja}`);
   console.log(`nearest memories held by ${npc.name_ja}:`);
-  for (const row of results.slice(0, 5)) {
-    console.log(`  ${Number(row.distance).toFixed(4)}  ${row.surface_ja}`);
+  for (const row of top) {
+    console.log(`  ${Number(row.distance).toFixed(4)}  ${textById.get(row.memory_id)}`);
   }
+
+  // A response carrying vectors would blow the MCP ceiling long before it
+  // carried anything useful, so measure what the tool would actually return.
+  const payloadBytes = Buffer.byteLength(JSON.stringify(results), "utf8");
+  console.log(`\nresponse payload: ${payloadBytes} bytes for ${results.length} rows`);
+  check(
+    "a full result set fits the MCP response ceiling",
+    payloadBytes < 10 * 1024,
+    `${payloadBytes} of ${10 * 1024} bytes`,
+  );
 
   // The MCP-facing views must not expose ground truth.
   const { rows: leak } = await client.query(

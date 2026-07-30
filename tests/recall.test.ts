@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { MCP_SAFE_RECALL_LIMIT } from "../lib/memory/queries";
 import { aggregate, computeRoots, fetchWidth, type Candidate } from "../lib/memory/recall";
 import type { MemoryRow } from "../lib/memory/scoring";
 
@@ -155,6 +156,12 @@ describe("aggregation", () => {
 
   it("over-fetches, because vector search is approximate at the tail", () => {
     expect(fetchWidth(3)).toBeGreaterThan(3);
-    expect(fetchWidth(1)).toBeGreaterThanOrEqual(24);
+    expect(fetchWidth(1)).toBeGreaterThanOrEqual(12);
+  });
+
+  it("never asks for more rows than an MCP response can carry", () => {
+    for (const desired of [1, 3, 5, 20, 100]) {
+      expect(fetchWidth(desired)).toBeLessThanOrEqual(MCP_SAFE_RECALL_LIMIT);
+    }
   });
 });

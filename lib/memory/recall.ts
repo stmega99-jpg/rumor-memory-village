@@ -16,6 +16,7 @@
  * roots merely repeat.
  */
 
+import { MCP_SAFE_RECALL_LIMIT } from "./queries";
 import {
   recallScore,
   type MemoryRow,
@@ -153,9 +154,14 @@ export function aggregate(
  *
  * Over-fetching is not tuning slack. Vector search is approximate, so the tail
  * of a result set is genuinely unstable between runs, and duplicates of one
- * claim can occupy several slots. Asking for k and returning k would let both
- * effects change what a villager says.
+ * claim can occupy several slots -- on the seeded world, Gen holds the same
+ * proposition about the well twice, at identical distance. Asking for k and
+ * returning k would let both effects change what a villager says.
+ *
+ * The ceiling is not a preference. Managed MCP truncates responses at 10 KiB
+ * and the ranking projection costs about 410 bytes a row, so this is as wide
+ * as a single recall can be.
  */
 export function fetchWidth(desiredClaims: number): number {
-  return Math.max(24, desiredClaims * 8);
+  return Math.min(MCP_SAFE_RECALL_LIMIT, Math.max(12, desiredClaims * 6));
 }
