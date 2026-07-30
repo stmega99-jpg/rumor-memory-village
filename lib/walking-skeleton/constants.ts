@@ -12,6 +12,9 @@ export const COCKROACH_MCP_URL = "https://cockroachlabs.cloud/mcp";
 
 export const NOVA_LITE_MODEL_ID = "amazon.nova-lite-v1:0";
 
+export const NOVA_LITE_INFERENCE_PROFILE_ID =
+  "us.amazon.nova-lite-v1:0";
+
 export const PREGENERATED_PROMPT_VERSION =
   "initial-bedrock-connectivity-smoke-v1";
 

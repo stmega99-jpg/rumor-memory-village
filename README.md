@@ -82,8 +82,9 @@ Use separate roles for Amplify build/deployment and SSR runtime:
 - **Amplify service role:** only the permissions Amplify needs to build and
   publish the app.
 - **SSR Compute Role:** `secretsmanager:GetSecretValue` on the exact runtime
-  secret plus `bedrock:InvokeModel` on the exact Nova Lite model resource in
-  `RMV_BEDROCK_REGION`.
+  secret plus `bedrock:InvokeModel` on the US Nova Lite inference profile and
+  its three destination model resources (`us-east-1`, `us-east-2`, and
+  `us-west-2`).
 
 Attach the compute role only to the production branch. Titan Text Embeddings
 v2 permission will be added when the embedding path is implemented; the
@@ -105,14 +106,15 @@ artifact. Configure this non-secret build variable on the Amplify app:
 
 ```text
 RMV_LIVE_BEDROCK_PROBE=false
-RMV_BEDROCK_REGION=us-east-1
+RMV_BEDROCK_REGION=us-east-2
 ```
 
 `amplify.yml` copies these settings into `.env.production` so they reach the
 SSR runtime. The Secrets Manager Region and secret name remain frozen to
 `us-east-1` and `rumor-memory-village/prod` in server-only defaults;
-`RMV_BEDROCK_REGION` can independently select a Region with available Nova
-Lite quota.
+`RMV_BEDROCK_REGION` selects the source Region for the US Geo inference
+profile. The initial quota measurement found the usable Nova Lite allocation
+in `us-east-2`, so that Region is frozen for the smoke proof.
 
 For the first deployment only, set `RMV_LIVE_BEDROCK_PROBE=true`, deploy, and
 run the verifier. After it reports `mode=bedrock`, set the value back to

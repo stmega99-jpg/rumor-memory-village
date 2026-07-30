@@ -4,14 +4,14 @@ import {
   BedrockRuntimeClient,
   ConverseCommand,
 } from "@aws-sdk/client-bedrock-runtime";
-import { NOVA_LITE_MODEL_ID } from "./constants";
+import { NOVA_LITE_INFERENCE_PROFILE_ID } from "./constants";
 import type { ProbeRow } from "./types";
 
 export async function generateNpcLine(row: ProbeRow): Promise<string> {
   const region =
     process.env.RMV_BEDROCK_REGION ??
     process.env.AWS_REGION ??
-    "us-east-1";
+    "us-east-2";
   const client = new BedrockRuntimeClient({
     region,
   });
@@ -26,7 +26,7 @@ export async function generateNpcLine(row: ProbeRow): Promise<string> {
   try {
     const response = await client.send(
       new ConverseCommand({
-        modelId: NOVA_LITE_MODEL_ID,
+        modelId: NOVA_LITE_INFERENCE_PROFILE_ID,
         messages: [
           {
             role: "user",
@@ -34,7 +34,7 @@ export async function generateNpcLine(row: ProbeRow): Promise<string> {
           },
         ],
         inferenceConfig: {
-          maxTokens: 80,
+          maxTokens: 32,
           temperature: 0.2,
           topP: 0.9,
         },
