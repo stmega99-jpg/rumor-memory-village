@@ -27,7 +27,9 @@
     "@aws-sdk/client-bedrock-runtime": "3.1098.0",
     "@aws-sdk/client-secrets-manager": "3.1098.0",
     "@modelcontextprotocol/client": "2.0.0",
+    "@types/pg": "^8.20.0",
     "next": "15.5.22",
+    "pg": "^8.22.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "server-only": "0.0.1"
