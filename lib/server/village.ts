@@ -7,6 +7,7 @@ import { getPool, transaction } from "../memory/db";
 import { forkWorld, getTemplateWorldId, pruneForks } from "../memory/world";
 import { getRuntimeSecrets } from "../walking-skeleton/config";
 import type { McpCredentials } from "../memory/mcp-client";
+import { templateLine } from "../memory/utterance";
 
 /**
  * Server-side plumbing for the village.
@@ -116,6 +117,9 @@ export interface VerdictView {
   rationaleJa: string;
   rationaleEn: string;
   rationale: unknown;
+  saidJa: string;
+  saidEn: string;
+  saidMode: string;
 }
 
 export interface TransferView {
@@ -174,16 +178,50 @@ export async function loadVillage(worldId: string): Promise<VillageState> {
     [worldId],
   );
 
+  // Each verdict is spoken from one memory: the strongest the villager holds
+  // about that proposition. A pre-generated line overrides the template when
+  // one exists for this exact belief state.
   const verdicts = await executor<Record<string, unknown>>(
     `SELECT b.npc_id, a.name_ja AS npc_ja, a.name_en AS npc_en,
             b.claim_id, c.canonical_ja, c.canonical_en, c.truth_value,
             b.status, b.score, b.opposing_score,
-            b.rationale_text_ja, b.rationale_text_en, b.rationale_json
+            b.rationale_text_ja, b.rationale_text_en, b.rationale_json,
+            src.surface_ja, src.source_ja, src.source_en, src.emotional_weight,
+            said.line_ja AS said_ja, said.line_en AS said_en,
+            said.generation_mode
      FROM rumor_memory_village.public.belief b
      JOIN rumor_memory_village.public.actor a
        ON a.world_id = b.world_id AND a.id = b.npc_id
      JOIN rumor_memory_village.public.claim c
        ON c.world_id = b.world_id AND c.id = b.claim_id
+     LEFT JOIN LATERAL (
+       SELECT m.surface_ja, m.emotional_weight,
+              s.name_ja AS source_ja, s.name_en AS source_en
+         FROM rumor_memory_village.public.memory m
+         LEFT JOIN rumor_memory_village.public.actor s
+           ON s.world_id = m.world_id AND s.id = m.source_actor_id
+        WHERE m.world_id = b.world_id
+          AND m.owner_npc_id = b.npc_id
+          AND m.claim_id = b.claim_id
+        ORDER BY m.witnessed_directly DESC, m.confidence_at_acq DESC
+        LIMIT 1
+     ) AS src ON true
+     -- Pre-generated dialogue is looked up in the template world, not this one.
+     -- A fork keeps every row id and changes only the world, so a line written
+     -- once against (speaker, claim, stance) is valid in every visitor's copy.
+     -- Copying it per fork instead would mean regenerating it per fork, which
+     -- is exactly the per-click Bedrock call the pre-generation avoids.
+     LEFT JOIN LATERAL (
+       SELECT v.line_ja, v.line_en, v.generation_mode
+         FROM rumor_memory_village.public.conversation v
+         JOIN rumor_memory_village.public.world tw
+           ON tw.id = v.world_id AND tw.is_template = true
+        WHERE v.speaker_id = b.npc_id
+          AND v.belief_claim_id = b.claim_id
+          AND v.topic = b.status
+        ORDER BY v.occurred_at DESC
+        LIMIT 1
+     ) AS said ON true
      WHERE b.world_id = $1
      ORDER BY c.canonical_en, b.score DESC`,
     [worldId],
@@ -251,7 +289,26 @@ export async function loadVillage(worldId: string): Promise<VillageState> {
       fearOfPlayer: Number(row.fear),
       memoryCount: Number(row.memory_count),
     })),
-    verdicts: verdicts.map((row) => ({
+    verdicts: verdicts.map((row) => {
+      const spoken =
+        row.said_ja && row.said_en
+          ? {
+              ja: String(row.said_ja),
+              en: String(row.said_en),
+              mode: String(row.generation_mode ?? "bedrock"),
+            }
+          : templateLine({
+              villagerJa: String(row.npc_ja),
+              villagerEn: String(row.npc_en),
+              status: String(row.status),
+              sourceJa: row.source_ja ? String(row.source_ja) : null,
+              sourceEn: row.source_en ? String(row.source_en) : null,
+              surfaceJa: String(row.surface_ja ?? row.canonical_ja),
+              claimEn: String(row.canonical_en),
+              emotionalWeight: Number(row.emotional_weight ?? 0),
+            });
+
+      return {
       npcId: String(row.npc_id),
       npcNameJa: String(row.npc_ja),
       npcNameEn: String(row.npc_en),
@@ -265,7 +322,11 @@ export async function loadVillage(worldId: string): Promise<VillageState> {
       rationaleJa: String(row.rationale_text_ja),
       rationaleEn: String(row.rationale_text_en),
       rationale: row.rationale_json,
-    })),
+      saidJa: spoken.ja,
+      saidEn: spoken.en,
+      saidMode: spoken.mode,
+      };
+    }),
     transfers: transfers.map((row) => ({
       id: String(row.id),
       claimJa: String(row.canonical_ja),

@@ -37,6 +37,9 @@ interface Verdict {
   opposingScore: number;
   rationaleJa: string;
   rationaleEn: string;
+  saidJa: string;
+  saidEn: string;
+  saidMode: string;
   rationale: {
     corroborationCount?: number;
     repeatCount?: number;
@@ -375,6 +378,15 @@ export default function VillageClient() {
                         {verdict.score.toFixed(2)} vs {verdict.opposingScore.toFixed(2)}
                       </span>
                     </div>
+                    <blockquote className="said">
+                      <p className="said-ja">{verdict.saidJa}</p>
+                      <p className="said-en">{verdict.saidEn}</p>
+                      <span className="said-mode">
+                        {verdict.saidMode === "bedrock"
+                          ? "wording by Amazon Bedrock (Nova Lite), pre-generated"
+                          : "wording from a deterministic template"}
+                      </span>
+                    </blockquote>
                     <p className="why-en">{verdict.rationaleEn}</p>
                     <p className="why-ja">{verdict.rationaleJa}</p>
                     {verdict.rationale?.usedMemories?.length ? (
