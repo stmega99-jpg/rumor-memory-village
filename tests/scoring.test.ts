@@ -281,6 +281,39 @@ describe("belief arbitration", () => {
     expect(outcomes.every((o) => o.status === "doubted")).toBe(true);
   });
 
+  it("believes a lone eyewitness account with nobody contradicting it", () => {
+    // The decision margin exists to tell two accounts apart. Applying it to a
+    // single claim made a witness doubt themselves for want of an opponent.
+    const outcomes = arbitrate([claimSupport(repair, ctx)]);
+
+    expect(outcomes).toHaveLength(1);
+    expect(outcomes[0].status).toBe("believed");
+  });
+
+  it("holds no view at all when nothing in the group clears conviction", () => {
+    // Judging members individually produced villagers who rejected one account
+    // while holding no view on the account that had outranked it.
+    const faded = context({ simulatedAt: at(400) });
+    const outcomes = arbitrate([
+      claimSupport(theft, faded),
+      claimSupport(repair, faded),
+    ]);
+
+    expect(outcomes.every((o) => o.status === "unknown")).toBe(true);
+  });
+
+  it("never ranks a rejected claim above an unknown one", () => {
+    for (const day of [1, 30, 90, 200, 400]) {
+      const moment = context({ simulatedAt: at(day) });
+      const outcomes = arbitrate([
+        claimSupport(theft, moment),
+        claimSupport(repair, moment),
+      ]);
+      const statuses = new Set(outcomes.map((o) => o.status));
+      expect(statuses.has("unknown") && statuses.size > 1).toBe(false);
+    }
+  });
+
   it("returns unknown rather than inventing a conviction from nothing", () => {
     const stale = {
       claimId: "faint",

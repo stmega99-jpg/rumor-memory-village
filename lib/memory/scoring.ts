@@ -283,25 +283,42 @@ export function arbitrate(verdicts: ClaimVerdict[]): BeliefOutcome[] {
 
   const ranked = [...verdicts].sort((a, b) => b.score - a.score);
   const leader = ranked[0];
-  const runnerUp = ranked[1];
-  const rivalScore = runnerUp ? runnerUp.score : 0;
+  const hasRival = ranked.length > 1;
+
+  // Nothing left worth an opinion. A villager whose memories have all faded
+  // below conviction does not half-believe them; they simply no longer know,
+  // and that has to be true of the whole group at once. Judging members
+  // individually here produced villagers who rejected one account while
+  // holding no view on the account that outranked it.
+  const decidable = leader.score >= SCORING.minimumConviction;
+
+  // The margin is about telling two accounts apart, so it only applies when
+  // there are two. An uncontested memory that clears conviction is simply
+  // believed -- an eyewitness with nobody contradicting them should not end up
+  // doubting themselves for want of an opponent to beat.
   const decisive =
-    leader.score >= SCORING.minimumConviction &&
-    leader.score - rivalScore >= SCORING.decisionMargin;
+    decidable &&
+    (!hasRival || leader.score - ranked[1].score >= SCORING.decisionMargin);
 
   return ranked.map((verdict, index) => {
     const opposing = Math.max(
       0,
-      ...ranked.filter((other) => other.claimId !== verdict.claimId).map((o) => o.score),
+      ...ranked
+        .filter((other) => other.claimId !== verdict.claimId)
+        .map((other) => other.score),
+      0,
     );
 
     let status: BeliefStatus;
-    if (verdict.score < SCORING.minimumConviction) {
-      status = ranked.length > 1 && index > 0 ? "rejected" : "unknown";
-    } else if (index === 0) {
-      status = decisive ? "believed" : "doubted";
+    if (!decidable) {
+      status = "unknown";
+    } else if (decisive) {
+      status = index === 0 ? "believed" : "rejected";
     } else {
-      status = decisive ? "rejected" : "doubted";
+      // Two credible accounts, too close to separate. Holding both in doubt is
+      // the honest outcome; picking one would be a coin toss wearing a number.
+      status =
+        leader.score - verdict.score < SCORING.decisionMargin ? "doubted" : "rejected";
     }
 
     return {

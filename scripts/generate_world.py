@@ -264,8 +264,17 @@ CONTRADICTIONS = [
 ]
 
 
-def build_memories(claims: list[dict], rng: random.Random) -> list[dict]:
-    """Spread background claims across the cast, then lay the scenario on top."""
+def build_memories(
+    background: list[dict], scenario: list[dict], rng: random.Random
+) -> list[dict]:
+    """Spread village life across the cast, then lay the scenario on top.
+
+    Scenario claims are kept out of the random pass on purpose. Letting them
+    into the background pool hands the theft to whoever the shuffle picks, and
+    the demo stops being a story about how a rumour travelled: villagers simply
+    start out knowing things, from nobody. What each villager knows at the
+    outset is authored here; everything after that has to arrive by being told.
+    """
     memories: list[dict] = []
 
     def add(owner: str, claim_key: str, *, source_type: str, source: str | None,
@@ -289,13 +298,13 @@ def build_memories(claims: list[dict], rng: random.Random) -> list[dict]:
             }
         )
 
-    by_key = {c["key"]: c for c in claims}
+    by_key = {c["key"]: c for c in [*background, *scenario]}
 
     # Background: every NPC witnesses a slice of village life and hears another
     # slice second-hand. Overlap is intentional -- shared claims are what make
     # corroboration counting non-trivial.
     for npc in NPCS:
-        pool = list(claims)
+        pool = list(background)
         rng.shuffle(pool)
         witnessed = pool[:70]
         heard = pool[70:130]
@@ -340,8 +349,9 @@ def build_memories(claims: list[dict], rng: random.Random) -> list[dict]:
 def main() -> None:
     rng = random.Random(SEED)
     background = build_background(rng)
-    claims = background + [dict(c, subject_label=c["subject_label"]) for c in SCENARIO]
-    memories = build_memories(claims, rng)
+    scenario = [dict(c) for c in SCENARIO]
+    claims = background + scenario
+    memories = build_memories(background, scenario, rng)
 
     payload = {
         "world_id": WORLD_ID,

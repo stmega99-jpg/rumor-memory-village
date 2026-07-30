@@ -260,10 +260,15 @@ function narrate(
     reasonsEn.push(`the same informant ${support.repeatCount + 1} times`);
   }
   if (Math.abs(outcome.priorBias) > 0.05) {
-    const leaning = outcome.priorBias > 0 ? "好意的" : "否定的";
-    reasons.push(`${facts.subjectLabel}への感情が${leaning}に働いた`);
+    // The bias is affection times how the claim reflects on its subject, so a
+    // warm feeling pushes against an accusation and for a kind account. Say
+    // which way it pushed, not just which sign it carried.
+    const pull = outcome.priorBias > 0 ? "信じる" : "疑う";
+    reasons.push(`${facts.subjectLabel}への感情が${pull}方に働いた`);
     reasonsEn.push(
-      `${outcome.priorBias > 0 ? "warm" : "cold"} feelings toward ${facts.subjectLabel}`,
+      `their feelings about ${facts.subjectLabel} pulled ${
+        outcome.priorBias > 0 ? "toward" : "against"
+      } it`,
     );
   }
 
