@@ -21,9 +21,6 @@ deterministic template fallback.
 - A visible per-boundary trace
 - No claim/memory/belief simulation yet
 
-See [`SPEC_FOR_SOL.md`](./SPEC_FOR_SOL.md) for the frozen implementation
-specification.
-
 ## Requirements
 
 - Node.js 24

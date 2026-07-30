@@ -83,7 +83,7 @@ export default function Home() {
 
       <footer>
         <span>MIT licensed · Built for the CockroachDB Hackathon</span>
-        <span>Tokyo / 2026</span>
+        <span>Amplify us-east-1 / 2026</span>
       </footer>
     </main>
   );
