@@ -39,7 +39,9 @@ const list = statements(sql);
 const client = new pg.Client({
   connectionString,
   ssl: { rejectUnauthorized: true },
-  statement_timeout: 120_000,
+  // Schema changes on a low-traffic Basic cluster can wait several minutes
+  // for leases even when the data change itself is tiny.
+  statement_timeout: 600_000,
 });
 
 try {
