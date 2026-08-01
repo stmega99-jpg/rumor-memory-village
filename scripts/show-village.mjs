@@ -9,6 +9,15 @@
 
 import pg from "pg";
 
+const groundTruth = new Map([
+  ["helped_with_field", true],
+  ["stole_from_warehouse", false],
+  ["repaired_warehouse", true],
+  ["well_running_dry", true],
+  ["broke_bridge", false],
+  ["fixed_bridge", true],
+]);
+
 const connectionString = process.env.RMV_COCKROACH_SQL_URL;
 if (!connectionString) {
   console.error("RMV_COCKROACH_SQL_URL is not set.");
@@ -36,7 +45,7 @@ try {
   const world = worlds.find((w) => w.is_template);
 
   const { rows: beliefs } = await client.query(
-    `SELECT a.name_ja AS npc, c.canonical_ja AS claim, c.truth_value,
+    `SELECT a.name_ja AS npc, c.canonical_ja AS claim, c.predicate,
             b.status, b.score, b.opposing_score, b.rationale_text_ja
      FROM belief b
      JOIN actor a ON a.world_id = b.world_id AND a.id = b.npc_id
@@ -51,8 +60,8 @@ try {
   for (const row of beliefs) {
     if (row.claim !== current) {
       current = row.claim;
-      const truth =
-        row.truth_value === null ? "unknowable" : row.truth_value ? "true" : "FALSE";
+      const answer = groundTruth.get(row.predicate) ?? null;
+      const truth = answer === null ? "unknowable" : answer ? "true" : "FALSE";
       console.log(`\n  「${row.claim}」  [ground truth: ${truth}]`);
     }
     console.log(

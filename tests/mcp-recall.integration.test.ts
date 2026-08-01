@@ -1,8 +1,16 @@
 import pg from "pg";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-import { McpUnavailableError, type McpCredentials } from "../lib/memory/mcp-client";
-import { hydrateSurfaces, recall } from "../lib/memory/mcp-recall";
+import {
+  McpUnavailableError,
+  runSelectQuery,
+  type McpCredentials,
+} from "../lib/memory/mcp-client";
+import {
+  hydrateProvenanceSources,
+  hydrateSurfaces,
+  recall,
+} from "../lib/memory/mcp-recall";
 import { liveDatabaseUrl, loadLocalEnv } from "./live-env";
 
 loadLocalEnv();
@@ -150,6 +158,31 @@ describeLive("recall through the Managed MCP Server", () => {
     }
   }, 60_000);
 
+  it("resolves a hearsay root to its source actor rather than its owner", async () => {
+    const { rows } = await client.query(
+      `SELECT m.id, source.name_ja AS expected_name, owner.name_ja AS owner_name
+       FROM memory AS m
+       JOIN actor AS source
+         ON source.world_id = m.world_id AND source.id = m.source_actor_id
+       JOIN actor AS owner
+         ON owner.world_id = m.world_id AND owner.id = m.owner_npc_id
+       WHERE m.world_id = $1 AND m.source_type = 'heard'
+         AND m.provenance_root_memory_id = m.id
+       LIMIT 1`,
+      [worldId],
+    );
+    expect(rows).toHaveLength(1);
+
+    const labels = await hydrateProvenanceSources(
+      worldId,
+      [rows[0].id],
+      simulatedAt,
+      credentials,
+    );
+    expect(labels.get(rows[0].id)?.nameJa).toBe(rows[0].expected_name);
+    expect(labels.get(rows[0].id)?.nameJa).not.toBe(rows[0].owner_name);
+  }, 60_000);
+
   it("fails rather than quietly answering from somewhere else", async () => {
     // The whole point of routing recall through MCP is that it is the path.
     // A fallback to the direct SQL connection would make a broken dependency
@@ -163,6 +196,16 @@ describeLive("recall through the Managed MCP Server", () => {
         trustOf,
         credentials: { ...credentials, apiKey: "CCDB1_not_a_real_key" },
       }),
+    ).rejects.toBeInstanceOf(McpUnavailableError);
+  }, 60_000);
+
+  it("cannot retrieve audience-only ground truth through the MCP identity", async () => {
+    await expect(
+      runSelectQuery(
+        "SELECT truth_value FROM claim LIMIT 1",
+        "rumor_memory_village",
+        credentials,
+      ),
     ).rejects.toBeInstanceOf(McpUnavailableError);
   }, 60_000);
 

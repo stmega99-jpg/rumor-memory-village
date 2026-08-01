@@ -13,13 +13,16 @@ const T0 = new Date("2026-06-01T00:00:00Z");
 const NO_SUPPORT: SupportCounts = { corroborationCount: 0, repeatCount: 0 };
 
 function memory(overrides: Partial<MemoryRow> = {}): MemoryRow {
+  const memoryId = overrides.memoryId ?? "gen-saw-theft";
   return {
-    memoryId: "gen-saw-theft",
+    memoryId,
     ownerNpcId: "gen",
     claimId: "stole",
     sourceType: "witnessed",
     sourceActorId: null,
     sourceMemoryId: null,
+    provenanceRootMemoryId:
+      overrides.provenanceRootMemoryId ?? memoryId,
     sourceForgottenAt: null,
     witnessedDirectly: true,
     confidenceAtAcq: 0.8,

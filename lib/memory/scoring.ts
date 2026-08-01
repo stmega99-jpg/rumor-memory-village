@@ -21,6 +21,8 @@ export const SCORING = {
   /** How much hearing the same informant again slows forgetting. Deliberately
    *  smaller: repetition from one mouth is not independent evidence. */
   repeatBoost: 0.08,
+  /** Total repeated acquisitions counted before further repetition saturates. */
+  repeatCap: 4,
   /** Half-life, in simulated days, of the recency term used during recall. */
   recencyHalfLifeDays: 21,
   /** Multiplier applied to a memory the villager witnessed themselves. */
@@ -57,6 +59,8 @@ export interface MemoryRow {
   sourceActorId: string | null;
   /** The informant's own memory this one was copied from. Immutable. */
   sourceMemoryId: string | null;
+  /** Oldest stored memory in the provenance chain. Immutable across retellings. */
+  provenanceRootMemoryId: string;
   sourceForgottenAt: Date | null;
   witnessedDirectly: boolean;
   confidenceAtAcq: number;
@@ -123,7 +127,7 @@ export function decayedConfidence(
   const reinforcement =
     1 +
     SCORING.corroborationBoost * Math.log1p(support.corroborationCount) +
-    SCORING.repeatBoost * Math.log1p(support.repeatCount);
+    SCORING.repeatBoost * Math.log1p(Math.min(support.repeatCount, SCORING.repeatCap));
   return clamp(memory.confidenceAtAcq * decay * reinforcement, 0, 1);
 }
 

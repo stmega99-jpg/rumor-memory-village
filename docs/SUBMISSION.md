@@ -75,13 +75,15 @@ narration already moving.
 > connection, because Managed MCP offers select_query and insert_rows but not the
 > updates belief re-evaluation needs.
 >
-> Ranking, decay, propagation and arbitration are deterministic code. A language
-> model writes the sentence a villager says; it never decides what they believe.
-> That is what makes the explanation log honest — every number in it can be
-> recomputed.
+> Ranking, decay, propagation and arbitration are deterministic code. Nova Lite
+> may rewrite a villager's sentence during pre-generation, with a labelled
+> deterministic template used when no model line exists; it never decides what
+> they believe. That is what makes the explanation log honest — every number in
+> it can be recomputed.
 >
 > Runs on AWS Amplify Hosting with credentials from Secrets Manager, and Amazon
-> Bedrock Nova Lite for dialogue.
+> Bedrock Nova Lite for the proven smoke path and optional pre-generated
+> dialogue. The public click path does not require a live model call.
 
 ### Challenges we ran into
 
@@ -114,15 +116,21 @@ narration already moving.
 
 **AWS**
 - Amplify Hosting — runs the Next.js app and API routes.
-- Amazon Bedrock (Nova Lite) — villager dialogue.
-- Secrets Manager — MCP key, cluster id, database URL.
+- Amazon Bedrock (Nova Lite) — proven live smoke path and optional
+  pre-generated villager dialogue; labelled deterministic templates otherwise.
+- Secrets Manager — MCP key, cluster id, database URL and an independent
+  world-cookie signing key.
 
 ---
 
 ## 3. Pre-submission checklist
 
 - [ ] `cockroachSqlUrl` present in the `rumor-memory-village/prod` secret
+- [ ] `worldCookieSecret` present in the same secret (independent random value,
+      at least 32 bytes)
 - [ ] Live URL loads and **Run the demonstration** completes end to end
+- [ ] `npm run verify:deployment -- <live-url> --allow-pregenerated` passes the
+      village contract, full scenario, Managed MCP recall and five-stage trace
 - [ ] Reset works, and a second run produces the same result as the first
 - [ ] Repository public, `LICENSE` detected by GitHub in the sidebar
 - [ ] README front page renders (tables, diagram, no broken links)

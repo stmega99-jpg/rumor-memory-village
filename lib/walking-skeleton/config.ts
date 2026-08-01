@@ -9,6 +9,9 @@ import { COCKROACH_CLUSTER_ID } from "./constants";
 export interface RuntimeSecrets {
   cockroachMcpApiKey: string;
   cockroachClusterId: string;
+  cockroachSqlUrl: string;
+  /** Independent HMAC key for the per-visitor world cookie. */
+  worldCookieSecret: string;
 }
 
 export class RuntimeConfigurationError extends Error {
@@ -28,7 +31,28 @@ let cachedSecrets:
   | undefined;
 let secretsInFlight: Promise<RuntimeSecrets> | undefined;
 
-function validateSecrets(value: unknown): RuntimeSecrets {
+function isCockroachSqlUrl(value: unknown): value is string {
+  if (typeof value !== "string") return false;
+
+  try {
+    const parsed = new URL(value);
+    return (
+      (parsed.protocol === "postgresql:" || parsed.protocol === "postgres:") &&
+      parsed.hostname.length > 0 &&
+      parsed.username.length > 0 &&
+      parsed.password.length > 0
+    );
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Validate the complete server-side secret contract without ever echoing a
+ * rejected value. Exported so configuration failures can be covered without
+ * contacting Secrets Manager.
+ */
+export function validateRuntimeSecrets(value: unknown): RuntimeSecrets {
   if (typeof value !== "object" || value === null) {
     throw new RuntimeConfigurationError();
   }
@@ -36,17 +60,30 @@ function validateSecrets(value: unknown): RuntimeSecrets {
   const candidate = value as Record<string, unknown>;
   const cockroachMcpApiKey = candidate.cockroachMcpApiKey;
   const cockroachClusterId = candidate.cockroachClusterId;
+  const cockroachSqlUrl = candidate.cockroachSqlUrl;
+  const worldCookieSecret = candidate.worldCookieSecret;
 
   if (
     typeof cockroachMcpApiKey !== "string" ||
     cockroachMcpApiKey.length < 16 ||
     typeof cockroachClusterId !== "string" ||
-    cockroachClusterId !== COCKROACH_CLUSTER_ID
+    cockroachClusterId !== COCKROACH_CLUSTER_ID ||
+    !isCockroachSqlUrl(cockroachSqlUrl) ||
+    typeof worldCookieSecret !== "string" ||
+    Buffer.byteLength(worldCookieSecret, "utf8") < 32 ||
+    worldCookieSecret !== worldCookieSecret.trim() ||
+    worldCookieSecret === cockroachMcpApiKey ||
+    worldCookieSecret === cockroachSqlUrl
   ) {
     throw new RuntimeConfigurationError();
   }
 
-  return { cockroachMcpApiKey, cockroachClusterId };
+  return {
+    cockroachMcpApiKey,
+    cockroachClusterId,
+    cockroachSqlUrl,
+    worldCookieSecret,
+  };
 }
 
 function loadLocalSecrets(): RuntimeSecrets | undefined {
@@ -57,9 +94,11 @@ function loadLocalSecrets(): RuntimeSecrets | undefined {
     return undefined;
   }
 
-  return validateSecrets({
+  return validateRuntimeSecrets({
     cockroachMcpApiKey: process.env.RMV_COCKROACH_MCP_API_KEY,
     cockroachClusterId: process.env.RMV_COCKROACH_CLUSTER_ID,
+    cockroachSqlUrl: process.env.RMV_COCKROACH_SQL_URL,
+    worldCookieSecret: process.env.RMV_WORLD_COOKIE_SECRET,
   });
 }
 
@@ -91,7 +130,7 @@ async function fetchSecrets(): Promise<RuntimeSecrets> {
       throw new RuntimeConfigurationError();
     }
 
-    return validateSecrets(JSON.parse(raw) as unknown);
+    return validateRuntimeSecrets(JSON.parse(raw) as unknown);
   } catch {
     throw new RuntimeConfigurationError();
   } finally {

@@ -129,19 +129,29 @@ try {
     `${payloadBytes} of ${10 * 1024} bytes`,
   );
 
-  // Ground truth exists in exactly one column, and the control that keeps it
-  // away from villagers is server-side query construction, not a grant:
-  // CockroachDB Cloud requires the Managed MCP service account to hold a Cloud
-  // role, which cannot be bound to a SQL role, so rmv_mcp_read does not
-  // constrain the MCP path. What can be checked here is that no statement the
-  // application issues mentions the column, and that the projection omits it.
+  const { rows: provenance } = await client.query(`
+    SELECT
+      count(*) FILTER (WHERE m.provenance_root_memory_id IS NULL)::INT AS missing,
+      count(*) FILTER (WHERE root.id IS NULL)::INT AS orphaned,
+      count(*) FILTER (WHERE root.source_memory_id IS NOT NULL)::INT AS non_root
+    FROM memory AS m
+    LEFT JOIN memory AS root
+      ON root.world_id = m.world_id AND root.id = m.provenance_root_memory_id
+  `);
+  check("every memory has a persisted provenance root", Number(provenance[0].missing) === 0);
+  check("every provenance root resolves inside its world", Number(provenance[0].orphaned) === 0);
+  check("every persisted root is the oldest stored memory", Number(provenance[0].non_root) === 0);
+
+  // The Managed MCP identity is provisioned by CockroachDB Cloud, so a local
+  // advisory role cannot constrain the MCP path. Ground truth must therefore
+  // be absent from the database, and from every statement the app sends.
   console.log("");
-  const { rows: projected } = await client.query(
+  const { rows: storedGroundTruth } = await client.query(
     `SELECT column_name FROM information_schema.columns
-     WHERE table_schema = 'public' AND table_name = 'mcp_claim'
+     WHERE table_schema = 'public' AND table_name = 'claim'
        AND column_name = 'truth_value'`,
   );
-  check("truth_value is absent from the MCP claim projection", projected.length === 0);
+  check("truth_value is absent from the database", storedGroundTruth.length === 0);
   check("the recall statement never mentions ground truth", !recall.includes("truth_value"));
 
   console.log(failures === 0 ? "\nall checks passed" : `\n${failures} check(s) failed`);

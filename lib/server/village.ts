@@ -8,6 +8,8 @@ import { forkWorld, getTemplateWorldId, pruneForks } from "../memory/world";
 import { getRuntimeSecrets } from "../walking-skeleton/config";
 import type { McpCredentials } from "../memory/mcp-client";
 import { templateLine } from "../memory/utterance";
+import { signWorldCookie, verifyWorldCookie } from "./world-cookie";
+import { groundTruthForPredicate } from "./ground-truth";
 
 /**
  * Server-side plumbing for the village.
@@ -36,12 +38,30 @@ export async function mcpCredentials(): Promise<McpCredentials> {
   };
 }
 
-async function worldExists(worldId: string): Promise<boolean> {
-  const rows = await executor<{ id: string }>(
-    "SELECT id FROM rumor_memory_village.public.world WHERE id = $1",
-    [worldId],
+/** Accept only a direct, non-template fork of the current template world. */
+export async function isUsableWorldFork(
+  exec: Executor,
+  worldId: string,
+  templateWorldId: string,
+): Promise<boolean> {
+  const rows = await exec<{ id: string }>(
+    `SELECT id FROM rumor_memory_village.public.world
+     WHERE id = $1 AND is_template = false AND forked_from = $2`,
+    [worldId, templateWorldId],
   );
   return rows.length > 0;
+}
+
+/** Resolve only an authentic cookie whose world is still an eligible fork. */
+export async function worldIdFromCookie(
+  exec: Executor,
+  cookieValue: unknown,
+  secret: string,
+  templateWorldId: string,
+): Promise<string | null> {
+  const worldId = verifyWorldCookie(cookieValue, secret);
+  if (!worldId) return null;
+  return (await isUsableWorldFork(exec, worldId, templateWorldId)) ? worldId : null;
 }
 
 /**
@@ -54,13 +74,19 @@ async function worldExists(worldId: string): Promise<boolean> {
  */
 export async function currentWorldId(): Promise<{ worldId: string; fresh: boolean }> {
   const jar = await cookies();
-  const existing = jar.get(WORLD_COOKIE)?.value;
+  const secrets = await getRuntimeSecrets();
+  const template = await getTemplateWorldId(executor);
+  const existing = await worldIdFromCookie(
+    executor,
+    jar.get(WORLD_COOKIE)?.value,
+    secrets.worldCookieSecret,
+    template,
+  );
 
-  if (existing && (await worldExists(existing))) {
+  if (existing) {
     return { worldId: existing, fresh: false };
   }
 
-  const template = await getTemplateWorldId(executor);
   const worldId = await transaction(async (client) => {
     const scoped: Executor = async (sql, values = []) =>
       (await client.query(sql, values)).rows as never;
@@ -68,7 +94,7 @@ export async function currentWorldId(): Promise<{ worldId: string; fresh: boolea
     return forkWorld(scoped, template, "visitor");
   });
 
-  jar.set(WORLD_COOKIE, worldId, {
+  jar.set(WORLD_COOKIE, signWorldCookie(worldId, secrets.worldCookieSecret), {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
@@ -183,7 +209,7 @@ export async function loadVillage(worldId: string): Promise<VillageState> {
   // one exists for this exact belief state.
   const verdicts = await executor<Record<string, unknown>>(
     `SELECT b.npc_id, a.name_ja AS npc_ja, a.name_en AS npc_en,
-            b.claim_id, c.canonical_ja, c.canonical_en, c.truth_value,
+            b.claim_id, c.predicate, c.canonical_ja, c.canonical_en,
             b.status, b.score, b.opposing_score,
             b.rationale_text_ja, b.rationale_text_en, b.rationale_json,
             src.surface_ja, src.source_ja, src.source_en, src.emotional_weight,
@@ -315,7 +341,7 @@ export async function loadVillage(worldId: string): Promise<VillageState> {
       claimId: String(row.claim_id),
       claimJa: String(row.canonical_ja),
       claimEn: String(row.canonical_en),
-      truthValue: row.truth_value === null ? null : Boolean(row.truth_value),
+      truthValue: groundTruthForPredicate(String(row.predicate)),
       status: String(row.status),
       score: Number(row.score),
       opposingScore: Number(row.opposing_score),

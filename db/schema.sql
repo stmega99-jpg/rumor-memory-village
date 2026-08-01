@@ -93,9 +93,6 @@ CREATE TABLE IF NOT EXISTS claim (
   -- Canonical embedding. Generated once per claim from canonical_ja.
   embedding       VECTOR(384) NULL,
   embedding_model STRING NULL,
-  -- Ground truth, for demo scoring only. Hidden from the MCP read role so no
-  -- agent can retrieve it.
-  truth_value     BOOL NULL,
   created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
   CONSTRAINT claim_pk PRIMARY KEY (world_id, id),
   CONSTRAINT claim_world_fk FOREIGN KEY (world_id) REFERENCES world (id),
@@ -111,6 +108,12 @@ CREATE TABLE IF NOT EXISTS claim (
 -- The database is not dropped and rebuilt because the deployed walking
 -- skeleton lives alongside these tables.
 ALTER TABLE claim ADD COLUMN IF NOT EXISTS subject_valence FLOAT NOT NULL DEFAULT 0.0;
+
+-- Ground truth is audience-only data. Managed MCP uses a Cloud-managed SQL
+-- identity whose privileges cannot be narrowed by this schema, so storing the
+-- answer in the database would let an agent retrieve it. Fixed demo answers
+-- live in server-only application code instead.
+ALTER TABLE claim DROP COLUMN IF EXISTS truth_value;
 
 -- Mutually exclusive / supporting relations between propositions.
 CREATE TABLE IF NOT EXISTS claim_relation (
@@ -145,6 +148,10 @@ CREATE TABLE IF NOT EXISTS memory (
   -- Immutable provenance. Never nulled, never rewritten.
   source_actor_id     UUID NULL,
   source_memory_id    UUID NULL,
+  -- Stable origin of the whole provenance chain. Initial memories point to
+  -- themselves; every retelling copies this value from source_memory_id. This
+  -- makes two routes from one original witness repetition, not corroboration.
+  provenance_root_memory_id UUID NOT NULL,
   -- Subjective forgetting: the owner can no longer recall where this came
   -- from, but the audit trail above is intact. Expressed on the game clock.
   source_forgotten_at TIMESTAMPTZ NULL,
@@ -186,6 +193,67 @@ CREATE TABLE IF NOT EXISTS memory (
   CONSTRAINT memory_source_memory_fk
     FOREIGN KEY (world_id, source_memory_id) REFERENCES memory (world_id, id)
 );
+
+-- Existing clusters predate the stored provenance root. Backfill by walking
+-- each memory's world-scoped source chain to its oldest stored ancestor, then
+-- make the invariant mandatory. The recursive pass only considers rows whose
+-- root is still NULL, so reapplying this schema never rewrites immutable roots.
+ALTER TABLE memory
+  ADD COLUMN IF NOT EXISTS provenance_root_memory_id UUID NULL;
+
+WITH RECURSIVE provenance_lineage AS (
+  SELECT
+    world_id,
+    id AS leaf_id,
+    id AS ancestor_id,
+    source_memory_id AS parent_id,
+    0 AS depth
+  FROM memory
+  WHERE provenance_root_memory_id IS NULL
+
+  UNION ALL
+
+  SELECT
+    lineage.world_id,
+    lineage.leaf_id,
+    parent.id AS ancestor_id,
+    parent.source_memory_id AS parent_id,
+    lineage.depth + 1
+  FROM provenance_lineage AS lineage
+  JOIN memory AS parent
+    ON parent.world_id = lineage.world_id
+   AND parent.id = lineage.parent_id
+  WHERE lineage.parent_id IS NOT NULL
+    AND lineage.depth < 1024
+), deepest_ancestor AS (
+  SELECT world_id, leaf_id, ancestor_id
+  FROM (
+    SELECT
+      world_id,
+      leaf_id,
+      ancestor_id,
+      row_number() OVER (
+        PARTITION BY world_id, leaf_id
+        ORDER BY depth DESC
+      ) AS position
+    FROM provenance_lineage
+  )
+  WHERE position = 1
+)
+UPDATE memory AS held
+SET provenance_root_memory_id = root.ancestor_id
+FROM deepest_ancestor AS root
+WHERE held.world_id = root.world_id
+  AND held.id = root.leaf_id
+  AND held.provenance_root_memory_id IS NULL;
+
+ALTER TABLE memory
+  ALTER COLUMN provenance_root_memory_id SET NOT NULL;
+
+ALTER TABLE memory
+  ADD CONSTRAINT IF NOT EXISTS memory_provenance_root_fk
+  FOREIGN KEY (world_id, provenance_root_memory_id)
+  REFERENCES memory (world_id, id);
 
 -- Recall is always "this world, this NPC, semantically near this topic", so
 -- both scoping columns are index prefixes ahead of the vector.
@@ -341,10 +409,9 @@ CREATE TABLE IF NOT EXISTS action_log (
 -- ---------------------------------------------------------------------------
 -- MCP read surface.
 --
--- Ground truth lives in exactly one column, `claim.truth_value`, so exactly one
--- table needs hiding behind a projection. `memory` holds nothing an agent
--- should not see -- provenance, confidence and wording are all things the
--- villager themselves knows -- and is granted directly.
+-- `memory` holds nothing an agent should not see -- provenance, confidence and
+-- wording are all things the villager themselves knows -- and is granted
+-- directly. Ground truth is not stored in this database at all.
 --
 -- That directness is load-bearing rather than a simplification. Recall must
 -- name its index explicitly, because a freshly forked world appears in no
@@ -375,6 +442,6 @@ GRANT SELECT ON TABLE memory TO rmv_mcp_read;
 GRANT SELECT ON TABLE mcp_claim TO rmv_mcp_read;
 GRANT SELECT ON TABLE actor TO rmv_mcp_read;
 GRANT SELECT ON TABLE relationship TO rmv_mcp_read;
--- Deliberately NOT granted: the `claim` base table, which is the only place
--- ground truth exists. Also withheld: belief, event, world, rumor_transfer,
+-- Deliberately NOT granted: the `claim` base table. Also withheld: belief,
+-- event, world, rumor_transfer,
 -- recall_event, action_log -- none of which a villager recalls from.

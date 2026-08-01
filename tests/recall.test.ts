@@ -13,6 +13,8 @@ function memory(overrides: Partial<MemoryRow> & { memoryId: string }): MemoryRow
     sourceType: "heard",
     sourceActorId: "gen",
     sourceMemoryId: null,
+    provenanceRootMemoryId:
+      overrides.provenanceRootMemoryId ?? overrides.memoryId,
     sourceForgottenAt: null,
     witnessedDirectly: false,
     confidenceAtAcq: 0.7,
@@ -46,21 +48,33 @@ describe("source roots", () => {
     expect(computeRoots([witnessed]).get("a")).toBe("a");
   });
 
-  it("attributes a heard memory to its informant", () => {
-    const heard = memory({ memoryId: "b", sourceActorId: "gen" });
-    expect(computeRoots([heard]).get("b")).toBe("gen");
+  it("uses the persisted origin rather than the immediate informant", () => {
+    const heard = memory({
+      memoryId: "b",
+      sourceActorId: "gen",
+      provenanceRootMemoryId: "first-witness-memory",
+    });
+    expect(computeRoots([heard]).get("b")).toBe("first-witness-memory");
   });
 
-  it("follows a chain back through memories it can see", () => {
-    const first = memory({ memoryId: "root", witnessedDirectly: true, sourceActorId: null });
-    const relayed = memory({ memoryId: "relay", sourceMemoryId: "root" });
-    expect(computeRoots([first, relayed]).get("relay")).toBe("root");
+  it("keeps a cross-owner root even when the parent memory was not fetched", () => {
+    const relayed = memory({
+      memoryId: "relay",
+      sourceActorId: "miyo",
+      sourceMemoryId: "memory-owned-by-miyo",
+      provenanceRootMemoryId: "gen-first-hand",
+    });
+    expect(computeRoots([relayed]).get("relay")).toBe("gen-first-hand");
   });
 
-  it("does not hang on a cyclic chain", () => {
-    const a = memory({ memoryId: "a", sourceMemoryId: "b" });
-    const b = memory({ memoryId: "b", sourceMemoryId: "a" });
-    expect(() => computeRoots([a, b])).not.toThrow();
+  it("does not infer roots from a candidate-set source chain", () => {
+    const a = memory({ memoryId: "a", provenanceRootMemoryId: "origin-a" });
+    const b = memory({
+      memoryId: "b",
+      sourceMemoryId: "a",
+      provenanceRootMemoryId: "origin-b",
+    });
+    expect(computeRoots([a, b]).get("b")).toBe("origin-b");
   });
 });
 
@@ -82,43 +96,51 @@ describe("aggregation", () => {
   it("counts two informants as corroboration, not repetition", () => {
     const groups = aggregate(
       candidates([
-        [memory({ memoryId: "m1", sourceActorId: "gen" }), 0.9],
-        [memory({ memoryId: "m2", sourceActorId: "tatsu" }), 0.9],
+        [memory({ memoryId: "m1", sourceActorId: "gen", provenanceRootMemoryId: "root-gen" }), 0.9],
+        [memory({ memoryId: "m2", sourceActorId: "tatsu", provenanceRootMemoryId: "root-tatsu" }), 0.9],
       ]),
       options,
     );
 
-    expect(groups[0].support.corroborationCount).toBe(1);
+    expect(groups[0].support.corroborationCount).toBe(2);
     expect(groups[0].support.repeatCount).toBe(0);
-    expect(groups[0].sourceRoots.sort()).toEqual(["gen", "tatsu"]);
+    expect(groups[0].sourceRoots.sort()).toEqual(["root-gen", "root-tatsu"]);
   });
 
   it("counts one informant twice as repetition, not corroboration", () => {
     const groups = aggregate(
       candidates([
-        [memory({ memoryId: "m1", sourceActorId: "gen" }), 0.9],
-        [memory({ memoryId: "m2", sourceActorId: "gen" }), 0.9],
+        [memory({ memoryId: "m1", sourceActorId: "gen", provenanceRootMemoryId: "root-gen" }), 0.9],
+        [memory({ memoryId: "m2", sourceActorId: "gen", provenanceRootMemoryId: "root-gen" }), 0.9],
       ]),
       options,
     );
 
-    expect(groups[0].support.corroborationCount).toBe(0);
-    expect(groups[0].support.repeatCount).toBe(1);
-    expect(groups[0].sourceRoots).toEqual(["gen"]);
+    expect(groups[0].support.corroborationCount).toBe(1);
+    expect(groups[0].support.repeatCount).toBe(2);
+    expect(groups[0].sourceRoots).toEqual(["root-gen"]);
   });
 
-  it("does not let a relayed copy pose as an independent witness", () => {
-    // Miyo heard it from Gen, then heard Gen's own account again second-hand.
-    const original = memory({
-      memoryId: "root",
-      witnessedDirectly: true,
-      sourceActorId: null,
+  it("does not let two immediate informants launder one origin into corroboration", () => {
+    const viaMiyo = memory({
+      memoryId: "via-miyo",
+      sourceActorId: "miyo",
+      sourceMemoryId: "miyo-copy",
+      provenanceRootMemoryId: "gen-first-hand",
     });
-    const relay = memory({ memoryId: "relay", sourceMemoryId: "root" });
+    const viaTatsu = memory({
+      memoryId: "via-tatsu",
+      sourceActorId: "tatsu",
+      sourceMemoryId: "tatsu-copy",
+      provenanceRootMemoryId: "gen-first-hand",
+    });
 
-    const groups = aggregate(candidates([[original, 0.9], [relay, 0.9]]), options);
-    expect(groups[0].support.corroborationCount).toBe(0);
-    expect(groups[0].support.repeatCount).toBe(1);
+    const groups = aggregate(
+      candidates([[viaMiyo, 0.9], [viaTatsu, 0.9]]),
+      options,
+    );
+    expect(groups[0].support.corroborationCount).toBe(1);
+    expect(groups[0].support.repeatCount).toBe(2);
   });
 
   it("picks the strongest memory of a claim as the one spoken from", () => {

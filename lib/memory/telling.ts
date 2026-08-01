@@ -30,6 +30,7 @@ function rowToMemory(row: Record<string, unknown>): MemoryRow {
     sourceType: row.source_type as MemoryRow["sourceType"],
     sourceActorId: row.source_actor_id ? String(row.source_actor_id) : null,
     sourceMemoryId: row.source_memory_id ? String(row.source_memory_id) : null,
+    provenanceRootMemoryId: String(row.provenance_root_memory_id),
     sourceForgottenAt: row.source_forgotten_at
       ? new Date(row.source_forgotten_at as string)
       : null,
@@ -92,8 +93,8 @@ export async function tellAbout(
   const { worldId, speakerId, listenerId, claimId, simulatedAt } = input;
 
   const speakerRows = await exec<Record<string, unknown>>(
-    `SELECT id, owner_npc_id, claim_id, source_type, source_actor_id,
-            source_memory_id, source_forgotten_at, witnessed_directly,
+     `SELECT id, owner_npc_id, claim_id, source_type, source_actor_id,
+            source_memory_id, provenance_root_memory_id, source_forgotten_at, witnessed_directly,
             confidence_at_acq, importance, emotional_weight, emotion_type,
             acquired_at, last_recalled_at, surface_ja
      FROM memory
@@ -110,8 +111,8 @@ export async function tellAbout(
   // not just the memory they happen to be speaking from.
   const allOfClaim = (
     await exec<Record<string, unknown>>(
-      `SELECT id, owner_npc_id, claim_id, source_type, source_actor_id,
-              source_memory_id, source_forgotten_at, witnessed_directly,
+       `SELECT id, owner_npc_id, claim_id, source_type, source_actor_id,
+               source_memory_id, provenance_root_memory_id, source_forgotten_at, witnessed_directly,
               confidence_at_acq, importance, emotional_weight, emotion_type,
               acquired_at, last_recalled_at, surface_ja
        FROM memory WHERE world_id = $1 AND owner_npc_id = $2 AND claim_id = $3`,
@@ -168,11 +169,12 @@ export async function tellAbout(
     createdMemoryId = randomUUID();
     await exec(
       `INSERT INTO memory (world_id, id, owner_npc_id, claim_id, source_type,
-                           source_actor_id, source_memory_id, witnessed_directly,
+                           source_actor_id, source_memory_id,
+                           provenance_root_memory_id, witnessed_directly,
                            confidence_at_acq, importance, emotional_weight,
                            emotion_type, acquired_at, surface_ja, embedding)
-       SELECT $1, $2, $3, $4, 'heard', $5, $6, false, $7, $8, $9, $10, $11, $12,
-              c.embedding
+       SELECT $1, $2, $3, $4, 'heard', $5, $6, $7, false, $8, $9, $10, $11, $12, $13,
+               c.embedding
        FROM claim c WHERE c.world_id = $1 AND c.id = $4`,
       [
         worldId,
@@ -181,6 +183,7 @@ export async function tellAbout(
         claimId,
         outcome.sourceActorId,
         outcome.sourceMemoryId,
+        speakerMemory.provenanceRootMemoryId,
         outcome.confidence,
         // A story someone bothered to tell you matters a little more than the
         // weather, but less than something you saw yourself.

@@ -11,9 +11,9 @@
  *      evidence. One informant saying it twice is the same evidence heard
  *      twice, and must not be laundered into the former.
  *
- * The distinction is drawn by provenance: every memory is traced back along its
- * source chain to whoever first held it. Distinct roots corroborate; shared
- * roots merely repeat.
+ * The distinction is drawn by immutable provenance. Every memory stores the id
+ * of the oldest memory in its source chain. Distinct roots corroborate; shared
+ * roots merely repeat, even when the story arrived through different mouths.
  */
 
 import { MCP_SAFE_RECALL_LIMIT } from "./queries";
@@ -45,43 +45,24 @@ export interface AggregateOptions {
   simulatedAt: Date;
   trustOf: (actorId: string | null) => number;
   /**
-   * Resolve a memory to the identifier of whoever originated the chain it
-   * arrived through. Falls back to the memory itself for first-hand accounts.
+   * Override the persisted root resolver. Intended for focused tests only;
+   * production callers all use memory.provenanceRootMemoryId.
    */
   rootOf?: (memory: MemoryRow) => string;
 }
 
 /**
- * Resolve source roots within a set of memories.
+ * Read source roots from their persisted, world-scoped identity.
  *
- * Chains that leave the set -- because the earlier link belongs to a different
- * villager and was not fetched -- terminate at the informant, which is the
- * right granularity: what matters is whether two accounts came from the same
- * mouth, not how far back the story goes beyond that.
+ * Reconstructing roots from the candidate set is incorrect: recall candidates
+ * belong to one owner, while the parent memory normally belongs to the previous
+ * speaker. A chain walk over that set stops after one hop and launders one
+ * original rumour relayed by two people into two independent sources.
  */
 export function computeRoots(memories: MemoryRow[]): Map<string, string> {
-  const byId = new Map(memories.map((m) => [m.memoryId, m]));
-  const roots = new Map<string, string>();
-
-  for (const memory of memories) {
-    const seen = new Set<string>();
-    let current = memory;
-
-    while (current.sourceMemoryId && byId.has(current.sourceMemoryId)) {
-      if (seen.has(current.memoryId)) break; // defensive: never loop forever
-      seen.add(current.memoryId);
-      current = byId.get(current.sourceMemoryId)!;
-    }
-
-    roots.set(
-      memory.memoryId,
-      current.witnessedDirectly || !current.sourceActorId
-        ? current.memoryId
-        : current.sourceActorId,
-    );
-  }
-
-  return roots;
+  return new Map(
+    memories.map((memory) => [memory.memoryId, memory.provenanceRootMemoryId]),
+  );
 }
 
 /**
@@ -101,8 +82,8 @@ export function supportByClaim(
   memories: MemoryRow[],
   rootOf?: (memory: MemoryRow) => string,
 ): { support: Map<string, SupportCounts>; roots: Map<string, string[]> } {
-  const fallback = computeRoots(memories);
-  const resolve = rootOf ?? ((memory: MemoryRow) => fallback.get(memory.memoryId)!);
+  const resolve =
+    rootOf ?? ((memory: MemoryRow) => memory.provenanceRootMemoryId);
 
   const roots = new Map<string, string[]>();
   for (const memory of memories) {
@@ -113,11 +94,19 @@ export function supportByClaim(
 
   const support = new Map<string, SupportCounts>();
   for (const [claimId, list] of roots) {
-    const distinct = new Set(list);
+    const frequencies = new Map<string, number>();
+    for (const root of list) {
+      frequencies.set(root, (frequencies.get(root) ?? 0) + 1);
+    }
     support.set(claimId, {
-      // The first account is the baseline, not corroboration of itself.
-      corroborationCount: Math.max(0, distinct.size - 1),
-      repeatCount: Math.max(0, list.length - distinct.size),
+      // These are absolute counts used in the explanation contract. One root
+      // heard twice is 1 independent source and 2 repeated acquisitions; two
+      // roots heard once each are 2 independent sources and 0 repetitions.
+      corroborationCount: frequencies.size,
+      repeatCount: [...frequencies.values()].reduce(
+        (total, count) => total + (count > 1 ? count : 0),
+        0,
+      ),
     });
   }
 

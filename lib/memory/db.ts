@@ -50,10 +50,7 @@ async function connectionString(): Promise<string> {
     return pointAtDatabase(fromEnv);
   }
 
-  const secrets = (await getRuntimeSecrets()) as { cockroachSqlUrl?: string };
-  if (!secrets.cockroachSqlUrl) {
-    throw new SqlUnavailableError();
-  }
+  const secrets = await getRuntimeSecrets();
   return pointAtDatabase(secrets.cockroachSqlUrl);
 }
 

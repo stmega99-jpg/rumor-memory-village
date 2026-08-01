@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 
-import { hydrateSurfaces, recall } from "@/lib/memory/mcp-recall";
+import {
+  hydrateProvenanceSources,
+  hydrateSurfaces,
+  recall,
+} from "@/lib/memory/mcp-recall";
 import { currentWorldId, executor, mcpCredentials } from "@/lib/server/village";
 
 export const dynamic = "force-dynamic";
@@ -53,30 +57,32 @@ export async function POST(request: Request) {
     );
     const trust = new Map(relationships.map((r) => [r.target_id, Number(r.trust)]));
 
+    const credentials = await mcpCredentials();
+    const simulatedAt = new Date(world.simulated_at);
     const result = await recall({
       worldId,
       npcId: body.npcId,
       embedding: JSON.parse(topic.v) as number[],
-      simulatedAt: new Date(world.simulated_at),
+      simulatedAt,
       trustOf: (actorId) => (actorId ? (trust.get(actorId) ?? 0.3) : 0.3),
-      credentials: await mcpCredentials(),
+      credentials,
     });
 
     const top = result.groups.slice(0, 6);
-    const surfaces = await hydrateSurfaces(
-      worldId,
-      top.map((group) => group.representative.memoryId),
-      await mcpCredentials(),
-    );
-
-    const names = new Map(
-      (
-        await executor<{ id: string; name_ja: string }>(
-          "SELECT id, name_ja FROM rumor_memory_village.public.actor WHERE world_id = $1",
-          [worldId],
-        )
-      ).map((row) => [row.id, row.name_ja]),
-    );
+    const rootIds = [...new Set(top.flatMap((group) => group.sourceRoots))];
+    const [surfaces, provenanceSources] = await Promise.all([
+      hydrateSurfaces(
+        worldId,
+        top.map((group) => group.representative.memoryId),
+        credentials,
+      ),
+      hydrateProvenanceSources(
+        worldId,
+        rootIds,
+        simulatedAt,
+        credentials,
+      ),
+    ]);
 
     return NextResponse.json({
       topicJa: topic.canonical_ja,
@@ -97,7 +103,13 @@ export async function POST(request: Request) {
         emotion: group.representative.emotion,
         corroborationCount: group.support.corroborationCount,
         repeatCount: group.support.repeatCount,
-        sources: group.sourceRoots.map((root) => names.get(root) ?? "自分"),
+        sources: group.sourceRoots.map((root) => {
+          const source = provenanceSources.get(root);
+          if (!source) return "不明";
+          return source.subjectivelyForgotten
+            ? `${source.nameJa} (subjectively forgotten; audit trail retained)`
+            : source.nameJa;
+        }),
       })),
     });
   } catch (error) {

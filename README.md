@@ -66,12 +66,16 @@ with both prefix columns pinned.
 credentials are read server-side from AWS Secrets Manager through the SSR
 compute role; nothing is baked into the build.
 
-**Amazon Bedrock** — Nova Lite generates villager dialogue. The public demo
-serves pre-generated lines by default, so a judge clicking through it costs
-nothing, never waits on a model, and cannot hit a quota mid-demonstration.
+**Amazon Bedrock** — the walking skeleton proved a live Nova Lite invocation,
+and `scripts/pregenerate-lines.mjs` can use it to author villager dialogue. The
+public demo does not invoke a model on each click: it uses a stored Bedrock line
+when one exists and labels the deterministic template it uses otherwise. This
+removes per-click model inference, not every operating cost; Amplify, Secrets
+Manager and CockroachDB still consume their allowances or credits and may incur
+provider charges outside them.
 
-**AWS Secrets Manager** — holds the MCP service-account key, the cluster id and
-the database URL.
+**AWS Secrets Manager** — holds the MCP service-account key, cluster id,
+database URL and an independent world-cookie signing key.
 
 ---
 
@@ -86,7 +90,7 @@ flowchart LR
 
   A -- "state changes<br/>beliefs · rumour hops · world forks" --> C
 
-  A -- "dialogue" --> BR["Amazon Bedrock<br/>Nova Lite"]
+  A -. "optional live smoke proof" .-> BR["Amazon Bedrock<br/>Nova Lite"]
   A -- "credentials" --> S["AWS Secrets Manager"]
 ```
 
@@ -119,10 +123,10 @@ it.
 **Provenance is immutable.** An agent can forget *who* told them something —
 that is a separate, reversible flag — but the audit trail is never rewritten.
 
-**Corroboration and repetition are counted apart.** Two informants agreeing is
-evidence. One informant saying it twice is the same evidence heard twice. Every
-memory is traced back along its source chain; distinct roots corroborate,
-shared roots merely repeat.
+**Corroboration and repetition are counted apart.** Two independent origins are
+evidence. One original account arriving twice is the same evidence heard twice,
+even if it travelled through different mouths. Every memory carries its stable
+provenance root; distinct roots corroborate, shared roots merely repeat.
 
 **Decay is computed at read time**, from the world's simulated clock, never
 from wall time and never written back by a scheduled job. Importance and
@@ -130,24 +134,27 @@ emotional charge divide the decay rate, which is why a debt or a fright still
 reads clearly after six weeks and an ordinary afternoon does not. Nothing is
 ever deleted.
 
-**Arbitration is deterministic code.** A language model writes the sentence a
-villager says; it never decides what they believe. Every number in an
-explanation can be recomputed from the database.
+**Arbitration is deterministic code.** A language model may rewrite the
+sentence a villager says during pre-generation; a labelled deterministic
+template is used otherwise. It never decides what they believe. Every number in
+an explanation can be recomputed from the database.
 
 ---
 
 ## Security boundary, stated honestly
 
-Ground truth (`claim.truth_value`) exists so the demo can show the audience
-that the village is confidently wrong. No villager should be able to read it.
+Ground truth for the fixed demonstration lives in the server-only mapping
+`lib/server/ground-truth.ts`, so the CockroachDB cluster used by Managed MCP
+does not need to store it. The audience-facing API attaches that answer after
+the database result is read; a villager can never request the mapping.
 
 The control that actually enforces this is **server-side query construction**,
 not a database grant. The browser cannot submit SQL, cannot choose a world id —
 that comes from a signed HttpOnly cookie — and cannot influence the projection:
 recall is compiled from fixed server constants in `lib/memory/queries.ts`, which
 validates every interpolated identifier against its expected shape and throws
-rather than escaping. `truth_value` appears in no query the application issues,
-and `mcp_claim` is a projection that omits it.
+rather than escaping. The database does not store `truth_value`, and
+`mcp_claim` is a projection that omits it.
 
 **What is *not* true:** the `rmv_mcp_read` SQL role in `db/schema.sql` does not
 constrain the MCP path. CockroachDB Cloud requires a Managed MCP service account
@@ -180,10 +187,12 @@ npm run dev
 | `RMV_COCKROACH_SQL_URL` | CockroachDB Cloud → cluster → Connect |
 | `RMV_COCKROACH_MCP_API_KEY` | CockroachDB Cloud → Service Accounts → Create API key |
 | `RMV_COCKROACH_CLUSTER_ID` | CockroachDB Cloud → cluster overview |
+| `RMV_WORLD_COOKIE_SECRET` | A new independent random value of at least 32 bytes; do not reuse a database or MCP credential |
 
-In production the same three values are read from the Secrets Manager secret
+In production the same values are read from the Secrets Manager secret
 named by `RMV_SECRET_ID`, as `cockroachSqlUrl`, `cockroachMcpApiKey` and
-`cockroachClusterId`.
+`cockroachClusterId`, plus an independent `worldCookieSecret` used to HMAC-sign
+the HttpOnly per-visitor world cookie.
 
 `db/seed_generated.sql` is committed with its vectors already computed, so a
 first run needs no embedding model. To regenerate the world from scratch:
@@ -201,9 +210,16 @@ by AWS. The provider sits behind one function and can be swapped back.
 ### Verification
 
 ```bash
-npm test           # 111 tests; the live ones skip without a cluster
+npm test           # unit tests; the live ones skip without a cluster
 npm run db:verify  # proves the vector index is actually used
+npm run verify:deployment -- https://your-amplify-domain.example --allow-pregenerated
 ```
+
+The deployment verifier checks the public village contract, plays the complete
+scenario in its own signed-cookie world, performs a Managed MCP recall, and
+then checks the five-stage walking-skeleton trace. `--allow-pregenerated` is for
+the stable post-proof deployment, where a judge does not trigger a live model
+call.
 
 `npm run db:verify` exists because the failure it guards against is silent.
 With statistics missing, or in a freshly forked world that appears in no
@@ -245,9 +261,9 @@ Only Claude Code's commits carry a `Co-Authored-By` trailer, because that is
 what its tooling does; the split above is the accurate one and the commit
 history on its own would understate Codex's share.
 
-Neither assistant decided anything that matters to the demonstration. Belief
-arbitration is deterministic code, and the one place a language model appears at
-runtime is writing the sentence a villager says.
+Neither assistant decides a villager's belief at runtime. Belief arbitration is
+deterministic code; the optional model contribution is limited to dialogue
+wording generated ahead of the public click path.
 
 ## Licence
 

@@ -23,13 +23,16 @@ function at(days: number): Date {
 const NO_SUPPORT: SupportCounts = { corroborationCount: 0, repeatCount: 0 };
 
 function memory(overrides: Partial<MemoryRow> = {}): MemoryRow {
+  const memoryId = overrides.memoryId ?? "m1";
   return {
-    memoryId: "m1",
+    memoryId,
     ownerNpcId: "miyo",
     claimId: "c1",
     sourceType: "heard",
     sourceActorId: "gen",
     sourceMemoryId: null,
+    provenanceRootMemoryId:
+      overrides.provenanceRootMemoryId ?? memoryId,
     sourceForgottenAt: null,
     witnessedDirectly: false,
     confidenceAtAcq: 0.8,
@@ -99,13 +102,33 @@ describe("decay", () => {
     );
     const repeated = decayedConfidence(
       m,
-      { corroborationCount: 0, repeatCount: 2 },
+      { corroborationCount: 1, repeatCount: 2 },
       at(60),
     );
-    const alone = decayedConfidence(m, NO_SUPPORT, at(60));
+    const alone = decayedConfidence(
+      m,
+      { corroborationCount: 1, repeatCount: 0 },
+      at(60),
+    );
 
     expect(corroborated).toBeGreaterThan(repeated);
     expect(repeated).toBeGreaterThan(alone);
+  });
+
+  it("caps reinforcement from repeatedly hearing one provenance root", () => {
+    const m = memory();
+    const atCap = decayedConfidence(
+      m,
+      { corroborationCount: 1, repeatCount: SCORING.repeatCap },
+      at(60),
+    );
+    const farBeyondCap = decayedConfidence(
+      m,
+      { corroborationCount: 1, repeatCount: SCORING.repeatCap + 10_000 },
+      at(60),
+    );
+
+    expect(farBeyondCap).toBeCloseTo(atCap, 12);
   });
 
   it("refreshes a memory that was actually recalled", () => {

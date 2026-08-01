@@ -52,6 +52,7 @@ function toMemoryRow(row: Record<string, unknown>): MemoryRow {
     sourceType: row.source_type as MemoryRow["sourceType"],
     sourceActorId: row.source_actor_id ? String(row.source_actor_id) : null,
     sourceMemoryId: row.source_memory_id ? String(row.source_memory_id) : null,
+    provenanceRootMemoryId: String(row.provenance_root_memory_id),
     sourceForgottenAt: row.source_forgotten_at
       ? new Date(row.source_forgotten_at as string)
       : null,
@@ -171,8 +172,8 @@ export async function loadMemoriesForClaims(
   if (claimIds.length === 0) return [];
 
   const rows = await exec<Record<string, unknown>>(
-    `SELECT id, owner_npc_id, claim_id, source_type, source_actor_id,
-            source_memory_id, source_forgotten_at, witnessed_directly,
+     `SELECT id, owner_npc_id, claim_id, source_type, source_actor_id,
+            source_memory_id, provenance_root_memory_id, source_forgotten_at, witnessed_directly,
             confidence_at_acq, importance, emotional_weight, emotion_type,
             acquired_at, last_recalled_at, surface_ja
      FROM memory
@@ -251,13 +252,13 @@ function narrate(
     reasons.push(`情報源への信頼度は ${top.trust.toFixed(2)}`);
     reasonsEn.push(`trusts that informant ${top.trust.toFixed(2)}`);
   }
-  if (support.corroborationCount > 0) {
-    reasons.push(`独立した情報源が ${support.corroborationCount + 1} 人`);
-    reasonsEn.push(`${support.corroborationCount + 1} independent sources`);
+  if (support.corroborationCount > 1) {
+    reasons.push(`独立した情報源が ${support.corroborationCount} 人`);
+    reasonsEn.push(`${support.corroborationCount} independent sources`);
   }
   if (support.repeatCount > 0) {
-    reasons.push(`同じ相手から ${support.repeatCount + 1} 回`);
-    reasonsEn.push(`the same informant ${support.repeatCount + 1} times`);
+    reasons.push(`同じ出所からの取得が計 ${support.repeatCount} 回`);
+    reasonsEn.push(`${support.repeatCount} acquisitions came from repeated roots`);
   }
   if (Math.abs(outcome.priorBias) > 0.05) {
     // The bias is affection times how the claim reflects on its subject, so a

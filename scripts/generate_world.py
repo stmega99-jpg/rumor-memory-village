@@ -171,7 +171,6 @@ def build_background(rng: random.Random) -> list[dict]:
                 "subject_label": label,
                 "canonical_ja": ja,
                 "canonical_en": en,
-                "truth_value": None,
                 # Village weather and broken hoes say nothing about anyone's
                 # character, so they carry no prior for or against their subject.
                 "subject_valence": 0.0,
@@ -349,9 +348,28 @@ def build_memories(
 def main() -> None:
     rng = random.Random(SEED)
     background = build_background(rng)
-    scenario = [dict(c) for c in SCENARIO]
+    # The authoring constants contain the fixed demo answer, but the generated
+    # database seed must not. Managed MCP has a Cloud-managed SQL identity and
+    # could otherwise read the answer directly from CockroachDB.
+    scenario = [
+        {key: value for key, value in claim.items() if key != "truth_value"}
+        for claim in SCENARIO
+    ]
     claims = background + scenario
     memories = build_memories(background, scenario, rng)
+    seeded_memories = []
+    for memory in memories:
+        memory_id = sid("memory", memory["key"])
+        # Seed memories are the oldest stored node in their provenance chain.
+        # Retellings created at runtime copy this stable id from the speaker's
+        # memory instead of trying to reconstruct an origin from nearby rows.
+        seeded_memories.append(
+            dict(
+                memory,
+                id=memory_id,
+                provenance_root_memory_id=memory_id,
+            )
+        )
 
     payload = {
         "world_id": WORLD_ID,
@@ -385,7 +403,7 @@ def main() -> None:
             {"id": sid("rel", a, b), "a": a, "b": b, "relation": "mutually_exclusive"}
             for a, b in CONTRADICTIONS
         ],
-        "memories": [dict(m, id=sid("memory", m["key"])) for m in memories],
+        "memories": seeded_memories,
     }
 
     OUT.parent.mkdir(parents=True, exist_ok=True)

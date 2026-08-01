@@ -6,6 +6,7 @@ import {
   UnsafeQueryValueError,
   buildClaimQuery,
   buildMemoryTextQuery,
+  buildProvenanceSourceQuery,
   buildRecallQuery,
   buildRelationshipQuery,
   positiveInt,
@@ -158,6 +159,28 @@ describe("memory text lookup", () => {
 
   it("refuses an empty batch rather than emitting IN ()", () => {
     expect(() => buildMemoryTextQuery(WORLD, [])).toThrow(UnsafeQueryValueError);
+  });
+});
+
+describe("provenance source lookup", () => {
+  const ROOT = "22222222-3333-4444-5555-666666666666";
+
+  it("resolves the named source of a root through world-scoped MCP SQL", () => {
+    const sql = buildProvenanceSourceQuery(WORLD, [ROOT]);
+    expect(sql).toContain("FROM memory AS root");
+    expect(sql).toContain("root.source_actor_id");
+    expect(sql).toContain("root.owner_npc_id");
+    expect(sql).toContain(`root.world_id = '${WORLD}'`);
+    expect(sql).not.toContain("truth_value");
+  });
+
+  it("validates the batch before constructing an IN clause", () => {
+    expect(() => buildProvenanceSourceQuery(WORLD, [])).toThrow(
+      UnsafeQueryValueError,
+    );
+    expect(() => buildProvenanceSourceQuery(WORLD, [ROOT, "not-a-uuid"])).toThrow(
+      UnsafeQueryValueError,
+    );
   });
 });
 

@@ -144,14 +144,13 @@ def main() -> None:
 
     for claim, vector in zip(claims, vectors):
         subject = q(actor_id[claim["subject_ref"]]) if claim.get("subject_ref") else "NULL"
-        truth = "NULL" if claim.get("truth_value") is None else str(claim["truth_value"]).lower()
         lines.append(
             "INSERT INTO claim (world_id, id, subject_id, subject_label, subject_valence, "
-            "predicate, canonical_ja, canonical_en, embedding, embedding_model, truth_value) VALUES ("
+            "predicate, canonical_ja, canonical_en, embedding, embedding_model) VALUES ("
             f"{q(world_id)}, {q(claim['id'])}, {subject}, {q(claim['subject_label'])}, "
             f"{claim.get('subject_valence', 0.0)}, "
             f"{q(claim['predicate'])}, {q(claim['canonical_ja'])}, {q(claim['canonical_en'])}, "
-            f"{vec(vector)}, {q(MODEL_ID)}, {truth});"
+            f"{vec(vector)}, {q(MODEL_ID)});"
         )
     lines.append("")
 
@@ -170,10 +169,12 @@ def main() -> None:
         source = q(actor_id[memory["source_ref"]]) if memory.get("source_ref") else "NULL"
         lines.append(
             "INSERT INTO memory (world_id, id, owner_npc_id, claim_id, source_type, "
-            "source_actor_id, witnessed_directly, confidence_at_acq, importance, "
-            "emotional_weight, emotion_type, acquired_at, surface_ja) VALUES ("
+            "source_actor_id, provenance_root_memory_id, witnessed_directly, "
+            "confidence_at_acq, importance, emotional_weight, emotion_type, "
+            "acquired_at, surface_ja) VALUES ("
             f"{q(world_id)}, {q(memory['id'])}, {q(actor_id[memory['owner']])}, "
             f"{q(claim_id[memory['claim_key']])}, {q(memory['source_type'])}, {source}, "
+            f"{q(memory['provenance_root_memory_id'])}, "
             f"{str(memory['witnessed_directly']).lower()}, {memory['confidence_at_acq']}, "
             f"{memory['importance']}, {memory['emotional_weight']}, {q(memory['emotion_type'])}, "
             f"{ts(acquired)}, {q(memory['surface_ja'])});"

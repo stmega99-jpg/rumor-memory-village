@@ -4,6 +4,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import type { Executor } from "../lib/memory/belief";
 import { DEMO_SCENARIO, runScenario } from "../lib/memory/scenario";
 import { dropWorld, forkWorld, getTemplateWorldId } from "../lib/memory/world";
+import { groundTruthForPredicate } from "../lib/server/ground-truth";
 import { liveDatabaseUrl } from "./live-env";
 
 const connectionString = liveDatabaseUrl();
@@ -122,12 +123,12 @@ describeLive("the demo scenario, run in its own world", () => {
 
     const detail = await exec<{
       claim: string;
-      truth_value: boolean | null;
+      predicate: string;
       npc: string;
       status: string;
       rationale_text_ja: string;
     }>(
-      `SELECT c.canonical_ja AS claim, c.truth_value, a.name_ja AS npc,
+      `SELECT c.canonical_ja AS claim, c.predicate, a.name_ja AS npc,
               b.status, b.rationale_text_ja
        FROM belief b
        JOIN claim c ON c.world_id = b.world_id AND c.id = b.claim_id
@@ -142,8 +143,8 @@ describeLive("the demo scenario, run in its own world", () => {
     for (const row of detail) {
       if (row.claim !== heading) {
         heading = row.claim;
-        const truth =
-          row.truth_value === null ? "unknowable" : row.truth_value ? "true" : "FALSE";
+        const answer = groundTruthForPredicate(row.predicate);
+        const truth = answer === null ? "unknowable" : answer ? "true" : "FALSE";
         console.log(`\n  ${row.claim}  [ground truth: ${truth}]`);
       }
       console.log(`    ${row.npc} ${row.status}`);

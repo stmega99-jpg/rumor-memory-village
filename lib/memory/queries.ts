@@ -117,7 +117,7 @@ export function buildRecallQuery(input: RecallQueryInput): string {
   const limit = positiveInt(input.limit, "limit", 200);
   const vector = vectorLiteral(input.embedding);
 
-  const sql = `SELECT id AS memory_id, claim_id, source_actor_id, source_memory_id, source_forgotten_at, witnessed_directly, confidence_at_acq, importance, emotional_weight, emotion_type, acquired_at, last_recalled_at, embedding <=> ${vector} AS distance FROM memory@memory_embedding_idx WHERE world_id = ${world} AND owner_npc_id = ${owner} ORDER BY distance LIMIT ${limit}`;
+  const sql = `SELECT id AS memory_id, claim_id, source_actor_id, source_memory_id, provenance_root_memory_id, source_forgotten_at, witnessed_directly, confidence_at_acq, importance, emotional_weight, emotion_type, acquired_at, last_recalled_at, embedding <=> ${vector} AS distance FROM memory@memory_embedding_idx WHERE world_id = ${world} AND owner_npc_id = ${owner} ORDER BY distance LIMIT ${limit}`;
 
   if (sql.length > MCP_STATEMENT_LIMIT) {
     throw new UnsafeQueryValueError(`statement length (${sql.length} chars)`);
@@ -143,6 +143,31 @@ export function buildMemoryTextQuery(
   }
   const ids = memoryIds.map((id) => uuid(id, "memory id")).join(", ");
   return `SELECT id AS memory_id, claim_id, source_type, recall_count, surface_ja FROM memory WHERE world_id = ${world} AND id IN (${ids})`;
+}
+
+/**
+ * Resolve the actor at each immutable provenance root.
+ *
+ * A root may itself be hearsay: in that case its source_actor is the origin we
+ * can name, while its owner is merely the first villager whose memory we store.
+ * This stays on the Managed MCP read path because it reads memory provenance.
+ */
+export function buildProvenanceSourceQuery(
+  worldId: string,
+  rootMemoryIds: readonly string[],
+): string {
+  const world = uuid(worldId, "world id");
+  if (rootMemoryIds.length === 0) {
+    throw new UnsafeQueryValueError("empty provenance-root list");
+  }
+  if (rootMemoryIds.length > 12) {
+    throw new UnsafeQueryValueError("provenance-root batch size");
+  }
+  const ids = rootMemoryIds
+    .map((id) => uuid(id, "provenance root memory id"))
+    .join(", ");
+
+  return `SELECT root.id AS root_memory_id, root.witnessed_directly, root.source_forgotten_at, COALESCE(source.name_ja, owner.name_ja) AS source_name_ja FROM memory AS root JOIN actor AS owner ON owner.world_id = root.world_id AND owner.id = root.owner_npc_id LEFT JOIN actor AS source ON source.world_id = root.world_id AND source.id = root.source_actor_id WHERE root.world_id = ${world} AND root.id IN (${ids})`;
 }
 
 /** Claim text for a set of claim ids. Vectors deliberately excluded. */

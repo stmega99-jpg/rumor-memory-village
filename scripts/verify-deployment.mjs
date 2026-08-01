@@ -15,6 +15,22 @@ if (!input) {
 
 const endpoint = new URL("/api/walking-skeleton", input);
 const homepage = new URL("/", input);
+const villageEndpoint = new URL("/api/village", input);
+const scenarioEndpoint = new URL("/api/scenario", input);
+const recallEndpoint = new URL("/api/recall", input);
+
+function worldCookieFrom(response, current = "") {
+  const values =
+    typeof response.headers.getSetCookie === "function"
+      ? response.headers.getSetCookie()
+      : [response.headers.get("set-cookie")].filter(Boolean);
+  let cookie = current;
+  for (const value of values) {
+    const match = /^rmv_world=([^;]+)/.exec(value);
+    if (match?.[1]) cookie = `rmv_world=${match[1]}`;
+  }
+  return cookie;
+}
 const homepageResponse = await fetch(homepage, {
   signal: AbortSignal.timeout(20_000),
   headers: { Accept: "text/html" },
@@ -26,6 +42,170 @@ if (
   !homepageHtml.includes("Rumor Memory Village")
 ) {
   console.error(`The public homepage failed (${homepageResponse.status}).`);
+  process.exit(1);
+}
+
+const villageResponse = await fetch(villageEndpoint, {
+  signal: AbortSignal.timeout(60_000),
+  headers: { Accept: "application/json" },
+});
+let worldCookie = worldCookieFrom(villageResponse);
+let villageBody;
+try {
+  villageBody = await villageResponse.json();
+} catch {
+  console.error(
+    `The village API returned a non-JSON response (${villageResponse.status}).`,
+  );
+  process.exit(1);
+}
+
+const uuidPattern =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const npcCount = Array.isArray(villageBody?.villagers)
+  ? villageBody.villagers.filter((villager) => villager?.kind === "npc").length
+  : 0;
+const villageContractHealthy =
+  villageResponse.ok &&
+  uuidPattern.test(villageBody?.worldId ?? "") &&
+  typeof villageBody?.simulatedAt === "string" &&
+  Number.isFinite(Date.parse(villageBody.simulatedAt)) &&
+  npcCount >= 5 &&
+  Array.isArray(villageBody?.verdicts) &&
+  Array.isArray(villageBody?.transfers) &&
+  Array.isArray(villageBody?.contradictions) &&
+  villageBody?.totals !== null &&
+  typeof villageBody?.totals === "object" &&
+  Number.isInteger(villageBody.totals.claims) &&
+  villageBody.totals.claims > 0 &&
+  Number.isInteger(villageBody.totals.memories) &&
+  villageBody.totals.memories > 0 &&
+  Number.isInteger(villageBody.totals.transfers) &&
+  villageBody.totals.transfers >= 0;
+
+if (!villageContractHealthy) {
+  console.error(
+    JSON.stringify(
+      {
+        message: "The public village API failed its minimum state contract.",
+        status: villageResponse.status,
+        error: villageBody?.error,
+        hasWorldId: uuidPattern.test(villageBody?.worldId ?? ""),
+        npcCount,
+        totals: villageBody?.totals,
+      },
+      null,
+      2,
+    ),
+  );
+  process.exit(1);
+}
+
+const scenarioDefinitionResponse = await fetch(scenarioEndpoint, {
+  signal: AbortSignal.timeout(20_000),
+  headers: { Accept: "application/json" },
+});
+const scenarioDefinition = await scenarioDefinitionResponse.json();
+if (
+  !scenarioDefinitionResponse.ok ||
+  !Array.isArray(scenarioDefinition?.steps) ||
+  scenarioDefinition.steps.length === 0
+) {
+  console.error("The scenario definition is unavailable.");
+  process.exit(1);
+}
+
+let scenarioState;
+for (let index = 0; index < scenarioDefinition.steps.length; index += 1) {
+  const stepResponse = await fetch(scenarioEndpoint, {
+    method: "POST",
+    signal: AbortSignal.timeout(60_000),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      ...(worldCookie ? { Cookie: worldCookie } : {}),
+    },
+    body: JSON.stringify({ index }),
+  });
+  worldCookie = worldCookieFrom(stepResponse, worldCookie);
+  const stepBody = await stepResponse.json();
+  if (
+    !stepResponse.ok ||
+    stepBody?.index !== index ||
+    typeof stepBody?.result?.detail !== "string" ||
+    (index === scenarioDefinition.steps.length - 1 && stepBody?.done !== true)
+  ) {
+    console.error(
+      JSON.stringify(
+        {
+          message: "The public scenario failed.",
+          index,
+          status: stepResponse.status,
+          error: stepBody?.error,
+        },
+        null,
+        2,
+      ),
+    );
+    process.exit(1);
+  }
+  scenarioState = stepBody.state ?? scenarioState;
+}
+
+if (
+  !scenarioState ||
+  !Array.isArray(scenarioState.verdicts) ||
+  scenarioState.verdicts.length === 0 ||
+  !Array.isArray(scenarioState.transfers) ||
+  scenarioState.transfers.length === 0
+) {
+  console.error("The scenario completed without persisted verdicts and transfers.");
+  process.exit(1);
+}
+
+const recallSubject = scenarioState.verdicts[0];
+const recallResponse = await fetch(recallEndpoint, {
+  method: "POST",
+  signal: AbortSignal.timeout(60_000),
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    ...(worldCookie ? { Cookie: worldCookie } : {}),
+  },
+  body: JSON.stringify({
+    npcId: recallSubject.npcId,
+    topicClaimId: recallSubject.claimId,
+  }),
+});
+const recallBody = await recallResponse.json();
+const recallHealthy =
+  recallResponse.ok &&
+  Number.isInteger(recallBody?.candidateCount) &&
+  recallBody.candidateCount > 0 &&
+  Number.isInteger(recallBody?.statementLength) &&
+  recallBody.statementLength > 0 &&
+  recallBody.statementLength <= 16_384 &&
+  Array.isArray(recallBody?.groups) &&
+  recallBody.groups.length > 0 &&
+  recallBody.groups.every(
+    (group) =>
+      typeof group?.claimId === "string" &&
+      typeof group?.score === "number" &&
+      Array.isArray(group?.sources),
+  );
+if (!recallHealthy) {
+  console.error(
+    JSON.stringify(
+      {
+        message: "The public Managed MCP recall path failed.",
+        status: recallResponse.status,
+        error: recallBody?.error,
+        candidateCount: recallBody?.candidateCount,
+      },
+      null,
+      2,
+    ),
+  );
   process.exit(1);
 }
 
@@ -95,7 +275,16 @@ if (
   process.exit(1);
 }
 
-if (/CCDB1_|AKIA[0-9A-Z]{16}|secret.?key/i.test(JSON.stringify(body))) {
+if (
+  /CCDB1_|AKIA[0-9A-Z]{16}|secret.?key/i.test(
+    JSON.stringify({
+      trace: body,
+      village: villageBody,
+      scenario: scenarioState,
+      recall: recallBody,
+    }),
+  )
+) {
   console.error("The response appears to contain credential material.");
   process.exit(1);
 }
@@ -104,6 +293,23 @@ console.log(
   JSON.stringify(
     {
       status: response.status,
+      village: {
+        status: villageResponse.status,
+        worldId: villageBody?.worldId,
+        npcCount,
+        totals: villageBody?.totals,
+      },
+      scenario: {
+        steps: scenarioDefinition.steps.length,
+        verdicts: scenarioState.verdicts.length,
+        transfers: scenarioState.transfers.length,
+      },
+      recall: {
+        status: recallResponse.status,
+        candidateCount: recallBody.candidateCount,
+        groups: recallBody.groups.length,
+        statementLength: recallBody.statementLength,
+      },
       requestId: body.requestId,
       worldId: body.worldId,
       probeKey: body.probeKey,

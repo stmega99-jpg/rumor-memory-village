@@ -41,6 +41,9 @@ describe("Managed MCP production boundary", () => {
                 cockroachMcpApiKey: "CCDB1_intentionally_invalid_test_key",
                 cockroachClusterId:
                   "dcd3153f-e8af-4509-a796-b4f160170270",
+                cockroachSqlUrl:
+                  "postgresql://test:test@localhost:26257/defaultdb",
+                worldCookieSecret: "test-world-cookie-secret-32-bytes-minimum",
               }),
             }),
           generateLine,
@@ -84,6 +87,9 @@ describe("Managed MCP production boundary", () => {
           cockroachMcpApiKey: "CCDB1_intentionally_invalid_test_key",
           cockroachClusterId:
             "dcd3153f-e8af-4509-a796-b4f160170270",
+          cockroachSqlUrl:
+            "postgresql://test:test@localhost:26257/defaultdb",
+          worldCookieSecret: "test-world-cookie-secret-32-bytes-minimum",
         }),
       }),
     ).rejects.toBeInstanceOf(McpReadError);

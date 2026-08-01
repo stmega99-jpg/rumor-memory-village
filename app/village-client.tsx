@@ -503,14 +503,16 @@ export default function VillageClient() {
                       {group.trust.toFixed(2)} · confidence{" "}
                       {group.confidence.toFixed(2)} · recency{" "}
                       {group.recency.toFixed(2)}
-                      {group.corroborationCount > 0
-                        ? ` · ${group.corroborationCount + 1} independent sources`
+                      {group.corroborationCount > 1
+                        ? ` · ${group.corroborationCount} independent sources`
                         : ""}
                       {group.repeatCount > 0
-                        ? ` · heard ${group.repeatCount + 1} times from the same person`
+                        ? ` · ${group.repeatCount} acquisitions from repeated roots`
                         : ""}
                     </p>
-                    <p className="recalled-src">from: {group.sources.join(", ")}</p>
+                    <p className="recalled-src">
+                      provenance roots: {group.sources.join(", ")}
+                    </p>
                   </li>
                 ))}
               </ol>

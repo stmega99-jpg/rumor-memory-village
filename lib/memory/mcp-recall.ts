@@ -11,6 +11,7 @@
 import { aggregate, fetchWidth, type Candidate, type ClaimGroup } from "./recall";
 import {
   buildMemoryTextQuery,
+  buildProvenanceSourceQuery,
   buildRecallQuery,
   MCP_SAFE_RECALL_LIMIT,
 } from "./queries";
@@ -30,6 +31,9 @@ function asNumber(value: unknown, fallback = 0): number {
 }
 
 export function rowToMemory(row: Record<string, unknown>): MemoryRow {
+  if (!row.provenance_root_memory_id) {
+    throw new Error("MCP recall row is missing its provenance root.");
+  }
   return {
     memoryId: String(row.memory_id),
     ownerNpcId: String(row.owner_npc_id ?? ""),
@@ -37,6 +41,7 @@ export function rowToMemory(row: Record<string, unknown>): MemoryRow {
     sourceType: (row.source_type as MemoryRow["sourceType"]) ?? "heard",
     sourceActorId: row.source_actor_id ? String(row.source_actor_id) : null,
     sourceMemoryId: row.source_memory_id ? String(row.source_memory_id) : null,
+    provenanceRootMemoryId: String(row.provenance_root_memory_id),
     sourceForgottenAt: asDate(row.source_forgotten_at),
     witnessedDirectly: row.witnessed_directly === true || row.witnessed_directly === "true",
     confidenceAtAcq: asNumber(row.confidence_at_acq, 0.5),
@@ -133,5 +138,45 @@ export async function hydrateSurfaces(
 
   return new Map(
     rows.map((row) => [String(row.memory_id), String(row.surface_ja ?? "")]),
+  );
+}
+
+export interface ProvenanceSource {
+  nameJa: string;
+  witnessedDirectly: boolean;
+  /** Subjective state only; immutable audit provenance remains available. */
+  subjectivelyForgotten: boolean;
+}
+
+/** Resolve provenance labels through Managed MCP, never through direct SQL. */
+export async function hydrateProvenanceSources(
+  worldId: string,
+  rootMemoryIds: string[],
+  simulatedAt: Date,
+  credentials: McpCredentials,
+  database = "rumor_memory_village",
+): Promise<Map<string, ProvenanceSource>> {
+  if (rootMemoryIds.length === 0) return new Map();
+
+  const rows = await runSelectQuery(
+    buildProvenanceSourceQuery(worldId, rootMemoryIds),
+    database,
+    credentials,
+  );
+
+  return new Map(
+    rows.map((row) => {
+      const forgottenAt = asDate(row.source_forgotten_at);
+      return [
+        String(row.root_memory_id),
+        {
+          nameJa: String(row.source_name_ja ?? "不明"),
+          witnessedDirectly:
+            row.witnessed_directly === true || row.witnessed_directly === "true",
+          subjectivelyForgotten:
+            forgottenAt !== null && forgottenAt.getTime() <= simulatedAt.getTime(),
+        },
+      ];
+    }),
   );
 }
